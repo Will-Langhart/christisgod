@@ -31,35 +31,35 @@ export function Hero() {
       <div className="relative z-10 flex flex-col items-center">
         <p
           className="hero-rise font-[family-name:var(--font-ui)] text-xs font-semibold uppercase tracking-[0.45em] text-gold"
-          style={{ animationDelay: "0.05s" }}
+          style={{ animationDelay: "0.4s" }}
         >
           {bookMeta.year} &middot; An Apologetic
         </p>
 
         <h1
           className="hero-rise hero-title mt-6 text-7xl sm:text-8xl md:text-[8.5rem]"
-          style={{ animationDelay: "0.15s" }}
+          style={{ animationDelay: "0.55s" }}
         >
           {bookMeta.title}
         </h1>
 
         <p
           className="hero-rise mt-3 font-[family-name:var(--font-display)] text-3xl font-medium italic text-gold sm:text-4xl"
-          style={{ animationDelay: "0.3s" }}
+          style={{ animationDelay: "0.7s" }}
         >
           {bookMeta.subtitle}
         </p>
 
         <p
           className="hero-rise mx-auto mt-7 max-w-xl font-[family-name:var(--font-serif)] text-lg leading-relaxed text-ink-soft"
-          style={{ animationDelay: "0.45s" }}
+          style={{ animationDelay: "0.85s" }}
         >
           {bookMeta.tagline}
         </p>
 
         <div
           className="hero-rise mt-11 flex flex-wrap items-center justify-center gap-3"
-          style={{ animationDelay: "0.6s" }}
+          style={{ animationDelay: "1s" }}
         >
           <Link
             href={`/read/${first.slug}`}

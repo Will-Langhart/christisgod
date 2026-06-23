@@ -215,6 +215,9 @@ body {
   background:
     radial-gradient(120% 80% at 50% -10%, color-mix(in srgb, var(--gold) 16%, transparent), transparent 55%),
     radial-gradient(90% 60% at 50% 120%, color-mix(in srgb, var(--gold) 10%, transparent), transparent 60%);
+  animation:
+    cig-fade-in 2.4s ease-out both,
+    cig-base-breathe 18s ease-in-out 2.4s infinite;
 }
 
 /* Rotating godrays behind the cross */
@@ -234,7 +237,10 @@ body {
   -webkit-mask-image: radial-gradient(closest-side, black 8%, transparent 62%);
   mask-image: radial-gradient(closest-side, black 8%, transparent 62%);
   opacity: 0.5;
-  animation: cig-spin 90s linear infinite;
+  animation:
+    cig-rays-in 2.4s cubic-bezier(0.22, 1, 0.36, 1) both,
+    cig-spin 90s linear infinite,
+    cig-rays-glow 9s ease-in-out 2.4s infinite;
 }
 .dark .hero-rays { opacity: 0.4; }
 
@@ -245,7 +251,9 @@ body {
   top: 45%;
   z-index: -3;
   translate: -50% -50%;
-  animation: cig-breathe 9s ease-in-out infinite;
+  animation:
+    cig-cross-in 2.2s cubic-bezier(0.22, 1, 0.36, 1) both,
+    cig-breathe 9s ease-in-out 2.2s infinite;
   user-select: none;
   pointer-events: none;
 }
@@ -273,13 +281,17 @@ body {
   width: 38rem; height: 38rem;
   left: -8rem; top: -6rem;
   background: radial-gradient(circle, color-mix(in srgb, var(--gold) 30%, transparent), transparent 70%);
-  animation: cig-drift-1 22s ease-in-out infinite;
+  animation:
+    cig-blob-in 2.6s ease-out 0.3s both,
+    cig-drift-1 22s ease-in-out infinite;
 }
 .hero-blob-2 {
   width: 34rem; height: 34rem;
   right: -7rem; bottom: -5rem;
   background: radial-gradient(circle, color-mix(in srgb, var(--gold-bright) 26%, transparent), transparent 70%);
-  animation: cig-drift-2 26s ease-in-out infinite;
+  animation:
+    cig-blob-in 2.6s ease-out 0.5s both,
+    cig-drift-2 26s ease-in-out infinite;
 }
 
 /* Vignette + edge fade to blend into the page below */
@@ -321,7 +333,9 @@ body {
   left: 50%;
   translate: -50% 0;
   color: var(--ink-faint);
-  animation: cig-bob 2.4s ease-in-out infinite;
+  animation:
+    cig-fade-in 0.9s ease-out 2.3s both,
+    cig-bob 2.4s ease-in-out 2.3s infinite;
 }
 
 /* Sheen sweep across the primary button on hover */
@@ -337,9 +351,44 @@ body {
 .btn-sheen:hover::after { translate: 120% 0; }
 
 @keyframes cig-spin { to { rotate: 360deg; } }
+
+/* Cross: bloom in, then settle into a gentle breath (scale only, so it
+   hands off seamlessly from the intro's resting scale of 1) */
+@keyframes cig-cross-in {
+  from { opacity: 0; scale: 0.9; }
+  to   { opacity: 1; scale: 1; }
+}
 @keyframes cig-breathe {
-  0%, 100% { opacity: 0.85; scale: 1; }
-  50% { opacity: 1; scale: 1.03; }
+  0%, 100% { scale: 1; }
+  50%      { scale: 1.03; }
+}
+
+/* Godrays: grow + fade in via scale/filter (leaves themed opacity intact),
+   then a slow living shimmer */
+@keyframes cig-rays-in {
+  from { scale: 0.8; filter: opacity(0); }
+  to   { scale: 1;   filter: opacity(1); }
+}
+@keyframes cig-rays-glow {
+  0%, 100% { filter: opacity(0.82); }
+  50%      { filter: opacity(1.12); }
+}
+
+/* Blobs: swell up into place (individual scale composes with drift transform) */
+@keyframes cig-blob-in {
+  from { opacity: 0; scale: 0.8; }
+  to   { opacity: 1; scale: 1; }
+}
+
+/* Base wash: very slow ambient swell */
+@keyframes cig-base-breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+
+@keyframes cig-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 @keyframes cig-drift-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
@@ -363,7 +412,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-rays, .hero-cross, .hero-blob, .hero-title,
+  .hero-base, .hero-rays, .hero-cross, .hero-blob, .hero-title,
   .hero-rise, .hero-scrollcue, .btn-sheen::after {
     animation: none !important;
   }
