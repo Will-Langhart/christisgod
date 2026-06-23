@@ -1,0 +1,198 @@
+#!/usr/bin/env python3
+"""Convert _content_raw.json (extracted from the docx) into per-chapter MDX
+files + a TypeScript chapter registry for the Next.js site."""
+import json, re, os
+
+RAW = "_content_raw.json"
+OUT_CONTENT = "web/src/content"
+OUT_REGISTRY = "web/src/lib/chapters.ts"
+OUT_META = "web/src/lib/book-meta.ts"
+
+ROMAN = "I II III IV V VI VII VIII IX X XI XII XIII XIV XV XVI XVII XVIII XIX XX".split()
+
+def slugify(s):
+    s = s.lower()
+    s = re.sub(r"[^a-z0-9\s-]", "", s)
+    s = re.sub(r"\s+", "-", s).strip("-")
+    return s[:60].strip("-")
+
+def esc(t):
+    # MDX-safe: escape braces; keep typographic chars as-is.
+    return t.replace("{", "\\{").replace("}", "\\}")
+
+def md_table(rows):
+    head = rows[0]
+    body = rows[1:]
+    out = ["| " + " | ".join(esc(c) for c in head) + " |"]
+    out.append("| " + " | ".join("---" for _ in head) + " |")
+    for r in body:
+        # pad/truncate to header width
+        cells = (r + [""] * len(head))[: len(head)]
+        out.append("| " + " | ".join(esc(c).replace("\n", " ") for c in cells) + " |")
+    return "\n".join(out)
+
+def para(text):
+    # A docx paragraph may carry an internal line break that is an attribution
+    # ("…quote…\n  — John 10:30"). Render those as blockquotes.
+    if "\n" in text and ("—" in text or "–" in text):
+        lines = [l.strip() for l in text.split("\n") if l.strip()]
+        return "\n".join("> " + esc(l) for l in lines)
+    return esc(text.strip())
+
+def main():
+    items = json.load(open(RAW))
+
+    # 1) title page + epigraphs (before "Contents")
+    contents_idx = next(i for i, it in enumerate(items)
+                        if it["t"] == "p" and it.get("lvl") == "h1"
+                        and it["text"].strip() == "Contents")
+    title_block = items[:contents_idx]
+    epigraphs = [it["text"] for it in title_block
+                 if it["t"] == "p" and "\n" in it["text"] and ("—" in it["text"])]
+
+    # 2) skip the Contents ToC: jump to the first chapter h1 after it
+    rest = items[contents_idx + 1:]
+    first_ch = next(i for i, it in enumerate(rest)
+                    if it["t"] == "p" and it.get("lvl") == "h1")
+    body = rest[first_ch:]
+
+    # 3) split into chapters at each h1
+    chapters = []
+    cur = None
+    for it in body:
+        if it["t"] == "p" and it.get("lvl") == "h1":
+            if cur:
+                chapters.append(cur)
+            cur = {"title_raw": it["text"].strip(), "blocks": []}
+        else:
+            if cur is None:
+                continue
+            cur["blocks"].append(it)
+    if cur:
+        chapters.append(cur)
+
+    os.makedirs(OUT_CONTENT, exist_ok=True)
+    os.makedirs(os.path.dirname(OUT_REGISTRY), exist_ok=True)
+
+    registry = []
+    for idx, ch in enumerate(chapters):
+        raw = ch["title_raw"]
+        # parse "IV. Title — subtitle"
+        m = re.match(r"^([IVXL]+)\.\s*(.+)$", raw)
+        if m:
+            numeral = m.group(1)
+            rest_title = m.group(2)
+        else:
+            numeral = None
+            rest_title = raw
+        # split title / subtitle on em dash
+        if "—" in rest_title:
+            title, subtitle = [p.strip() for p in rest_title.split("—", 1)]
+        else:
+            title, subtitle = rest_title.strip(), None
+
+        slug = slugify((numeral + "-" if numeral else "") + title) if numeral else slugify(title)
+        order = idx
+
+        # build MDX body
+        lines = []
+        for b in ch["blocks"]:
+            if b["t"] == "table":
+                lines.append(md_table(b["rows"]))
+            else:
+                lvl = b.get("lvl")
+                txt = b["text"].strip()
+                if not txt:
+                    continue
+                if lvl == "h2":
+                    lines.append(f"## {esc(txt)}")
+                elif lvl == "h3":
+                    lines.append(f"### {esc(txt)}")
+                elif lvl == "h4":
+                    lines.append(f"#### {esc(txt)}")
+                else:
+                    lines.append(para(b["text"]))
+        mdx = "\n\n".join(lines).strip() + "\n"
+
+        fname = f"{order:02d}-{slug}.mdx"
+        with open(os.path.join(OUT_CONTENT, fname), "w") as f:
+            f.write(mdx)
+
+        registry.append({
+            "slug": slug,
+            "order": order,
+            "numeral": numeral,
+            "title": title,
+            "subtitle": subtitle,
+            "file": fname,
+        })
+
+    # 4) registry TS
+    def tsval(v):
+        if v is None:
+            return "null"
+        return json.dumps(v, ensure_ascii=False)
+
+    entries = []
+    for r in registry:
+        entries.append(
+            "  {\n"
+            f"    slug: {tsval(r['slug'])},\n"
+            f"    order: {r['order']},\n"
+            f"    numeral: {tsval(r['numeral'])},\n"
+            f"    title: {tsval(r['title'])},\n"
+            f"    subtitle: {tsval(r['subtitle'])},\n"
+            f"    load: () => import(\"@/content/{r['file']}\"),\n"
+            "  },"
+        )
+
+    ts = (
+        "// AUTO-GENERATED by convert_to_mdx.py. Do not edit by hand.\n"
+        "import type { ComponentType } from \"react\";\n\n"
+        "export type Chapter = {\n"
+        "  slug: string;\n"
+        "  order: number;\n"
+        "  numeral: string | null;\n"
+        "  title: string;\n"
+        "  subtitle: string | null;\n"
+        "  load: () => Promise<{ default: ComponentType }>;\n"
+        "};\n\n"
+        "export const chapters: Chapter[] = [\n"
+        + "\n".join(entries)
+        + "\n];\n\n"
+        "export const chapterBySlug = (slug: string) =>\n"
+        "  chapters.find((c) => c.slug === slug);\n"
+    )
+    with open(OUT_REGISTRY, "w") as f:
+        f.write(ts)
+
+    # 5) book meta (title page + epigraphs)
+    title_lines = [it["text"].strip() for it in title_block
+                   if it["t"] == "p" and it["text"].strip()]
+    meta = {
+        "mark": title_lines[0] if title_lines else "",
+        "title": "Christ Is God",
+        "subtitle": "The Divinity of Christ",
+        "tagline": "A Scriptural, Historical, and Grammatical Case for the Deity of Jesus Christ",
+        "year": "2026",
+        "epigraphs": [
+            {
+                "text": e.split("\n")[0].strip().strip("“”\""),
+                "ref": e.split("—")[-1].strip(),
+            }
+            for e in epigraphs
+        ],
+    }
+    meta_ts = (
+        "// AUTO-GENERATED by convert_to_mdx.py. Do not edit by hand.\n"
+        "export const bookMeta = " + json.dumps(meta, ensure_ascii=False, indent=2) + " as const;\n"
+    )
+    with open(OUT_META, "w") as f:
+        f.write(meta_ts)
+
+    print(f"Wrote {len(chapters)} chapters to {OUT_CONTENT}")
+    for r in registry:
+        print(f"  {r['order']:02d} [{r['numeral']}] {r['slug']}")
+
+if __name__ == "__main__":
+    main()

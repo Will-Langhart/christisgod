@@ -1,0 +1,19 @@
+# Python virtualenvs / caches
+.venv/
+.venv2/
+__pycache__/
+*.pyc
+
+# Scratch / intermediate rendering artifacts
+rendered_christ_doc/
+rendered_christ_doc_researched/
+unpacked/
+unpacked_final/
+
+# Node / Next (also covered by web/.gitignore)
+node_modules/
+.next/
+.vercel/
+
+# OS
+.DS_Store

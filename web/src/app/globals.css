@@ -1,0 +1,384 @@
+@import "tailwindcss";
+
+/* Class-based dark mode (driven by next-themes attribute="class"). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ----------------------------------------------------------------------------
+   Classical & reverent palette
+   Light: warm parchment, deep ink, antique gold.
+   Dark:  candle-lit charcoal, warm bone text, soft gilt.
+---------------------------------------------------------------------------- */
+:root {
+  --parchment:      #f7f1e6;
+  --parchment-deep: #efe6d4;
+  --surface:        #fffdf8;
+  --ink:            #211c15;
+  --ink-soft:       #4a4133;
+  --ink-faint:      #6f6451;
+  --gold:           #9a7b3f;
+  --gold-bright:    #b08d4e;
+  --rule:           #e0d4ba;
+  --rule-strong:    #cbbb98;
+}
+
+.dark {
+  --parchment:      #16130e;
+  --parchment-deep: #100d09;
+  --surface:        #1d1810;
+  --ink:            #ece3d2;
+  --ink-soft:       #c4b8a1;
+  --ink-faint:      #968a73;
+  --gold:           #c9a86a;
+  --gold-bright:    #dcc187;
+  --rule:           #322a1d;
+  --rule-strong:    #463b28;
+}
+
+@theme inline {
+  --color-parchment: var(--parchment);
+  --color-parchment-deep: var(--parchment-deep);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+
+  --font-serif: var(--font-eb-garamond), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-ui: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  background-color: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--gold) 30%, transparent);
+}
+
+/* ----------------------------------------------------------------------------
+   Long-form reading typography (.prose)
+---------------------------------------------------------------------------- */
+.prose {
+  font-family: var(--font-serif);
+  font-size: 1.225rem;
+  line-height: 1.78;
+  color: var(--ink);
+  max-width: 42rem;
+}
+
+.prose p {
+  margin-block: 1.15em;
+  hanging-punctuation: first;
+}
+
+.prose h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.95rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-top: 2.75em;
+  margin-bottom: 0.65em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--rule);
+  scroll-margin-top: 6rem;
+}
+
+.prose h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.45rem;
+  line-height: 1.25;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  color: var(--ink);
+  scroll-margin-top: 6rem;
+}
+
+.prose h4 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 1.75em;
+  margin-bottom: 0.5em;
+}
+
+.prose blockquote {
+  margin: 1.8em 0;
+  padding: 0.2em 0 0.2em 1.4em;
+  border-left: 2px solid var(--gold);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.prose blockquote p { margin-block: 0.4em; }
+
+.prose a:not(.scripture-ref) {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 2px;
+}
+
+.prose strong { font-weight: 600; }
+
+/* Tables (Trinity comparison, citation density) */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2em 0;
+  font-size: 0.96rem;
+  font-family: var(--font-ui);
+}
+.prose thead th {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  text-align: left;
+  padding: 0.6em 0.85em;
+  border-bottom: 2px solid var(--gold);
+  color: var(--ink);
+}
+.prose tbody td {
+  padding: 0.55em 0.85em;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-soft);
+  vertical-align: top;
+}
+.prose tbody tr:first-child td { font-weight: 500; }
+.prose tbody td:first-child {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Heading anchor links (rehype-autolink-headings) */
+.prose .heading-anchor {
+  opacity: 0;
+  margin-left: 0.4em;
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 400;
+  transition: opacity 0.15s;
+}
+.prose h2:hover .heading-anchor,
+.prose h3:hover .heading-anchor { opacity: 0.6; }
+
+/* Drop cap on the first paragraph of a chapter */
+.prose .chapter-body > p:first-of-type::first-letter {
+  font-family: var(--font-display);
+  float: left;
+  font-size: 3.6em;
+  line-height: 0.78;
+  font-weight: 600;
+  padding-right: 0.08em;
+  margin-top: 0.06em;
+  color: var(--gold);
+}
+
+/* ----------------------------------------------------------------------------
+   Hero — animated, reverent
+---------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem;
+  text-align: center;
+}
+
+/* Base wash */
+.hero-base {
+  position: absolute;
+  inset: 0;
+  z-index: -5;
+  background:
+    radial-gradient(120% 80% at 50% -10%, color-mix(in srgb, var(--gold) 16%, transparent), transparent 55%),
+    radial-gradient(90% 60% at 50% 120%, color-mix(in srgb, var(--gold) 10%, transparent), transparent 60%);
+}
+
+/* Rotating godrays behind the cross */
+.hero-rays {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  z-index: -4;
+  width: 180vmax;
+  height: 180vmax;
+  translate: -50% -50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    color-mix(in srgb, var(--gold) 18%, transparent) 0deg 1.6deg,
+    transparent 1.6deg 9deg
+  );
+  -webkit-mask-image: radial-gradient(closest-side, black 8%, transparent 62%);
+  mask-image: radial-gradient(closest-side, black 8%, transparent 62%);
+  opacity: 0.5;
+  animation: cig-spin 90s linear infinite;
+}
+.dark .hero-rays { opacity: 0.4; }
+
+/* Giant luminous cross */
+.hero-cross {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  z-index: -3;
+  translate: -50% -50%;
+  font-family: var(--font-display);
+  font-size: clamp(20rem, 52vmin, 44rem);
+  line-height: 1;
+  color: color-mix(in srgb, var(--gold) 22%, transparent);
+  text-shadow: 0 0 70px color-mix(in srgb, var(--gold) 45%, transparent);
+  animation: cig-breathe 9s ease-in-out infinite;
+  user-select: none;
+}
+.dark .hero-cross {
+  color: color-mix(in srgb, var(--gold) 26%, transparent);
+  text-shadow: 0 0 90px color-mix(in srgb, var(--gold) 55%, transparent);
+}
+
+/* Drifting gradient blobs */
+.hero-blob {
+  position: absolute;
+  z-index: -4;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  will-change: transform;
+}
+.hero-blob-1 {
+  width: 38rem; height: 38rem;
+  left: -8rem; top: -6rem;
+  background: radial-gradient(circle, color-mix(in srgb, var(--gold) 30%, transparent), transparent 70%);
+  animation: cig-drift-1 22s ease-in-out infinite;
+}
+.hero-blob-2 {
+  width: 34rem; height: 34rem;
+  right: -7rem; bottom: -5rem;
+  background: radial-gradient(circle, color-mix(in srgb, var(--gold-bright) 26%, transparent), transparent 70%);
+  animation: cig-drift-2 26s ease-in-out infinite;
+}
+
+/* Vignette + edge fade to blend into the page below */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(120% 100% at 50% 40%, transparent 55%, color-mix(in srgb, var(--parchment) 70%, transparent) 100%),
+    linear-gradient(to bottom, transparent 70%, var(--parchment) 100%);
+  pointer-events: none;
+}
+
+/* Gilt shimmer title — dark letters with a moving gold highlight */
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  background: linear-gradient(
+    100deg,
+    var(--ink) 0%, var(--ink) 38%,
+    var(--gold-bright) 50%,
+    var(--ink) 62%, var(--ink) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: cig-shimmer 7s ease-in-out infinite;
+}
+
+/* Staggered entrance */
+.hero-rise { animation: cig-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.hero-scrollcue {
+  position: absolute;
+  bottom: 1.75rem;
+  left: 50%;
+  translate: -50% 0;
+  color: var(--ink-faint);
+  animation: cig-bob 2.4s ease-in-out infinite;
+}
+
+/* Sheen sweep across the primary button on hover */
+.btn-sheen { position: relative; overflow: hidden; }
+.btn-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.45) 50%, transparent 70%);
+  translate: -120% 0;
+  transition: translate 0.7s ease;
+}
+.btn-sheen:hover::after { translate: 120% 0; }
+
+@keyframes cig-spin { to { rotate: 360deg; } }
+@keyframes cig-breathe {
+  0%, 100% { opacity: 0.85; scale: 1; }
+  50% { opacity: 1; scale: 1.03; }
+}
+@keyframes cig-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(45px, 30px) scale(1.12); }
+}
+@keyframes cig-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-40px, -28px) scale(1.1); }
+}
+@keyframes cig-shimmer {
+  0% { background-position: 150% 50%; }
+  100% { background-position: -50% 50%; }
+}
+@keyframes cig-rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes cig-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rays, .hero-cross, .hero-blob, .hero-title,
+  .hero-rise, .hero-scrollcue, .btn-sheen::after {
+    animation: none !important;
+  }
+  .hero-title { background-position: 0 50%; }
+}
+
+/* Inline scripture references */
+.scripture-ref {
+  color: var(--gold);
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 1px dotted var(--gold);
+  white-space: nowrap;
+  transition: background 0.15s;
+  border-radius: 2px;
+}
+.scripture-ref:hover {
+  background: color-mix(in srgb, var(--gold) 14%, transparent);
+}
