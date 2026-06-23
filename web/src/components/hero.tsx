@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, BookOpen, ChevronDown } from "lucide-react";
 import { bookMeta } from "@/lib/book-meta";
 import { chapters } from "@/lib/chapters";
@@ -12,7 +13,15 @@ export function Hero() {
       <div className="hero-base" aria-hidden />
       <div className="hero-rays" aria-hidden />
       <div className="hero-cross" aria-hidden>
-        {bookMeta.mark}
+        <Image
+          src="/christisgod-logo.png"
+          alt=""
+          width={640}
+          height={640}
+          priority
+          unoptimized
+          className="hero-cross-img"
+        />
       </div>
       <div className="hero-blob hero-blob-1" aria-hidden />
       <div className="hero-blob hero-blob-2" aria-hidden />

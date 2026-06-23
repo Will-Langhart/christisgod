@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { bookMeta } from "@/lib/book-meta";
 import { chapters } from "@/lib/chapters";
@@ -67,8 +68,16 @@ export default function Home() {
       </section>
 
       <footer className="border-t border-rule px-6 py-10 text-center font-[family-name:var(--font-ui)] text-sm text-ink-faint">
+        <Image
+          src="/christisgod-logo.png"
+          alt=""
+          width={32}
+          height={32}
+          unoptimized
+          className="mx-auto mb-3 h-8 w-auto opacity-80"
+        />
         <p>
-          {bookMeta.mark} {bookMeta.title} — {bookMeta.subtitle} · {bookMeta.year}
+          {bookMeta.title} — {bookMeta.subtitle} · {bookMeta.year}
         </p>
         <p className="mt-1">Scripture quotations from the King James Version.</p>
       </footer>

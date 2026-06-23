@@ -238,24 +238,26 @@ body {
 }
 .dark .hero-rays { opacity: 0.4; }
 
-/* Giant luminous cross */
+/* Giant luminous cross (logo image) */
 .hero-cross {
   position: absolute;
   left: 50%;
-  top: 44%;
+  top: 45%;
   z-index: -3;
   translate: -50% -50%;
-  font-family: var(--font-display);
-  font-size: clamp(20rem, 52vmin, 44rem);
-  line-height: 1;
-  color: color-mix(in srgb, var(--gold) 22%, transparent);
-  text-shadow: 0 0 70px color-mix(in srgb, var(--gold) 45%, transparent);
   animation: cig-breathe 9s ease-in-out infinite;
   user-select: none;
+  pointer-events: none;
 }
-.dark .hero-cross {
-  color: color-mix(in srgb, var(--gold) 26%, transparent);
-  text-shadow: 0 0 90px color-mix(in srgb, var(--gold) 55%, transparent);
+.hero-cross-img {
+  width: clamp(17rem, 44vmin, 34rem);
+  height: auto;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 60px color-mix(in srgb, var(--gold) 55%, transparent));
+}
+.dark .hero-cross-img {
+  opacity: 1;
+  filter: drop-shadow(0 0 85px color-mix(in srgb, var(--gold) 65%, transparent));
 }
 
 /* Drifting gradient blobs */

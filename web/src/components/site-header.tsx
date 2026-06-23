@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -26,7 +27,14 @@ export function SiteHeader() {
               href="/"
               className="flex items-center gap-2 font-[family-name:var(--font-display)] text-lg font-semibold tracking-tight text-ink"
             >
-              <span className="text-gold">✠</span>
+              <Image
+                src="/christisgod-logo.png"
+                alt="Christ Is God"
+                width={26}
+                height={26}
+                unoptimized
+                className="h-[26px] w-auto"
+              />
               <span>Christ Is God</span>
             </Link>
           </div>
@@ -43,8 +51,16 @@ export function SiteHeader() {
           />
           <div className="absolute left-0 top-0 h-full w-[82%] max-w-sm overflow-y-auto border-r border-rule bg-parchment p-5 shadow-2xl">
             <div className="mb-4 flex items-center justify-between">
-              <span className="font-[family-name:var(--font-display)] text-lg font-semibold text-ink">
-                <span className="text-gold">✠</span> Christ Is God
+              <span className="flex items-center gap-2 font-[family-name:var(--font-display)] text-lg font-semibold text-ink">
+                <Image
+                  src="/christisgod-logo.png"
+                  alt=""
+                  width={24}
+                  height={24}
+                  unoptimized
+                  className="h-6 w-auto"
+                />
+                Christ Is God
               </span>
               <button
                 type="button"
