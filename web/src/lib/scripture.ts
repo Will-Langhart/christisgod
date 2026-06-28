@@ -1,6 +1,26 @@
-// Scripture reference parsing + a curated KJV verse store (public domain).
+// Scripture reference parsing + a KJV verse store (public domain).
 // The rehype plugin tags references in the prose; the popover component uses
-// these helpers to render verse text (when bundled) and a BibleGateway link.
+// these helpers to render verse text and a BibleGateway link.
+//
+// Verse text is auto-generated from the prose by scripts/build-verses.mjs
+// (see GENERATED_VERSES); VERSE_TEXT below holds any manual overrides.
+import { GENERATED_VERSES } from "./verses.generated";
+
+// Highest chapter number per book — rejects patristic look-alikes such as
+// Ignatius "to the Ephesians 18:2" (biblical Ephesians has only 6 chapters).
+const MAX_CHAPTER: Record<string, number> = {
+  Genesis: 50, Exodus: 40, Leviticus: 27, Numbers: 36, Deuteronomy: 34,
+  Joshua: 24, Judges: 21, Ruth: 4, "1 Samuel": 31, "2 Samuel": 24,
+  "1 Kings": 22, "2 Kings": 25, Psalm: 150, Proverbs: 31, Ecclesiastes: 12,
+  Isaiah: 66, Jeremiah: 52, Lamentations: 5, Ezekiel: 48, Daniel: 12,
+  Hosea: 14, Joel: 3, Amos: 9, Micah: 7, Zechariah: 14, Malachi: 4,
+  Matthew: 28, Mark: 16, Luke: 24, John: 21, Acts: 28, Romans: 16,
+  "1 Corinthians": 16, "2 Corinthians": 13, Galatians: 6, Ephesians: 6,
+  Philippians: 4, Colossians: 4, "1 Thessalonians": 5, "2 Thessalonians": 3,
+  "1 Timothy": 6, "2 Timothy": 4, Titus: 3, Hebrews: 13, James: 5,
+  "1 Peter": 5, "2 Peter": 3, "1 John": 5, "2 John": 1, "3 John": 1,
+  Jude: 1, Revelation: 22, Job: 42,
+};
 
 // Canonical book names + common abbreviations used in the manuscript.
 const BOOK_ALIASES: Record<string, string> = {
@@ -71,6 +91,12 @@ export function parseRef(raw: string): ParsedRef | null {
   const book = BOOK_ALIASES[bookKey];
   if (!book) return null;
   const rest = m[2].trim();
+  // Reject references whose chapter exceeds the book's real length (patristic
+  // citations that share a book name, e.g. Ignatius "to the Ephesians 18").
+  const chapter = parseInt(rest, 10);
+  if (Number.isFinite(chapter) && chapter > (MAX_CHAPTER[book] ?? 999)) {
+    return null;
+  }
   const display = `${book} ${rest}`;
   const bibleGatewayUrl =
     "https://www.biblegateway.com/passage/?version=KJV&search=" +
@@ -131,6 +157,10 @@ export const VERSE_TEXT: Record<string, string> = {
   "Matthew 28:9": "...And they came and held him by the feet, and worshipped him.",
 };
 
+// Generated KJV text is authoritative (full, accurate); VERSE_TEXT supplies
+// manual overrides only where a hand-trimmed rendering is preferred.
+const ALL_VERSES: Record<string, string> = { ...VERSE_TEXT, ...GENERATED_VERSES };
+
 export function lookupVerse(display: string): string | undefined {
-  return VERSE_TEXT[display];
+  return ALL_VERSES[display];
 }

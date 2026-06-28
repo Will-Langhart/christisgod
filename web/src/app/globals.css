@@ -433,3 +433,175 @@ body {
 .scripture-ref:hover {
   background: color-mix(in srgb, var(--gold) 14%, transparent);
 }
+
+/* ----------------------------------------------------------------------------
+   Enrichment components (KeyTakeaways, WordStudy, PullQuote, SeeAlso)
+---------------------------------------------------------------------------- */
+
+/* Key takeaways — a distilled summary card */
+.key-takeaways {
+  margin: 2.4em 0;
+  padding: 1.4em 1.6em 1.5em;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+}
+.key-takeaways__title {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 0.8em;
+}
+.key-takeaways__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+.key-takeaways__list li {
+  position: relative;
+  padding-left: 1.5em;
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.key-takeaways__list li::before {
+  content: "✠";
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  color: var(--gold);
+  font-size: 0.85em;
+}
+
+/* Word study — original-language sidebar card */
+.word-study {
+  margin: 1.9em 0;
+  padding: 1.2em 1.4em;
+  background: color-mix(in srgb, var(--gold) 6%, var(--surface));
+  border: 1px solid var(--rule-strong);
+  border-radius: 8px;
+}
+@media (min-width: 90rem) {
+  /* Float into the margin on very wide reading columns */
+  .word-study {
+    float: right;
+    width: 17rem;
+    margin: 0.4em -9rem 1.2em 1.8em;
+    clear: right;
+  }
+}
+.word-study__eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 0.5em;
+}
+.word-study__strongs { color: var(--gold); }
+.word-study__term {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0;
+}
+.word-study__line {
+  margin: 0.35em 0 0;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+.word-study__translit { font-style: italic; }
+.word-study__gloss { color: var(--ink); }
+.word-study__note {
+  margin-top: 0.7em;
+  padding-top: 0.7em;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.word-study__note p { margin: 0; }
+
+/* Pull quote — large set-apart quotation */
+.pull-quote {
+  margin: 2.2em 0;
+  padding: 0.2em 0 0.2em 0;
+  text-align: center;
+}
+.pull-quote blockquote {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  line-height: 1.32;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink);
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+.pull-quote blockquote::before { content: "“"; color: var(--gold); }
+.pull-quote blockquote::after { content: "”"; color: var(--gold); }
+.pull-quote figcaption {
+  margin-top: 0.7em;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* See also — related-chapter cross-reference chips */
+.see-also {
+  margin: 2.4em 0 0.5em;
+  padding-top: 1.3em;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.7em;
+}
+.see-also__label {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.see-also__chips { display: flex; flex-wrap: wrap; gap: 0.5em; }
+.see-also__chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  padding: 0.3em 0.8em;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.see-also__chip:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: color-mix(in srgb, var(--gold) 8%, transparent);
+}
+.see-also__num {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--gold);
+}

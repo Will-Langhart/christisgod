@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { chapters, chapterBySlug } from "@/lib/chapters";
+import { chapterExcerpt } from "@/lib/excerpt";
+import { pathBySlug } from "@/lib/reading-paths";
+import { bookMeta } from "@/lib/book-meta";
+import { chapterGraph } from "@/lib/structured-data";
+import { contentMTime } from "@/lib/content-mtime";
 import { ChapterNav } from "@/components/chapter-nav";
 import { OnThisPage } from "@/components/on-this-page";
+import { ShareButton } from "@/components/share-button";
 
 export function generateStaticParams() {
   return chapters.map((c) => ({ slug: c.slug }));
@@ -21,27 +27,65 @@ export async function generateMetadata({
   const title = chapter.numeral
     ? `${chapter.numeral}. ${chapter.title}`
     : chapter.title;
+  const description = chapterExcerpt(slug, chapter.subtitle);
+  const url = `/read/${slug}`;
   return {
     title,
-    description: chapter.subtitle ?? undefined,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
 export default async function ChapterPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ path?: string }>;
 }) {
   const { slug } = await params;
+  const { path: pathSlug } = await searchParams;
+
   const chapter = chapterBySlug(slug);
   if (!chapter) notFound();
 
+  const activePath = pathSlug ? pathBySlug(pathSlug) : null;
+
   const { default: Content } = await chapter.load();
+  const description = chapterExcerpt(slug, chapter.subtitle);
+
+  const jsonLd = chapterGraph({
+    title: chapter.title,
+    slug,
+    description,
+    modified: contentMTime(slug),
+  });
 
   return (
     <div className="flex gap-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <article className="min-w-0 flex-1 py-10 lg:py-14">
         <header className="mb-10">
+          {activePath && (
+            <p className="mb-3 font-[family-name:var(--font-ui)] text-xs font-semibold uppercase tracking-[0.2em] text-ink-faint">
+              Reading:{" "}
+              <span className="text-gold">{activePath.label}</span>
+            </p>
+          )}
           {chapter.numeral && (
             <p className="font-[family-name:var(--font-ui)] text-sm font-semibold uppercase tracking-[0.25em] text-gold">
               Chapter {chapter.numeral}
@@ -55,14 +99,17 @@ export default async function ChapterPage({
               {chapter.subtitle}
             </p>
           )}
-          <div className="mt-6 h-px w-24 bg-gold" />
+          <div className="mt-6 flex items-center gap-4">
+            <div className="h-px w-24 bg-gold" />
+            <ShareButton title={`${chapter.title} · ${bookMeta.title}`} />
+          </div>
         </header>
 
         <div className="prose chapter-body">
           <Content />
         </div>
 
-        <ChapterNav slug={chapter.slug} />
+        <ChapterNav slug={chapter.slug} pathSlug={pathSlug} />
       </article>
 
       {/* On-this-page rail (wide screens) */}
