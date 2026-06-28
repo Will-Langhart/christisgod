@@ -8,7 +8,7 @@
 // The key below must match the file served at https://<host>/<key>.txt.
 // See https://www.indexnow.org/documentation
 
-const HOST = "christisgod.vercel.app";
+const HOST = "christisgod.app";
 const KEY = "6b066dde377fc1fd276bca71cc216d7d";
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 const ENDPOINT = "https://api.indexnow.org/indexnow";

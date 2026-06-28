@@ -1,6 +1,6 @@
 // Canonical site configuration used for metadata, OG images, sitemap, and JSON-LD.
 export const site = {
-  url: "https://christisgod.vercel.app",
+  url: "https://christisgod.app",
   name: "Christ Is God",
   author: "Will Langhart",
   locale: "en_US",
