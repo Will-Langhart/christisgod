@@ -5,7 +5,6 @@ import { ArrowRight, ArrowLeft, BookOpen } from "lucide-react";
 import { readingPaths, pathBySlug, pathChapters } from "@/lib/reading-paths";
 import { bookMeta } from "@/lib/book-meta";
 import { site } from "@/lib/site";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 export function generateStaticParams() {
   return readingPaths.map((p) => ({ slug: p.slug }));
@@ -45,10 +44,6 @@ export default async function PathPage({
 
   return (
     <div className="flex min-h-full flex-col">
-      <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
-        <ThemeToggle />
-      </div>
-
       <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-20">
         {/* Back link */}
         <Link

@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { EB_Garamond, Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import { bookMeta } from "@/lib/book-meta";
 import { site, keywords } from "@/lib/site";
 
@@ -65,10 +64,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f1e6" },
-    { media: "(prefers-color-scheme: dark)", color: "#16130e" },
-  ],
+  themeColor: "#f7f1e6",
 };
 
 export default function RootLayout({
@@ -77,12 +73,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      suppressHydrationWarning
       className={`${ebGaramond.variable} ${cormorant.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

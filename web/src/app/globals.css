@@ -1,12 +1,8 @@
 @import "tailwindcss";
 
-/* Class-based dark mode (driven by next-themes attribute="class"). */
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* ----------------------------------------------------------------------------
-   Classical & reverent palette
-   Light: warm parchment, deep ink, antique gold.
-   Dark:  candle-lit charcoal, warm bone text, soft gilt.
+   Classical & reverent palette — warm parchment, deep ink, antique gold,
+   with illuminated lapis + vermillion accents.
 ---------------------------------------------------------------------------- */
 :root {
   --parchment:      #f7f1e6;
@@ -19,19 +15,13 @@
   --gold-bright:    #b08d4e;
   --rule:           #e0d4ba;
   --rule-strong:    #cbbb98;
-}
-
-.dark {
-  --parchment:      #16130e;
-  --parchment-deep: #100d09;
-  --surface:        #1d1810;
-  --ink:            #ece3d2;
-  --ink-soft:       #c4b8a1;
-  --ink-faint:      #968a73;
-  --gold:           #c9a86a;
-  --gold-bright:    #dcc187;
-  --rule:           #322a1d;
-  --rule-strong:    #463b28;
+  /* Illuminated-manuscript accents */
+  --lapis:          #2f4d80;  /* interactive: links, navigation, active states */
+  --lapis-bright:   #3d619c;
+  --vermillion:     #a3381f;  /* rubrication: initials, numerals, ornaments (rare) */
+  --vermillion-soft:#b8502f;
+  /* Card elevation */
+  --shadow-color:   38 30 18;
 }
 
 @theme inline {
@@ -45,6 +35,10 @@
   --color-gold-bright: var(--gold-bright);
   --color-rule: var(--rule);
   --color-rule-strong: var(--rule-strong);
+  --color-lapis: var(--lapis);
+  --color-lapis-bright: var(--lapis-bright);
+  --color-vermillion: var(--vermillion);
+  --color-vermillion-soft: var(--vermillion-soft);
 
   --font-serif: var(--font-eb-garamond), Georgia, "Times New Roman", serif;
   --font-display: var(--font-cormorant), Georgia, serif;
@@ -64,8 +58,72 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Tactile parchment grain — a fixed, near-invisible fibrous texture that gives
+   surfaces a hand-made warmth without touching legibility. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 ::selection {
   background: color-mix(in srgb, var(--gold) 30%, transparent);
+}
+
+/* ----------------------------------------------------------------------------
+   Ornamental dividers — a gilt rule centered on a scribe's cross/fleuron,
+   in place of a plain hairline.
+---------------------------------------------------------------------------- */
+.rule-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  color: var(--gold);
+}
+.rule-ornament::before,
+.rule-ornament::after {
+  content: "";
+  height: 1px;
+  width: clamp(2rem, 8vw, 4.5rem);
+  background: linear-gradient(
+    to var(--_dir, right),
+    transparent,
+    var(--rule-strong) 35%,
+    var(--gold)
+  );
+}
+.rule-ornament::before { --_dir: left; }
+.rule-ornament__mark {
+  font-size: 0.9rem;
+  line-height: 1;
+  color: var(--vermillion);
+}
+
+/* A faint gilt band to give long scrolls tonal rhythm between plain sections. */
+.section-gilt {
+  background:
+    radial-gradient(120% 100% at 50% 0%, color-mix(in srgb, var(--gold) 7%, transparent), transparent 62%),
+    radial-gradient(90% 80% at 50% 100%, color-mix(in srgb, var(--lapis) 4%, transparent), transparent 60%);
+}
+
+/* Soft, warm elevation for cards that should feel like laid pages. */
+.card-raised {
+  box-shadow:
+    0 1px 2px rgb(var(--shadow-color) / 0.04),
+    0 6px 18px rgb(var(--shadow-color) / 0.06);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.2s ease;
+}
+.card-raised:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 2px 4px rgb(var(--shadow-color) / 0.06),
+    0 14px 34px rgb(var(--shadow-color) / 0.10);
 }
 
 /* ----------------------------------------------------------------------------
@@ -94,6 +152,13 @@ body {
   margin-bottom: 0.65em;
   padding-bottom: 0.3em;
   border-bottom: 1px solid var(--rule);
+  /* Gilt underline that trails off to the right, like applied gold leaf. */
+  border-image: linear-gradient(
+    to right,
+    var(--gold) 0%,
+    color-mix(in srgb, var(--gold) 55%, transparent) 35%,
+    transparent 85%
+  ) 1;
   scroll-margin-top: 6rem;
 }
 
@@ -121,8 +186,15 @@ body {
 
 .prose blockquote {
   margin: 1.8em 0;
-  padding: 0.2em 0 0.2em 1.4em;
-  border-left: 2px solid var(--gold);
+  padding: 0.7em 1.2em 0.7em 1.4em;
+  border-left: 3px solid var(--gold);
+  border-image: linear-gradient(to bottom, var(--gold-bright), var(--gold)) 1;
+  border-radius: 0 6px 6px 0;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--gold) 8%, transparent),
+    transparent 75%
+  );
   font-style: italic;
   color: var(--ink-soft);
 }
@@ -130,10 +202,15 @@ body {
 .prose blockquote p { margin-block: 0.4em; }
 
 .prose a:not(.scripture-ref) {
-  color: var(--gold);
+  color: var(--lapis);
   text-decoration: underline;
-  text-decoration-color: var(--rule-strong);
+  text-decoration-color: color-mix(in srgb, var(--lapis) 35%, transparent);
   text-underline-offset: 2px;
+  transition: text-decoration-color 0.15s, color 0.15s;
+}
+.prose a:not(.scripture-ref):hover {
+  color: var(--lapis-bright);
+  text-decoration-color: var(--lapis);
 }
 
 .prose strong { font-weight: 600; }
@@ -152,7 +229,13 @@ body {
   text-align: left;
   padding: 0.6em 0.85em;
   border-bottom: 2px solid var(--gold);
+  background: color-mix(in srgb, var(--gold) 9%, transparent);
   color: var(--ink);
+}
+.prose thead th:first-child { border-top-left-radius: 6px; }
+.prose thead th:last-child { border-top-right-radius: 6px; }
+.prose tbody tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--gold) 3.5%, transparent);
 }
 .prose tbody td {
   padding: 0.55em 0.85em;
@@ -179,16 +262,19 @@ body {
 .prose h2:hover .heading-anchor,
 .prose h3:hover .heading-anchor { opacity: 0.6; }
 
-/* Drop cap on the first paragraph of a chapter */
+/* Illuminated initial — a rubricated drop cap opening each chapter, in the
+   vermillion of a scribe's red ink, gilt-shadowed for depth. */
+.prose.chapter-body > p:first-of-type::first-letter,
 .prose .chapter-body > p:first-of-type::first-letter {
   font-family: var(--font-display);
   float: left;
-  font-size: 3.6em;
-  line-height: 0.78;
-  font-weight: 600;
-  padding-right: 0.08em;
-  margin-top: 0.06em;
-  color: var(--gold);
+  font-size: 4.1em;
+  line-height: 0.72;
+  font-weight: 700;
+  padding-right: 0.09em;
+  margin-top: 0.04em;
+  color: var(--vermillion);
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--gold) 55%, transparent);
 }
 
 /* ----------------------------------------------------------------------------
@@ -207,13 +293,16 @@ body {
   text-align: center;
 }
 
-/* Base wash */
+/* Base wash — stained-glass jewel light: warm gold crown, sapphire and ruby
+   bleeding in from the corners as if through leaded glass. */
 .hero-base {
   position: absolute;
   inset: 0;
   z-index: -5;
   background:
-    radial-gradient(120% 80% at 50% -10%, color-mix(in srgb, var(--gold) 16%, transparent), transparent 55%),
+    radial-gradient(120% 80% at 50% -10%, color-mix(in srgb, var(--gold) 18%, transparent), transparent 55%),
+    radial-gradient(70% 55% at 12% 8%, color-mix(in srgb, var(--lapis) 14%, transparent), transparent 60%),
+    radial-gradient(70% 55% at 88% 92%, color-mix(in srgb, var(--vermillion) 12%, transparent), transparent 60%),
     radial-gradient(90% 60% at 50% 120%, color-mix(in srgb, var(--gold) 10%, transparent), transparent 60%);
   animation:
     cig-fade-in 2.4s ease-out both,
@@ -242,7 +331,6 @@ body {
     cig-spin 90s linear infinite,
     cig-rays-glow 9s ease-in-out 2.4s infinite;
 }
-.dark .hero-rays { opacity: 0.4; }
 
 /* Giant luminous cross (logo image) */
 .hero-cross {
@@ -263,10 +351,6 @@ body {
   opacity: 0.9;
   filter: drop-shadow(0 0 60px color-mix(in srgb, var(--gold) 55%, transparent));
 }
-.dark .hero-cross-img {
-  opacity: 1;
-  filter: drop-shadow(0 0 85px color-mix(in srgb, var(--gold) 65%, transparent));
-}
 
 /* Drifting gradient blobs */
 .hero-blob {
@@ -280,7 +364,10 @@ body {
 .hero-blob-1 {
   width: 38rem; height: 38rem;
   left: -8rem; top: -6rem;
-  background: radial-gradient(circle, color-mix(in srgb, var(--gold) 30%, transparent), transparent 70%);
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--lapis) 26%, transparent),
+    color-mix(in srgb, var(--gold) 14%, transparent) 55%,
+    transparent 72%);
   animation:
     cig-blob-in 2.6s ease-out 0.3s both,
     cig-drift-1 22s ease-in-out infinite;
@@ -288,7 +375,10 @@ body {
 .hero-blob-2 {
   width: 34rem; height: 34rem;
   right: -7rem; bottom: -5rem;
-  background: radial-gradient(circle, color-mix(in srgb, var(--gold-bright) 26%, transparent), transparent 70%);
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--vermillion) 22%, transparent),
+    color-mix(in srgb, var(--gold-bright) 16%, transparent) 55%,
+    transparent 72%);
   animation:
     cig-blob-in 2.6s ease-out 0.5s both,
     cig-drift-2 26s ease-in-out infinite;
@@ -442,10 +532,14 @@ body {
 .key-takeaways {
   margin: 2.4em 0;
   padding: 1.4em 1.6em 1.5em;
-  background: var(--surface);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--gold) 4%, var(--surface)), var(--surface));
   border: 1px solid var(--rule);
   border-left: 3px solid var(--gold);
   border-radius: 8px;
+  box-shadow:
+    0 1px 2px rgb(var(--shadow-color) / 0.04),
+    0 6px 18px rgb(var(--shadow-color) / 0.06);
 }
 .key-takeaways__title {
   font-family: var(--font-ui);
@@ -477,7 +571,7 @@ body {
   position: absolute;
   left: 0;
   top: 0.05em;
-  color: var(--gold);
+  color: var(--vermillion);
   font-size: 0.85em;
 }
 
@@ -488,6 +582,9 @@ body {
   background: color-mix(in srgb, var(--gold) 6%, var(--surface));
   border: 1px solid var(--rule-strong);
   border-radius: 8px;
+  box-shadow:
+    0 1px 2px rgb(var(--shadow-color) / 0.04),
+    0 6px 18px rgb(var(--shadow-color) / 0.06);
 }
 @media (min-width: 90rem) {
   /* Float into the margin on very wide reading columns */
@@ -512,7 +609,7 @@ body {
   font-family: var(--font-display);
   font-size: 1.9rem;
   line-height: 1.1;
-  color: var(--ink);
+  color: var(--vermillion);
   margin: 0;
 }
 .word-study__line {
@@ -536,9 +633,23 @@ body {
 
 /* Pull quote — large set-apart quotation */
 .pull-quote {
-  margin: 2.2em 0;
-  padding: 0.2em 0 0.2em 0;
+  position: relative;
+  margin: 2.6em 0;
+  padding: 1.2em 0;
   text-align: center;
+}
+/* A soft gilt halo behind the set-apart quotation. */
+.pull-quote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    60% 130% at 50% 50%,
+    color-mix(in srgb, var(--gold) 11%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
 }
 .pull-quote blockquote {
   font-family: var(--font-display);
@@ -595,9 +706,9 @@ body {
   transition: border-color 0.15s, color 0.15s, background 0.15s;
 }
 .see-also__chip:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: color-mix(in srgb, var(--gold) 8%, transparent);
+  border-color: var(--lapis);
+  color: var(--lapis);
+  background: color-mix(in srgb, var(--lapis) 8%, transparent);
 }
 .see-also__num {
   font-family: var(--font-ui);

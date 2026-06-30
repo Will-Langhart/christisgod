@@ -100,7 +100,7 @@ export default async function ChapterPage({
             </p>
           )}
           <div className="mt-6 flex items-center gap-4">
-            <div className="h-px w-24 bg-gold" />
+            <div className="h-px w-24 bg-gradient-to-r from-gold to-transparent" />
             <ShareButton title={`${chapter.title} · ${bookMeta.title}`} />
           </div>
         </header>

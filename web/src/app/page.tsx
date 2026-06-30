@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import { bookMeta } from "@/lib/book-meta";
 import { chapters } from "@/lib/chapters";
 import { readingPaths } from "@/lib/reading-paths";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Hero } from "@/components/hero";
 import { homeGraph } from "@/lib/structured-data";
 
@@ -17,9 +16,6 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
-        <ThemeToggle />
-      </div>
 
       <Hero />
 
@@ -43,22 +39,25 @@ export default function Home() {
       </section>
 
       {/* Reading Paths */}
-      <section id="paths" className="mx-auto w-full max-w-4xl px-6 py-20">
+      <section id="paths" className="section-gilt border-b border-rule px-6 py-20">
+        <div className="mx-auto w-full max-w-4xl">
         <h2 className="text-center font-[family-name:var(--font-display)] text-3xl font-semibold text-ink">
           Start Here
         </h2>
         <p className="mt-3 text-center font-[family-name:var(--font-serif)] text-lg italic text-ink-faint">
           Choose a path tailored to where you're coming from.
         </p>
-        <div className="mx-auto mt-3 mb-12 h-px w-24 bg-gold" />
+        <div className="rule-ornament mx-auto mt-4 mb-12 w-full max-w-xs">
+          <span className="rule-ornament__mark">✦</span>
+        </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {readingPaths.map((p) => (
             <Link
               key={p.slug}
               href={`/path/${p.slug}`}
-              className="group flex flex-col gap-2 rounded-xl border border-rule p-6 transition hover:border-gold hover:bg-parchment-deep/40"
+              className="card-raised group flex flex-col gap-2 rounded-xl border border-rule bg-surface/60 p-6 hover:border-gold"
             >
-              <span className="font-[family-name:var(--font-display)] text-xl text-ink group-hover:text-gold">
+              <span className="font-[family-name:var(--font-display)] text-xl text-ink transition-colors group-hover:text-gold">
                 {p.label}
               </span>
               <span className="font-[family-name:var(--font-serif)] text-base italic text-ink-faint">
@@ -70,6 +69,7 @@ export default function Home() {
             </Link>
           ))}
         </div>
+        </div>
       </section>
 
       {/* Contents */}
@@ -77,7 +77,9 @@ export default function Home() {
         <h2 className="text-center font-[family-name:var(--font-display)] text-3xl font-semibold text-ink">
           Contents
         </h2>
-        <div className="mx-auto mt-3 mb-12 h-px w-24 bg-gold" />
+        <div className="rule-ornament mx-auto mt-4 mb-12 w-full max-w-xs">
+          <span className="rule-ornament__mark">✦</span>
+        </div>
         <ol className="space-y-1">
           {chapters.map((c) => (
             <li key={c.slug}>
@@ -85,7 +87,7 @@ export default function Home() {
                 href={`/read/${c.slug}`}
                 className="group flex items-baseline gap-4 rounded-lg px-4 py-3 transition hover:bg-parchment-deep/60"
               >
-                <span className="w-10 shrink-0 text-right font-[family-name:var(--font-ui)] text-sm tabular-nums text-gold">
+                <span className="w-10 shrink-0 text-right font-[family-name:var(--font-ui)] text-sm tabular-nums text-vermillion">
                   {c.numeral ?? "✦"}
                 </span>
                 <span className="min-w-0">
