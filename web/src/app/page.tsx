@@ -5,6 +5,8 @@ import { bookMeta } from "@/lib/book-meta";
 import { chapters } from "@/lib/chapters";
 import { readingPaths } from "@/lib/reading-paths";
 import { Hero } from "@/components/hero";
+import { EvidenceCase } from "@/components/evidence-case";
+import { ObjectionExplorer } from "@/components/objection-explorer";
 import { homeGraph } from "@/lib/structured-data";
 
 export default function Home() {
@@ -18,6 +20,8 @@ export default function Home() {
       />
 
       <Hero />
+
+      <EvidenceCase />
 
       {/* Epigraphs */}
       <section
@@ -71,6 +75,8 @@ export default function Home() {
         </div>
         </div>
       </section>
+
+      <ObjectionExplorer />
 
       {/* Contents */}
       <section id="contents" className="mx-auto w-full max-w-4xl px-6 py-20">

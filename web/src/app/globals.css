@@ -126,6 +126,252 @@ body::before {
     0 14px 34px rgb(var(--shadow-color) / 0.10);
 }
 
+/* Cumulative-case overview: six distinct strands visually converge on one
+   conclusion without turning the page into a diagram-heavy infographic. */
+.evidence-section {
+  background:
+    radial-gradient(circle at 50% 46%, color-mix(in srgb, var(--gold) 9%, transparent), transparent 28rem),
+    linear-gradient(180deg, var(--parchment), color-mix(in srgb, var(--surface) 65%, var(--parchment)));
+}
+
+.evidence-card {
+  box-shadow: 0 8px 28px rgb(var(--shadow-color) / 0.055);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.evidence-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -20% -55% 25%;
+  height: 10rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--gold) 10%, transparent);
+  filter: blur(24px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.evidence-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--gold) 65%, var(--rule));
+  box-shadow: 0 18px 42px rgb(var(--shadow-color) / 0.1);
+}
+
+.evidence-card:hover::after { opacity: 1; }
+
+.evidence-number {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-family: var(--font-display);
+  font-size: 4.75rem;
+  line-height: 1;
+  color: color-mix(in srgb, var(--gold) 8%, transparent);
+  user-select: none;
+}
+
+.case-conclusion {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--gold) 8%, transparent), transparent 48%),
+    color-mix(in srgb, var(--surface) 78%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, white 65%, transparent);
+}
+
+/* Objection explorer — native details/summary keeps the interaction fast,
+   keyboard-accessible, and useful even when JavaScript is unavailable. */
+.objections-section {
+  background:
+    radial-gradient(70% 55% at 50% 0%, color-mix(in srgb, var(--lapis) 7%, transparent), transparent),
+    var(--parchment-deep);
+}
+
+.objection-item {
+  box-shadow: 0 2px 10px rgb(var(--shadow-color) / 0.035);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.objection-item[open] {
+  border-color: color-mix(in srgb, var(--lapis) 35%, var(--rule));
+  box-shadow: 0 10px 30px rgb(var(--shadow-color) / 0.07);
+}
+
+.objection-item summary::-webkit-details-marker { display: none; }
+.objection-item summary::marker { content: ""; }
+.objection-item summary:hover .objection-plus { color: var(--lapis); }
+
+.objection-plus { transition: transform 0.22s ease, color 0.2s ease; }
+.objection-item[open] .objection-plus { transform: rotate(45deg); }
+
+.objection-answer {
+  background: linear-gradient(105deg, color-mix(in srgb, var(--lapis) 4%, transparent), transparent 55%);
+}
+
+/* Guided case — a focused, slide-like reading experience with no competing
+   navigation. Each step uses the same parchment language as the main book. */
+.guided-case-shell {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5.25rem;
+  background:
+    radial-gradient(circle at 82% 28%, color-mix(in srgb, var(--gold) 10%, transparent), transparent 27rem),
+    radial-gradient(circle at 12% 78%, color-mix(in srgb, var(--lapis) 6%, transparent), transparent 24rem),
+    var(--parchment);
+}
+
+.guided-case-shell > footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+}
+
+.guided-case-progress { height: 3px; background: var(--rule); }
+.guided-case-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--vermillion), var(--gold));
+  transition: width 0.35s ease;
+}
+
+.guided-case-step { animation: guided-case-enter 0.35s ease both; }
+
+@keyframes guided-case-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.guided-scripture {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--gold) 8%, transparent), transparent 55%),
+    color-mix(in srgb, var(--surface) 82%, transparent);
+  box-shadow: 0 18px 50px rgb(var(--shadow-color) / 0.08);
+}
+
+.guided-nav-button,
+.guided-nav-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border-radius: 999px;
+  padding: 0.7rem 1.2rem;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.guided-nav-button { color: var(--ink-faint); }
+.guided-nav-button:hover:not(:disabled) { color: var(--gold); background: color-mix(in srgb, var(--gold) 8%, transparent); }
+.guided-nav-button:disabled { opacity: 0.3; cursor: not-allowed; }
+.guided-nav-primary { background: var(--gold); color: var(--parchment); padding-inline: 1.5rem; }
+.guided-nav-primary:hover { background: var(--gold-bright); }
+
+/* Pre-Nicene timeline */
+.history-page {
+  background:
+    radial-gradient(circle at 50% 8%, color-mix(in srgb, var(--gold) 10%, transparent), transparent 32rem),
+    var(--parchment);
+}
+
+.history-timeline { position: relative; }
+.history-timeline::before {
+  content: "";
+  position: absolute;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  left: 1.25rem;
+  width: 1px;
+  background: linear-gradient(var(--gold), var(--lapis), var(--vermillion));
+}
+
+.timeline-event {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 1.25rem;
+  padding-bottom: 1.5rem;
+}
+
+.timeline-marker {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  padding-top: 1.5rem;
+}
+
+.timeline-marker span {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: var(--parchment);
+  color: var(--gold);
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.timeline-card { box-shadow: 0 8px 30px rgb(var(--shadow-color) / 0.055); }
+.timeline-era {
+  border-radius: 999px;
+  padding: 0.22rem 0.65rem;
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.timeline-era-nt { color: var(--lapis); background: color-mix(in srgb, var(--lapis) 9%, transparent); }
+.timeline-era-church { color: var(--gold); background: color-mix(in srgb, var(--gold) 11%, transparent); }
+.timeline-era-council { color: var(--vermillion); background: color-mix(in srgb, var(--vermillion) 9%, transparent); }
+.history-verdict { background: color-mix(in srgb, var(--surface) 78%, transparent); box-shadow: 0 15px 45px rgb(var(--shadow-color) / 0.07); }
+
+/* Yahweh / Jesus passage comparison */
+.parallels-page {
+  background:
+    radial-gradient(circle at 15% 12%, color-mix(in srgb, var(--gold) 8%, transparent), transparent 28rem),
+    radial-gradient(circle at 85% 30%, color-mix(in srgb, var(--lapis) 7%, transparent), transparent 30rem),
+    var(--parchment);
+}
+
+.parallel-text { min-height: 18rem; box-shadow: 0 10px 35px rgb(var(--shadow-color) / 0.06); }
+.parallel-old { background: linear-gradient(145deg, color-mix(in srgb, var(--gold) 8%, transparent), transparent 55%), var(--surface); }
+.parallel-new { background: linear-gradient(145deg, color-mix(in srgb, var(--lapis) 7%, transparent), transparent 55%), var(--surface); }
+.parallel-label { font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); }
+.parallel-text mark { padding: 0.03em 0.08em; color: inherit; background: color-mix(in srgb, var(--gold) 25%, transparent); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.parallel-new mark { background: color-mix(in srgb, var(--lapis) 18%, transparent); }
+.parallel-connector { margin-block: -0.25rem; position: relative; z-index: 2; }
+.parallel-explanation { border-bottom: 1px solid var(--rule); }
+.parallel-verdict { background: color-mix(in srgb, var(--surface) 80%, transparent); box-shadow: 0 15px 45px rgb(var(--shadow-color) / 0.07); }
+
+@media (min-width: 768px) {
+  .parallel-grid { grid-template-columns: minmax(0, 1fr) 2.5rem minmax(0, 1fr); }
+  .parallel-connector { margin-inline: -0.25rem; margin-block: 0; }
+}
+
+@media (min-width: 640px) {
+  .history-timeline::before { left: 1.5rem; }
+  .timeline-event { grid-template-columns: 3rem 1fr; gap: 1.75rem; }
+  .timeline-marker span { width: 2.5rem; height: 2.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evidence-card { transition: none; }
+  .evidence-card:hover { transform: none; }
+  .objection-plus { transition: none; }
+  .guided-case-step { animation: none; }
+  .guided-case-progress span { transition: none; }
+}
+
 /* ----------------------------------------------------------------------------
    Long-form reading typography (.prose)
 ---------------------------------------------------------------------------- */

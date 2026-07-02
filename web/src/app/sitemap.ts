@@ -33,5 +33,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [home, ...chapterUrls, ...pathUrls];
+  const featuredUrls = ["case", "history", "parallels"].map((slug) => ({
+    url: `${site.url}/${slug}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.9,
+  }));
+
+  return [home, ...featuredUrls, ...chapterUrls, ...pathUrls];
 }
