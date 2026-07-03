@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { EB_Garamond, Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import { bookMeta } from "@/lib/book-meta";
@@ -75,7 +76,10 @@ export default function RootLayout({
       lang="en"
       className={`${ebGaramond.variable} ${cormorant.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
