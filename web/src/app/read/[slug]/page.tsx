@@ -86,6 +86,9 @@ export default async function ChapterPage({
               <span className="text-gold">{activePath.label}</span>
             </p>
           )}
+          <div className="chapter-crest" aria-hidden>
+            <span className="chapter-crest__mark">✠</span>
+          </div>
           {chapter.numeral && (
             <p className="font-[family-name:var(--font-ui)] text-sm font-semibold uppercase tracking-[0.25em] text-gold">
               Chapter {chapter.numeral}
@@ -107,6 +110,10 @@ export default async function ChapterPage({
 
         <div className="prose chapter-body">
           <Content />
+        </div>
+
+        <div className="chapter-endmark" aria-hidden>
+          ❧
         </div>
 
         <ChapterNav slug={chapter.slug} pathSlug={pathSlug} />

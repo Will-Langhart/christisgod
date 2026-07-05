@@ -373,6 +373,51 @@ body::before {
 }
 
 /* ----------------------------------------------------------------------------
+   Chapter frontispiece — an illuminated opening device and a scribe's
+   end-mark, framing each chapter like a leaf of a manuscript.
+---------------------------------------------------------------------------- */
+.chapter-crest {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.1rem;
+  color: var(--gold);
+}
+.chapter-crest::after {
+  content: "";
+  height: 1px;
+  flex: 0 1 5.5rem;
+  background: linear-gradient(to right, var(--gold), transparent);
+}
+.chapter-crest__mark {
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--vermillion);
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--gold) 55%, transparent);
+}
+
+/* A centered gilt fleuron closing the chapter's text. */
+.chapter-endmark {
+  margin: 3rem auto 0;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.9;
+}
+
+/* Chapter body settles in with a gentle upward breath on load. */
+.chapter-body { animation: cig-chapter-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes cig-chapter-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chapter-body { animation: none; }
+}
+
+/* ----------------------------------------------------------------------------
    Long-form reading typography (.prose)
 ---------------------------------------------------------------------------- */
 .prose {
@@ -657,6 +702,10 @@ body::before {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* Parchment halo lifts the letters cleanly off the luminous cross behind. */
+  filter:
+    drop-shadow(0 1px 1px color-mix(in srgb, var(--parchment) 75%, transparent))
+    drop-shadow(0 0 24px color-mix(in srgb, var(--parchment) 60%, transparent));
   animation: cig-shimmer 7s ease-in-out infinite;
 }
 

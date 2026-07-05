@@ -113,7 +113,10 @@ export default function Home() {
         </ol>
       </section>
 
-      <footer className="border-t border-rule px-6 py-10 text-center font-[family-name:var(--font-ui)] text-sm text-ink-faint">
+      <footer className="section-gilt border-t border-rule px-6 py-12 text-center font-[family-name:var(--font-ui)] text-sm text-ink-faint">
+        <div className="rule-ornament mx-auto mb-7 w-full max-w-xs">
+          <span className="rule-ornament__mark">✠</span>
+        </div>
         <Image
           src="/christisgod-logo.png"
           alt=""
