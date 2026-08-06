@@ -6,8 +6,10 @@ import { ArrowRight, MessagesSquare, Plus } from "lucide-react";
 import { dialogues, dialoguePersonas } from "@/lib/dialogues.generated";
 import { linkifyScripture } from "@/lib/linkify-scripture";
 
+type PersonaId = (typeof dialoguePersonas)[number]["id"];
+
 export function DialogueExplorer() {
-  const [persona, setPersona] = useState(dialoguePersonas[0].id);
+  const [persona, setPersona] = useState<PersonaId>(dialoguePersonas[0].id);
   const active = dialoguePersonas.find((p) => p.id === persona) ?? dialoguePersonas[0];
 
   return (
