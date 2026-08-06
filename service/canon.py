@@ -142,9 +142,10 @@ def _quote_is_scripture(quoted: str | None) -> bool:
 
 @dataclass(frozen=True)
 class VerifyResult:
-    ok: bool
+    ok: bool  # HARD gate: the reference is a real, in-range, existing KJV verse
     reason: str
     display: str | None = None  # canonical ref, when parseable
+    warning: str | None = None  # non-blocking: quote near this ref isn't verbatim KJV
 
 
 def verify_citation(raw: str, quoted_text: str | None = None) -> VerifyResult:
@@ -170,25 +171,21 @@ def verify_citation(raw: str, quoted_text: str | None = None) -> VerifyResult:
             display=parsed.display,
         )
 
-    if not _quote_is_scripture(quoted_text):
-        return VerifyResult(
-            ok=False,
-            reason=f"quoted text is not verbatim KJV (near {parsed.display!r})",
-            display=parsed.display,
-        )
-
-    return VerifyResult(ok=True, reason="verified", display=parsed.display)
+    warning = (None if _quote_is_scripture(quoted_text)
+               else f"quote near {parsed.display} is not verbatim KJV")
+    return VerifyResult(ok=True, reason="verified", display=parsed.display, warning=warning)
 
 
 def verify_citations(items: list[dict]) -> list[VerifyResult]:
     """Batch verify with POOLED quote-matching. Each item is ``{"raw", "quoted"}``.
 
-    A reference still fails hard if it's unparseable, out of range, or names a
-    verse that doesn't exist, and a quote fails hard if it is not verbatim KJV
-    text anywhere. But a quote is NOT required to match the specific reference it
-    was attached to: quoting a real verse with a slightly-off verse number is an
-    attribution slip, not a hallucination, and must not block an otherwise sound
-    answer.
+    Only the REFERENCE is hard-gated: it fails if unparseable, out of range, or a
+    verse that doesn't exist (the real anti-hallucination guarantee — the model
+    cannot cite a fake verse). Quote accuracy is a NON-BLOCKING warning: models
+    legitimately put paraphrases, titles, and critical discussion of textual
+    variants (e.g. the Comma Johanneum) in quotation marks near a real reference,
+    and hard-failing those degrades sound answers. Warnings are surfaced for human
+    review instead.
     """
     results: list[VerifyResult] = []
     for it in items:
@@ -201,10 +198,7 @@ def verify_citations(items: list[dict]) -> list[VerifyResult]:
                 False, f"{parsed.display!r} is not a real KJV verse (check the verse number)",
                 display=parsed.display))
             continue
-        if not _quote_is_scripture(it.get("quoted")):
-            results.append(VerifyResult(
-                False, f"quoted text is not verbatim KJV (near {parsed.display!r})",
-                display=parsed.display))
-            continue
-        results.append(VerifyResult(True, "verified", display=parsed.display))
+        warning = (None if _quote_is_scripture(it.get("quoted"))
+                   else f"quote near {parsed.display} is not verbatim KJV")
+        results.append(VerifyResult(True, "verified", display=parsed.display, warning=warning))
     return results

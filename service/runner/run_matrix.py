@@ -94,6 +94,7 @@ def save(persona: str, obj: dict, result: dict) -> None:
         {"persona": persona, "objection": obj["question"],
          "answer": result.get("final", ""),
          "citations": [c for c in result.get("citations", []) if c.get("ok")],
+         "citation_warnings": result.get("citation_warnings", []),
          "transcript": result.get("transcript", [])},
         indent=2, ensure_ascii=False) + "\n", "utf-8")
     print(f"  ✓ saved {path.name}")
@@ -140,6 +141,8 @@ def main() -> None:
             outcome = "degraded"
         else:
             print("\n--- ANSWER ---\n" + result.get("final", "") + "\n")
+            for w in result.get("citation_warnings", []):
+                print(f"  ⚑ {w}")  # non-blocking — for your review
             keep = args.auto or input("  approve into library? [y/N] ").strip().lower() == "y"
             if keep:
                 save(persona, obj, result)

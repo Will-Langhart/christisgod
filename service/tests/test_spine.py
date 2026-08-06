@@ -55,10 +55,13 @@ def test_out_of_range_reference_is_rejected():
     assert not state["verify_ok"]
 
 
-def test_misquote_is_rejected():
+def test_misquote_warns_but_passes_gate():
+    # The reference (John 1:1) is real, so the gate passes; the bogus quote is
+    # surfaced as a non-blocking warning for human review.
     draft = 'John 1:1 reads, "the Word was a god," proving subordination.'
     state = _run_gate(draft)
-    assert not state["verify_ok"]
+    assert state["verify_ok"]
+    assert state.get("citation_warnings")
 
 
 def test_synthesizer_collects_verified_refs():

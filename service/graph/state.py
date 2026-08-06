@@ -20,6 +20,7 @@ class CitationCheck(TypedDict):
     reason: str
     display: str | None
     quoted: str | None
+    warning: str | None
 
 
 class DebateState(TypedDict, total=False):
@@ -38,6 +39,7 @@ class DebateState(TypedDict, total=False):
     citations: list[CitationCheck]
     verify_ok: bool
     verify_feedback: str  # why verification failed, fed back to apologist
+    citation_warnings: list[str]  # non-blocking quote-accuracy flags for human review
     orthodoxy_ok: bool
     orthodoxy_report: str  # guardrail rationale / flagged heresies
     orthodoxy_feedback: str  # fed back to apologist on failure

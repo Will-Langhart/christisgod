@@ -27,12 +27,17 @@ def _extract_text(content) -> str:
     return str(content)
 
 
-def call_llm(model: str, system: str, user: str, temperature: float | None = None) -> str:
+def call_llm(model: str, system: str, user: str, temperature: float | None = None,
+             max_tokens: int = 4096) -> str:
     """Single-shot completion. Returns the assistant text.
 
     `temperature` is omitted unless explicitly set — the Claude 5 models reject a
     `temperature` parameter, so passing one 400s. Set a per-node temperature via
     env only for a model that still supports it.
+
+    `max_tokens` defaults high enough that thinking tokens plus the answer/JSON
+    verdict are not truncated (a truncated guardrail JSON was being parsed as a
+    spurious FAIL).
 
     Raises a clear error if the LLM stack isn't installed yet (Phase 1 setup),
     so a missing dependency is obvious rather than a cryptic ImportError deep in
@@ -48,7 +53,7 @@ def call_llm(model: str, system: str, user: str, temperature: float | None = Non
             "not need this.)"
         ) from e
 
-    kwargs: dict = {"model": model}
+    kwargs: dict = {"model": model, "max_tokens": max_tokens}
     if temperature is not None:
         kwargs["temperature"] = temperature
     llm = ChatAnthropic(**kwargs)

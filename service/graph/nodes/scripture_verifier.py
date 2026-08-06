@@ -28,20 +28,26 @@ def scripture_verifier(state: DebateState) -> dict:
             "reason": result.reason,
             "display": result.display,
             "quoted": cite.get("quoted"),
+            "warning": result.warning,
         }
         for cite, result in zip(citations, results)
     ]
 
+    # HARD gate: only fabricated / nonexistent references block. Quote-accuracy
+    # issues are non-blocking warnings surfaced for human review.
     failures = [c for c in checks if not c["ok"]]
+    warnings = [r.warning for r in results if r.warning]
     ok = not failures
 
     update: dict = {"citations": checks, "verify_ok": ok}
+    if warnings:
+        update["citation_warnings"] = warnings
     if not ok:
         update["retries"] = state.get("retries", 0) + 1
-        update["verify_feedback"] = "Citation problems to fix:\n" + "\n".join(
+        update["verify_feedback"] = "Fix these fabricated/invalid references:\n" + "\n".join(
             f"  - {c['raw']}: {c['reason']}" for c in failures
         )
         update["transcript"] = [
-            {"role": "system", "content": f"[verifier] rejected: {len(failures)} bad citation(s)"}
+            {"role": "system", "content": f"[verifier] rejected: {len(failures)} invalid reference(s)"}
         ]
     return update

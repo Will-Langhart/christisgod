@@ -55,10 +55,11 @@ def test_quote_ignores_punctuation_and_case():
     assert r.ok, r.reason
 
 
-def test_misquote_fails():
-    # "the Word was a god" is not verbatim KJV anywhere.
+def test_misquote_warns_but_does_not_block():
+    # A non-verbatim quote near a REAL reference is a warning, not a hard failure.
     r = verify_citation("John 1:1", "the Word was a god")
-    assert not r.ok
+    assert r.ok  # reference is real → not blocked
+    assert r.warning is not None  # but flagged for review
 
 
 def test_real_quote_with_slightly_wrong_verse_number_passes():
