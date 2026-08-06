@@ -11,8 +11,32 @@ The Python home of the multi-agent "Test the Case" engine. See the full design i
     `../shared/canon/`. Provides `parse_ref`, `lookup_verse`, `verify_citation`.
   - `tests/test_canon.py` — proves the gate (valid refs parse, out-of-range
     look-alikes reject, correct quotes pass, misquotes and fabricated refs fail).
-- **Phase 1 — graph + offline library: not started.**
-- **Phase 2 — live FastAPI/SSE service: not started.**
+- **Phase 1 — graph + offline library: 🚧 skeleton in place.**
+  - `graph/` — the compiled debate `StateGraph` (`build.py`), shared `state.py`,
+    `config.py`, and the seven `nodes/`. Deterministic nodes (citation_extractor,
+    scripture_verifier, synthesizer, terminal) are **complete**; the LLM nodes
+    (interlocutor, apologist, orthodoxy_guardrail) have **first-draft prompts**
+    to refine; `retriever` is a keyword **placeholder** to swap for embeddings.
+  - `runner/run_matrix.py` — the offline persona × objection runner (24 dialogues),
+    with `--dry-run` (needs no deps).
+  - `tests/test_spine.py` — the deterministic spine (extract → verify → synth),
+    **6/6 passing**, no LLM / no langgraph.
+- **Phase 2 — live FastAPI/SSE service: not started.** (Flip `config.TERMINAL_MODE`
+  to `respond`; wrap `graph.build_graph()` in a streaming endpoint.)
+
+### Running Phase 1
+
+```bash
+python3 -m runner.run_matrix --dry-run          # enumerate the matrix (no deps)
+
+python3 -m venv .venv && . .venv/bin/activate   # real run needs Python 3.10+
+pip install -r requirements.txt
+export ANTHROPIC_API_KEY=...
+python3 -m runner.run_matrix --persona muslim   # run + human-approve into library/
+```
+
+Before a real run, review the theology drafts and the LLM node prompts, and swap
+`retriever.py`'s keyword placeholder for a Chroma embedding search.
 
 ## The canon (single source of truth)
 

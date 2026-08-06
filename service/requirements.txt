@@ -1,0 +1,7 @@
+# Phase 1 apologetics engine. Python 3.10+ (host here is 3.9 — use a fresh venv).
+# The deterministic gate (canon.py) and the spine test need NONE of these.
+langgraph>=0.2.0
+langchain-core>=0.3.0
+langchain-anthropic>=0.3.0
+chromadb>=0.5.0          # Retriever embeddings (replaces the keyword placeholder)
+langsmith>=0.1.0         # trace the multi-agent loops (AI-SPEC.md §2)

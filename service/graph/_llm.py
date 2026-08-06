@@ -1,0 +1,30 @@
+"""Thin Claude wrapper shared by the LLM nodes.
+
+Kept in one place so model wiring, retries, and (later) LangSmith tracing are
+configured once. Imports langchain-anthropic lazily so the deterministic nodes
+and tests do not require the LLM stack to be installed.
+"""
+
+from __future__ import annotations
+
+
+def call_llm(model: str, system: str, user: str, temperature: float = 0.0) -> str:
+    """Single-shot completion. Returns the assistant text.
+
+    Raises a clear error if the LLM stack isn't installed yet (Phase 1 setup),
+    so a missing dependency is obvious rather than a cryptic ImportError deep in
+    a node.
+    """
+    try:
+        from langchain_anthropic import ChatAnthropic
+        from langchain_core.messages import HumanMessage, SystemMessage
+    except ImportError as e:  # pragma: no cover
+        raise RuntimeError(
+            "LLM stack not installed. `pip install -r requirements.txt` and set "
+            "ANTHROPIC_API_KEY to run the graph. (Deterministic nodes/tests do "
+            "not need this.)"
+        ) from e
+
+    llm = ChatAnthropic(model=model, temperature=temperature)
+    resp = llm.invoke([SystemMessage(content=system), HumanMessage(content=user)])
+    return resp.content if isinstance(resp.content, str) else str(resp.content)
