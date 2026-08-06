@@ -41,11 +41,29 @@ fly deploy
 fly open        # note the https URL
 ```
 
-## Railway / Render (Dockerfile auto-detected)
+## Render (free Docker web service — no card) — recommended
 
-Point the service at this repo (root Dockerfile). Set the env vars from the table
-above in the dashboard. Both detect the `Dockerfile` and expose `$PORT` (the CMD
-honors it).
+Uses `render.yaml` (repo root). The repo must be on GitHub.
+
+1. Push this branch to GitHub.
+2. Render dashboard → **New → Blueprint** → pick this repo/branch. It reads
+   `render.yaml` and provisions a free Docker web service.
+3. In the service's **Environment**, set the secret values (`sync: false`):
+   `ANTHROPIC_API_KEY`, `DEBATE_API_TOKEN` (any random string), and optionally
+   `LANGSMITH_API_KEY`. The non-secret vars come from the blueprint.
+4. Render builds the `Dockerfile` and deploys. First build downloads the embedding
+   model; later builds are cached. `healthCheckPath: /health`.
+
+Notes:
+- **Free plan = 512 MB RAM.** onnxruntime + chromadb + the graph may be tight; if
+  it OOMs on boot, bump to the Starter instance (or trim memory).
+- Free services **spin down after ~15 min idle** and cold-start on the next hit
+  (adds a few seconds). Fine for sporadic traffic.
+
+## Railway (Dockerfile auto-detected)
+
+Point a service at this repo (root `Dockerfile`), set the env vars from the table
+above. Railway needs a card/verified account.
 
 ## Wiring the site's live mode (later)
 

@@ -1,0 +1,26 @@
+# Render blueprint for the live apologetics service (free Docker web service).
+# Deploy: push this repo to GitHub, then in Render → New → Blueprint, pick this
+# repo. Set the `sync: false` secrets in the dashboard. See DEPLOY.md.
+services:
+  - type: web
+    name: christisgod-service
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free # spins down after ~15 min idle; cold-starts on next request
+    region: oregon
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: ANTHROPIC_API_KEY # secret — set in the Render dashboard
+        sync: false
+      - key: DEBATE_API_TOKEN # secret — set in the dashboard (any random string)
+        sync: false
+      - key: LANGSMITH_API_KEY # optional — set in the dashboard for tracing
+        sync: false
+      - key: DEBATE_TERMINAL
+        value: respond
+      - key: LANGSMITH_PROJECT
+        value: christisgod
+      - key: CORS_ORIGINS
+        value: https://christisgod.app,http://localhost:3000,http://localhost:3100
