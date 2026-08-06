@@ -3,5 +3,6 @@
 langgraph>=0.2.0
 langchain-core>=0.3.0
 langchain-anthropic>=0.3.0
-chromadb>=0.5.0          # Retriever embeddings (replaces the keyword placeholder)
+chromadb>=0.5.0          # Retriever embeddings (local model; no embeddings key)
 langsmith>=0.1.0         # trace the multi-agent loops (AI-SPEC.md §2)
+python-dotenv>=1.0.0     # load service/.env (ANTHROPIC_API_KEY, overrides)

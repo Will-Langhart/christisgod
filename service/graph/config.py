@@ -9,6 +9,15 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
+# Load service/.env if python-dotenv is present, so ANTHROPIC_API_KEY and any
+# overrides are available without exporting them by hand. Optional dependency.
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+except ImportError:  # pragma: no cover
+    pass
+
 # --- paths -----------------------------------------------------------------
 SERVICE_DIR = Path(__file__).resolve().parent.parent
 REPO_ROOT = SERVICE_DIR.parent
@@ -17,6 +26,10 @@ TAXONOMY_PATH = THEOLOGY_DIR / "heresy-taxonomy.md"
 PERSONAS_DIR = THEOLOGY_DIR / "personas"
 CONTENT_DIR = REPO_ROOT / "web" / "src" / "content"  # the 17 MDX chapters
 OBJECTIONS_PATH = REPO_ROOT / "shared" / "objections.json"
+
+# --- retrieval (Chroma) ----------------------------------------------------
+CHROMA_DIR = Path(os.getenv("CHROMA_DIR", str(SERVICE_DIR / ".chroma")))
+CHROMA_COLLECTION = os.getenv("CHROMA_COLLECTION", "christisgod-chapters")
 
 # --- models (Claude) -------------------------------------------------------
 # Strongest reasoning on the load-bearing nodes; a faster model for the

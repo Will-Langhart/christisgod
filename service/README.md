@@ -16,7 +16,9 @@ The Python home of the multi-agent "Test the Case" engine. See the full design i
     `config.py`, and the seven `nodes/`. Deterministic nodes (citation_extractor,
     scripture_verifier, synthesizer, terminal) are **complete**; the LLM nodes
     (interlocutor, apologist, orthodoxy_guardrail) have **first-draft prompts**
-    to refine; `retriever` is a keyword **placeholder** to swap for embeddings.
+    to refine; `retriever` uses a **Chroma** embedding index (`graph/retrieval.py`,
+    local model — no embeddings key) and degrades to a keyword scorer if chromadb
+    isn't installed.
   - `runner/run_matrix.py` — the offline persona × objection runner (24 dialogues),
     with `--dry-run` (needs no deps).
   - `tests/test_spine.py` — the deterministic spine (extract → verify → synth),
@@ -31,12 +33,16 @@ python3 -m runner.run_matrix --dry-run          # enumerate the matrix (no deps)
 
 python3 -m venv .venv && . .venv/bin/activate   # real run needs Python 3.10+
 pip install -r requirements.txt
-export ANTHROPIC_API_KEY=...
-python3 -m runner.run_matrix --persona muslim   # run + human-approve into library/
+
+cp .env.example .env                             # then paste your key into .env
+python3 -m graph.retrieval --build               # build the Chroma index (once)
+python3 -m runner.run_matrix --persona muslim    # run + human-approve into library/
 ```
 
-Before a real run, review the theology drafts and the LLM node prompts, and swap
-`retriever.py`'s keyword placeholder for a Chroma embedding search.
+`.env` holds `ANTHROPIC_API_KEY` (and optional LangSmith keys); it is gitignored —
+never commit it. Rebuild the index (`python3 -m graph.retrieval --build --force`)
+after editing chapter content. Before a real run, review the theology drafts and
+the LLM node prompts.
 
 ## The canon (single source of truth)
 
