@@ -4,7 +4,7 @@
 // Run:  node scripts/build-verses.mjs
 //
 // Source: aruljohn/Bible-kjv (public domain KJV, per-book JSON).
-import { readdir, readFile, writeFile } from "node:fs/promises";
+import { readdir, readFile, writeFile, mkdir } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -42,16 +42,21 @@ const BOOK_ALIASES = {
   mark: "Mark", luke: "Luke", john: "John", acts: "Acts",
   rom: "Romans", romans: "Romans",
   "1cor": "1 Corinthians", "2cor": "2 Corinthians",
+  "1corinthians": "1 Corinthians", "2corinthians": "2 Corinthians",
   gal: "Galatians", galatians: "Galatians",
   eph: "Ephesians", ephesians: "Ephesians",
   phil: "Philippians", philippians: "Philippians",
   col: "Colossians", colossians: "Colossians",
   "1thess": "1 Thessalonians", "2thess": "2 Thessalonians",
+  "1thessalonians": "1 Thessalonians", "2thessalonians": "2 Thessalonians",
   "1tim": "1 Timothy", "2tim": "2 Timothy",
+  "1timothy": "1 Timothy", "2timothy": "2 Timothy",
   titus: "Titus",
   heb: "Hebrews", hebrews: "Hebrews",
   jas: "James", james: "James",
   "1pet": "1 Peter", "2pet": "2 Peter",
+  "1peter": "1 Peter", "2peter": "2 Peter",
+  "1samuel": "1 Samuel", "2samuel": "2 Samuel",
   "1john": "1 John", "2john": "2 John", "3john": "3 John",
   jude: "Jude",
   rev: "Revelation", revelation: "Revelation",
@@ -191,6 +196,29 @@ async function main() {
     `\n};\n`;
   await writeFile(OUT, body, "utf8");
   console.log(`\n✓ wrote ${keys.length} verse entries → ${OUT}`);
+
+  // 5. Emit the shared canon consumed by the LangGraph verifier service
+  //    (service/canon.py). This keeps ONE source of truth: verses.generated.ts
+  //    and verses.json are written from the same `out` map in the same pass, so
+  //    they cannot drift. See AI-SPEC.md §6.
+  const SHARED = join(ROOT, "..", "shared", "canon");
+  await mkdir(SHARED, { recursive: true });
+
+  const verseJson = {};
+  for (const k of keys) verseJson[k] = out[k];
+  await writeFile(
+    join(SHARED, "verses.json"),
+    JSON.stringify(verseJson, null, 2) + "\n",
+    "utf8",
+  );
+
+  await writeFile(
+    join(SHARED, "book-meta.json"),
+    JSON.stringify({ maxChapter: MAX_CHAPTER, bookAliases: BOOK_ALIASES }, null, 2) +
+      "\n",
+    "utf8",
+  );
+  console.log(`✓ wrote shared canon (verses.json, book-meta.json) → ${SHARED}`);
 }
 
 main().catch((e) => {
