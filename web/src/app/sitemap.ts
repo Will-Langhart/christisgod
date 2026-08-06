@@ -33,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const featuredUrls = ["case", "history", "parallels"].map((slug) => ({
+  const featuredUrls = ["case", "dialogues", "history", "parallels"].map((slug) => ({
     url: `${site.url}/${slug}`,
     lastModified,
     changeFrequency: "monthly" as const,

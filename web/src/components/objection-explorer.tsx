@@ -58,7 +58,17 @@ export function ObjectionExplorer() {
           ))}
         </div>
 
-        <p className="mx-auto mt-9 max-w-2xl text-center font-[family-name:var(--font-serif)] text-base italic text-ink-faint">
+        <div className="mt-9 text-center">
+          <Link
+            href="/dialogues"
+            className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-5 py-2.5 font-[family-name:var(--font-ui)] text-sm font-semibold text-gold transition hover:bg-gold/15"
+          >
+            Answered voice by voice — skeptic, Muslim, seeker
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        <p className="mx-auto mt-6 max-w-2xl text-center font-[family-name:var(--font-serif)] text-base italic text-ink-faint">
           Questions are not enemies of faith. The invitation is to examine the
           evidence patiently, in context, without being asked to pretend certainty.
         </p>
