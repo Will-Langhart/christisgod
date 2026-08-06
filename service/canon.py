@@ -120,6 +120,26 @@ def _normalize_text(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
+@lru_cache(maxsize=1)
+def _kjv_blob() -> str:
+    """All KJV verse text, normalized, newline-joined. A quoted string is accepted
+    as genuine Scripture iff it is a verbatim substring here. Newlines between
+    verses prevent accidental cross-verse matches."""
+    return "\n".join(_normalize_text(t) for t in _verses().values())
+
+
+def _quote_is_scripture(quoted: str | None) -> bool:
+    """True if the quote is verbatim KJV somewhere. This is the anti-fabrication
+    guarantee: the model cannot invent Scripture text. It deliberately does NOT
+    require the quote to match the *specific* reference it was attached to — a
+    real verse cited with a slightly-off verse number (e.g. Col 1:17 text labelled
+    1:16) is an attribution slip, not a hallucination, and shouldn't hard-block."""
+    if not quoted:
+        return True
+    nq = _normalize_text(quoted)
+    return bool(nq) and nq in _kjv_blob()
+
+
 @dataclass(frozen=True)
 class VerifyResult:
     ok: bool
@@ -150,13 +170,12 @@ def verify_citation(raw: str, quoted_text: str | None = None) -> VerifyResult:
             display=parsed.display,
         )
 
-    if quoted_text is not None:
-        if _normalize_text(quoted_text) not in _normalize_text(canon):
-            return VerifyResult(
-                ok=False,
-                reason=f"quoted text does not match KJV for {parsed.display!r}",
-                display=parsed.display,
-            )
+    if not _quote_is_scripture(quoted_text):
+        return VerifyResult(
+            ok=False,
+            reason=f"quoted text is not verbatim KJV (near {parsed.display!r})",
+            display=parsed.display,
+        )
 
     return VerifyResult(ok=True, reason="verified", display=parsed.display)
 
@@ -165,33 +184,27 @@ def verify_citations(items: list[dict]) -> list[VerifyResult]:
     """Batch verify with POOLED quote-matching. Each item is ``{"raw", "quoted"}``.
 
     A reference still fails hard if it's unparseable, out of range, or names a
-    verse that doesn't exist. But a quote passes if it matches its own reference
-    *or any other verse cited in the same answer* — so interleaved quotes and
-    references ("...text A..." and "...text B..." (Ref A, Ref B)) don't trigger a
-    false misquote rejection. A genuine misquote (text matching no cited verse)
-    still fails.
+    verse that doesn't exist, and a quote fails hard if it is not verbatim KJV
+    text anywhere. But a quote is NOT required to match the specific reference it
+    was attached to: quoting a real verse with a slightly-off verse number is an
+    attribution slip, not a hallucination, and must not block an otherwise sound
+    answer.
     """
-    parsed_all = [parse_ref(it["raw"]) for it in items]
-    texts = [lookup_verse(p.display) if p else None for p in parsed_all]
-    pool = [_normalize_text(t) for t in texts if t]
-
     results: list[VerifyResult] = []
-    for it, parsed, text in zip(items, parsed_all, texts):
+    for it in items:
+        parsed = parse_ref(it["raw"])
         if parsed is None:
             results.append(VerifyResult(False, f"unparseable or out-of-range reference: {it['raw']!r}"))
             continue
-        if text is None:
+        if lookup_verse(parsed.display) is None:
             results.append(VerifyResult(
                 False, f"{parsed.display!r} is not a real KJV verse (check the verse number)",
                 display=parsed.display))
             continue
-        quoted = it.get("quoted")
-        if quoted:
-            nq = _normalize_text(quoted)
-            if nq not in _normalize_text(text) and not any(nq in t for t in pool):
-                results.append(VerifyResult(
-                    False, f"quoted text matches no cited verse (near {parsed.display!r})",
-                    display=parsed.display))
-                continue
+        if not _quote_is_scripture(it.get("quoted")):
+            results.append(VerifyResult(
+                False, f"quoted text is not verbatim KJV (near {parsed.display!r})",
+                display=parsed.display))
+            continue
         results.append(VerifyResult(True, "verified", display=parsed.display))
     return results

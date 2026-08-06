@@ -56,8 +56,16 @@ def test_quote_ignores_punctuation_and_case():
 
 
 def test_misquote_fails():
+    # "the Word was a god" is not verbatim KJV anywhere.
     r = verify_citation("John 1:1", "the Word was a god")
     assert not r.ok
+
+
+def test_real_quote_with_slightly_wrong_verse_number_passes():
+    # "all things consist" is Colossians 1:17; attaching it to 1:16 is an
+    # attribution slip, not a fabrication — it must not hard-block.
+    r = verify_citation("Colossians 1:16", "by him all things consist")
+    assert r.ok, r.reason
 
 
 def test_nonexistent_verse_number_fails():

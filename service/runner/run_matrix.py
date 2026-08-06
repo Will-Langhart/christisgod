@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 from graph.config import OBJECTIONS_PATH, PERSONAS_DIR
@@ -79,10 +80,16 @@ def _summary(rows: list[dict]) -> None:
     print(f"\n{saved} saved · {deg} degraded · {skip} skipped · {len(rows)} total → {OUT_DIR}")
 
 
+def _slug(text: str) -> str:
+    """A stable, unique-per-objection slug from the question text. Keyed on the
+    question — NOT the href, since several objections share one chapter link."""
+    words = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-").split("-")
+    return "-".join(w for w in words if w)[:60] or "objection"
+
+
 def save(persona: str, obj: dict, result: dict) -> None:
     OUT_DIR.mkdir(exist_ok=True)
-    slug = obj["href"].strip("/").replace("/", "-") or "root"
-    path = OUT_DIR / f"{persona}__{slug}.json"
+    path = OUT_DIR / f"{persona}__{_slug(obj['question'])}.json"
     path.write_text(json.dumps(
         {"persona": persona, "objection": obj["question"],
          "answer": result.get("final", ""),
