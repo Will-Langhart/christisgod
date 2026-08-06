@@ -48,20 +48,35 @@ def run_one(graph, persona: str, obj: dict) -> dict:
     return graph.invoke(state, config=run_config(persona, obj["question"]))
 
 
-def approve(result: dict) -> bool:
-    if result.get("status") == "degraded":
-        print("  ⚠ degraded (no answer emitted):", result.get("final", ""))
-        # Diagnostics: which gate rejected, and why (so tuning isn't blind).
-        print(f"    retries={result.get('retries')} "
-              f"verify_ok={result.get('verify_ok')} "
-              f"orthodoxy_ok={result.get('orthodoxy_ok')}")
-        if result.get("verify_feedback"):
-            print("    last verify feedback:", result["verify_feedback"])
-        if result.get("orthodoxy_report"):
-            print("    last guardrail verdict:", result["orthodoxy_report"])
-        return False
-    print("\n--- ANSWER ---\n" + result.get("final", "") + "\n")
-    return input("  approve into library? [y/N] ").strip().lower() == "y"
+def _degrade_diagnostics(result: dict) -> str:
+    """Print + return a one-line reason for a degraded run (which gate, why)."""
+    print("  ⚠ degraded (no answer emitted):", result.get("final", ""))
+    line = (f"retries={result.get('retries')} verify_ok={result.get('verify_ok')} "
+            f"orthodoxy_ok={result.get('orthodoxy_ok')}")
+    print("    " + line)
+    if result.get("verify_feedback"):
+        print("    last verify feedback:", result["verify_feedback"])
+    if result.get("orthodoxy_report"):
+        print("    last guardrail verdict:", result["orthodoxy_report"])
+    gate = ("citation" if result.get("verify_ok") is False
+            else "orthodoxy" if result.get("orthodoxy_ok") is False else "unknown")
+    return f"{gate} gate | {line}"
+
+
+def _summary(rows: list[dict]) -> None:
+    if not rows:
+        return
+    marks = {"saved": "✓", "degraded": "⚠", "skipped": "·"}
+    print("\n=== summary ===")
+    for r in rows:
+        print(f"  {marks.get(r['outcome'], '?')} {r['persona']:14s} "
+              f"{r['obj'][:46]:46s} {r['outcome']}")
+        if r.get("reason"):
+            print(f"      {r['reason']}")
+    saved = sum(1 for r in rows if r["outcome"] == "saved")
+    deg = sum(1 for r in rows if r["outcome"] == "degraded")
+    skip = sum(1 for r in rows if r["outcome"] == "skipped")
+    print(f"\n{saved} saved · {deg} degraded · {skip} skipped · {len(rows)} total → {OUT_DIR}")
 
 
 def save(persona: str, obj: dict, result: dict) -> None:
@@ -81,6 +96,9 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--persona", choices=PERSONAS, action="append")
     ap.add_argument("--objection", help="substring filter on the objection question")
+    ap.add_argument("--auto", action="store_true",
+                    help="save every non-degraded dialogue without prompting; "
+                         "review the saved JSON files afterward")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -105,14 +123,27 @@ def main() -> None:
     from graph import build_graph  # lazy: needs langgraph
 
     graph = build_graph()
-    approved = 0
+    rows: list[dict] = []
     for persona, obj in iter_matrix(personas, objections):
         print(f"\n=== {persona} × {obj['question']} ===")
         result = run_one(graph, persona, obj)
-        if approve(result):
-            save(persona, obj, result)
-            approved += 1
-    print(f"\n{approved} dialogue(s) approved into {OUT_DIR}")
+
+        if result.get("status") == "degraded":
+            reason = _degrade_diagnostics(result)
+            outcome = "degraded"
+        else:
+            print("\n--- ANSWER ---\n" + result.get("final", "") + "\n")
+            keep = args.auto or input("  approve into library? [y/N] ").strip().lower() == "y"
+            if keep:
+                save(persona, obj, result)
+                outcome = "saved"
+            else:
+                outcome = "skipped"
+            reason = ""
+        rows.append({"persona": persona, "obj": obj["question"],
+                     "outcome": outcome, "reason": reason})
+
+    _summary(rows)
 
 
 if __name__ == "__main__":
