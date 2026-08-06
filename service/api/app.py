@@ -21,11 +21,13 @@ import os
 os.environ.setdefault("DEBATE_TERMINAL", "respond")
 
 import sys  # noqa: E402
+import time  # noqa: E402
+from collections import defaultdict, deque  # noqa: E402
 from pathlib import Path  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from fastapi import FastAPI  # noqa: E402
+from fastapi import FastAPI, Header, Request  # noqa: E402
 from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
 from fastapi.responses import JSONResponse, StreamingResponse  # noqa: E402
 from pydantic import BaseModel  # noqa: E402
@@ -46,6 +48,32 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+
+# --- lightweight abuse protection --------------------------------------------
+# Each /debate call spends Anthropic budget, so guard the endpoint. If
+# DEBATE_API_TOKEN is set, a matching `Authorization: Bearer <token>` is required
+# (protects against non-browser abuse; a browser token is not truly secret — put
+# real per-user auth in front before heavy promotion). Plus a per-IP rate limit.
+_API_TOKEN = os.getenv("DEBATE_API_TOKEN")
+_RATE_PER_MIN = int(os.getenv("DEBATE_RATE_PER_MIN", "10"))
+_hits: dict[str, deque] = defaultdict(deque)
+
+
+def _client_ip(request: Request) -> str:
+    fwd = request.headers.get("x-forwarded-for")
+    return fwd.split(",")[0].strip() if fwd else (request.client.host if request.client else "?")
+
+
+def _rate_ok(ip: str) -> bool:
+    now = time.time()
+    dq = _hits[ip]
+    while dq and now - dq[0] > 60:
+        dq.popleft()
+    if len(dq) >= _RATE_PER_MIN:
+        return False
+    dq.append(now)
+    return True
+
 
 _graph = None
 
@@ -115,7 +143,11 @@ def _stream(req: DebateRequest):
 
 
 @app.post("/debate")
-def debate(req: DebateRequest):
+def debate(req: DebateRequest, request: Request, authorization: str | None = Header(default=None)):
+    if _API_TOKEN and authorization != f"Bearer {_API_TOKEN}":
+        return JSONResponse({"error": "unauthorized"}, status_code=401)
+    if not _rate_ok(_client_ip(request)):
+        return JSONResponse({"error": "rate limit exceeded, try again shortly"}, status_code=429)
     err = validate_persona(req.persona)
     if err:
         return JSONResponse({"error": err}, status_code=400)

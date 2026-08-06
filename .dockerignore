@@ -1,0 +1,20 @@
+# Keep the build context small — only service/, shared/, web/src/content/ are copied.
+.git
+.venv
+.venv2
+**/.venv
+**/__pycache__
+**/*.pyc
+**/node_modules
+web/.next
+web/.vercel
+service/.chroma
+service/library
+service/.env
+.env
+rendered_christ_doc
+rendered_christ_doc_researched
+unpacked
+unpacked_final
+*.docx
+_content_raw.json

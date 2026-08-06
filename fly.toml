@@ -1,0 +1,22 @@
+# Fly.io config for the apologetics engine (Dockerfile at repo root).
+# Deploy: see DEPLOY.md. Rename `app` to your own before `fly launch`.
+app = "christisgod-service"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  # Scale to zero when idle (sporadic traffic); cold-start is quick since the
+  # image bakes in the Chroma index + embedding model.
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[vm]]
+  # onnxruntime + chromadb + the graph need headroom; bump to 2gb if OOM.
+  memory = "1gb"
+  cpu_kind = "shared"
+  cpus = 1
