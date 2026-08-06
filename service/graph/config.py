@@ -9,17 +9,37 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-# Load .env if python-dotenv is present, so ANTHROPIC_API_KEY and any overrides
-# are available without exporting them by hand. Checks repo-root .env first, then
-# service/.env (service-local values win). Both are gitignored. Optional dep.
+# Load .env so ANTHROPIC_API_KEY and any overrides are available without exporting
+# them by hand. Checks repo-root .env first, then service/.env (service-local wins).
+# Both are gitignored. Uses python-dotenv when installed, else a stdlib fallback so
+# this works before `pip install` too. Never logs values.
+_service_dir = Path(__file__).resolve().parent.parent
+
+
+def _load_env_file_stdlib(path: Path, override: bool = False) -> None:
+    if not path.exists():
+        return
+    for raw in path.read_text("utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        if line.startswith("export "):
+            line = line[len("export "):]
+        key, _, val = line.partition("=")
+        key = key.strip()
+        val = val.strip().strip('"').strip("'")
+        if key and (override or key not in os.environ):
+            os.environ[key] = val
+
+
 try:
     from dotenv import load_dotenv
 
-    _service_dir = Path(__file__).resolve().parent.parent
     load_dotenv(_service_dir.parent / ".env")  # repo-root .env
     load_dotenv(_service_dir / ".env", override=True)  # service/.env overrides
-except ImportError:  # pragma: no cover
-    pass
+except ImportError:
+    _load_env_file_stdlib(_service_dir.parent / ".env")
+    _load_env_file_stdlib(_service_dir / ".env", override=True)
 
 # --- paths -----------------------------------------------------------------
 SERVICE_DIR = Path(__file__).resolve().parent.parent
