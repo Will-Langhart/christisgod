@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DialogueExplorer } from "@/components/dialogue-explorer";
+import { LiveDebate } from "@/components/live-debate";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -17,5 +18,10 @@ export const metadata: Metadata = {
 };
 
 export default function DialoguesPage() {
-  return <DialogueExplorer />;
+  return (
+    <>
+      <DialogueExplorer />
+      <LiveDebate />
+    </>
+  );
 }

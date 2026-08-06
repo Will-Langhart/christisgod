@@ -65,8 +65,19 @@ Notes:
 Point a service at this repo (root `Dockerfile`), set the env vars from the table
 above. Railway needs a card/verified account.
 
-## Wiring the site's live mode (later)
+## Wiring the site's live mode
 
-Once deployed, set `NEXT_PUBLIC_DEBATE_API=https://<your-service-url>` on the web
-project and add the live-mode box to `/dialogues` (not yet built). The static
-24-dialogue library works with or without the live service.
+The live-mode box on `/dialogues` (`web/src/components/live-debate.tsx`) is built
+and **dormant until configured** — it calls the service directly from the browser
+(no Vercel proxy, so long 1–2 min streams aren't cut by function timeouts).
+
+To activate:
+1. On the **Vercel (web) project**, set `NEXT_PUBLIC_DEBATE_API=https://<render-url>`
+   (build-time public var). Optionally `NEXT_PUBLIC_DEBATE_TOKEN` if the service
+   has `DEBATE_API_TOKEN` set — but a browser token is not secret, so for public
+   browser use prefer leaving the service token unset and relying on its CORS
+   allow-list + rate limit.
+2. Redeploy the site (`cd web && vercel deploy --prod --yes`). The box appears.
+
+The service's `CORS_ORIGINS` must include `https://christisgod.app` (it does by
+default). The static 24-dialogue library works with or without the live service.
