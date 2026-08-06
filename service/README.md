@@ -23,8 +23,29 @@ The Python home of the multi-agent "Test the Case" engine. See the full design i
     with `--dry-run` (needs no deps).
   - `tests/test_spine.py` — the deterministic spine (extract → verify → synth),
     **6/6 passing**, no LLM / no langgraph.
-- **Phase 2 — live FastAPI/SSE service: not started.** (Flip `config.TERMINAL_MODE`
-  to `respond`; wrap `graph.build_graph()` in a streaming endpoint.)
+- **Phase 2 — live FastAPI/SSE service: 🚧 skeleton in place.**
+  - `api/app.py` — FastAPI app; `GET /health` and `POST /debate` (SSE stream of
+    the debate for one objection). Same graph as Phase 1, terminal `respond`
+    instead of `human_approval` (set via `DEBATE_TERMINAL=respond`, done in-app).
+  - `api/sse.py` — framework-free SSE formatting + validation (`tests/test_api_sse.py`,
+    4/4, no FastAPI/LLM deps).
+  - Streams transcript turns as `interlocutor` / `draft` / `progress` events, then a
+    `done` event with the final answer, verified citations (with KJV text), and any
+    non-blocking quote warnings.
+
+### Running Phase 2 (live service)
+
+```bash
+# from service/, venv active, ANTHROPIC_API_KEY set
+uvicorn api.app:app --port 8600 --reload
+
+curl -N -X POST localhost:8600/debate -H 'content-type: application/json' \
+  -d '{"persona":"skeptic","objection":"Was Jesus made God at Nicaea?"}'
+```
+
+Restrict browser origins with `CORS_ORIGINS` (comma-separated; defaults to
+christisgod.app + localhost). The Next frontend consumes `/debate` via `EventSource`
+/ fetch-stream for a new `/dialogues` route.
 
 ### Running Phase 1
 
