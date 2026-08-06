@@ -8,8 +8,12 @@ and tests do not require the LLM stack to be installed.
 from __future__ import annotations
 
 
-def call_llm(model: str, system: str, user: str, temperature: float = 0.0) -> str:
+def call_llm(model: str, system: str, user: str, temperature: float | None = None) -> str:
     """Single-shot completion. Returns the assistant text.
+
+    `temperature` is omitted unless explicitly set — the Claude 5 models reject a
+    `temperature` parameter, so passing one 400s. Set a per-node temperature via
+    env only for a model that still supports it.
 
     Raises a clear error if the LLM stack isn't installed yet (Phase 1 setup),
     so a missing dependency is obvious rather than a cryptic ImportError deep in
@@ -25,6 +29,9 @@ def call_llm(model: str, system: str, user: str, temperature: float = 0.0) -> st
             "not need this.)"
         ) from e
 
-    llm = ChatAnthropic(model=model, temperature=temperature)
+    kwargs: dict = {"model": model}
+    if temperature is not None:
+        kwargs["temperature"] = temperature
+    llm = ChatAnthropic(**kwargs)
     resp = llm.invoke([SystemMessage(content=system), HumanMessage(content=user)])
     return resp.content if isinstance(resp.content, str) else str(resp.content)

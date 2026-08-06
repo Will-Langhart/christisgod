@@ -61,10 +61,16 @@ APOLOGIST_MODEL = os.getenv("APOLOGIST_MODEL", "claude-sonnet-5")
 GUARDRAIL_MODEL = os.getenv("GUARDRAIL_MODEL", "claude-sonnet-5")
 INTERLOCUTOR_MODEL = os.getenv("INTERLOCUTOR_MODEL", "claude-haiku-4-5")
 
-# Low temperature everywhere — this is not a place for creativity.
-APOLOGIST_TEMPERATURE = float(os.getenv("APOLOGIST_TEMPERATURE", "0.2"))
-GUARDRAIL_TEMPERATURE = float(os.getenv("GUARDRAIL_TEMPERATURE", "0.0"))
-INTERLOCUTOR_TEMPERATURE = float(os.getenv("INTERLOCUTOR_TEMPERATURE", "0.4"))
+# Temperature is omitted by default — Claude 5 models reject the parameter. Set a
+# value via env only for a model that still supports it (then it's passed through).
+def _opt_temp(name: str) -> float | None:
+    v = os.getenv(name)
+    return float(v) if v not in (None, "") else None
+
+
+APOLOGIST_TEMPERATURE = _opt_temp("APOLOGIST_TEMPERATURE")
+GUARDRAIL_TEMPERATURE = _opt_temp("GUARDRAIL_TEMPERATURE")
+INTERLOCUTOR_TEMPERATURE = _opt_temp("INTERLOCUTOR_TEMPERATURE")
 
 # --- control ---------------------------------------------------------------
 # Max apologist re-drafts before GracefulDegrade fires (AI-SPEC.md §4).
