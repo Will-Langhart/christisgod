@@ -40,9 +40,20 @@ python3 -m runner.run_matrix --persona muslim    # run + human-approve into libr
 ```
 
 `.env` holds `ANTHROPIC_API_KEY` (and optional LangSmith keys); it is gitignored —
-never commit it. Rebuild the index (`python3 -m graph.retrieval --build --force`)
-after editing chapter content. Before a real run, review the theology drafts and
-the LLM node prompts.
+never commit it. Either the **repo-root `.env`** or **`service/.env`** works
+(both are loaded; service-local wins). Rebuild the index
+(`python3 -m graph.retrieval --build --force`) after editing chapter content.
+Before a real run, review the theology drafts and the LLM node prompts.
+
+### LangSmith tracing
+
+Tracing auto-enables when `LANGSMITH_API_KEY` is set (traces go to project
+`christisgod-debate`; override with `LANGSMITH_PROJECT`). Each run is named and
+tagged by persona. Confirm it's wired:
+
+```bash
+python3 -m graph.tracing        # prints enabled / key present / project + connect check
+```
 
 ## The canon (single source of truth)
 

@@ -9,12 +9,15 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-# Load service/.env if python-dotenv is present, so ANTHROPIC_API_KEY and any
-# overrides are available without exporting them by hand. Optional dependency.
+# Load .env if python-dotenv is present, so ANTHROPIC_API_KEY and any overrides
+# are available without exporting them by hand. Checks repo-root .env first, then
+# service/.env (service-local values win). Both are gitignored. Optional dep.
 try:
     from dotenv import load_dotenv
 
-    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+    _service_dir = Path(__file__).resolve().parent.parent
+    load_dotenv(_service_dir.parent / ".env")  # repo-root .env
+    load_dotenv(_service_dir / ".env", override=True)  # service/.env overrides
 except ImportError:  # pragma: no cover
     pass
 
@@ -51,3 +54,8 @@ RETRIEVER_TOP_K = int(os.getenv("RETRIEVER_TOP_K", "6"))
 # Phase 1 offline runner terminates at HumanApproval; Phase 2 live service
 # terminates at `respond`. Toggled here.
 TERMINAL_MODE = os.getenv("DEBATE_TERMINAL", "human_approval")  # or "respond"
+
+# --- tracing ---------------------------------------------------------------
+# Default LangSmith project name; tracing auto-enables when LANGSMITH_API_KEY is
+# set (see graph/tracing.py).
+LANGSMITH_PROJECT = os.getenv("LANGSMITH_PROJECT", "christisgod-debate")

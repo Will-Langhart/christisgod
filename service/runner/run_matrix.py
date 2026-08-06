@@ -34,6 +34,8 @@ def iter_matrix(personas: list[str], objections: list[dict]):
 
 
 def run_one(graph, persona: str, obj: dict) -> dict:
+    from graph.tracing import run_config
+
     state = {
         "persona": persona,
         "objection": obj["question"],
@@ -42,7 +44,8 @@ def run_one(graph, persona: str, obj: dict) -> dict:
         "retries": 0,
         "status": "running",
     }
-    return graph.invoke(state)
+    # run_config names + tags the LangSmith trace by persona/objection.
+    return graph.invoke(state, config=run_config(persona, obj["question"]))
 
 
 def approve(result: dict) -> bool:

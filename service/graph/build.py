@@ -51,6 +51,11 @@ def _after_guardrail(state: DebateState) -> str:
 def build_graph(checkpointer=None):
     """Return a compiled debate graph. Pass a LangGraph checkpointer to persist
     state (recommended for the live service; optional for the offline runner)."""
+    from . import tracing
+
+    if tracing.configure():
+        print(f"· LangSmith tracing on → project '{tracing.status()['project']}'")
+
     g = StateGraph(DebateState)
 
     g.add_node("interlocutor", interlocutor)

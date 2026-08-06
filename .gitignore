@@ -15,5 +15,12 @@ node_modules/
 .next/
 .vercel/
 
+# Secrets — never commit. Keys live here (repo-root and service/.env).
+.env
+.env.*
+!.env.example
+**/.env
+!**/.env.example
+
 # OS
 .DS_Store
