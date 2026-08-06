@@ -26,6 +26,9 @@ distinct, co-equal, co-eternal persons; the Son true God and true man; his \
 prayers, sending, and 'the Father is greater' reflect the incarnation and the \
 personal order — never a lesser divine nature or a created Son.
 4. Be fair to the objector. Answer the strongest form; concede real difficulties.
+5. The passages below are tagged with `[source: <chapter>]` labels for your
+   reference ONLY. Never write those labels, chapter filenames, or bracketed tags
+   in your answer — cite Scripture by its reference alone.
 
 Answer in 4–8 sentences, warm but precise."""
 

@@ -51,6 +51,14 @@ def run_one(graph, persona: str, obj: dict) -> dict:
 def approve(result: dict) -> bool:
     if result.get("status") == "degraded":
         print("  ⚠ degraded (no answer emitted):", result.get("final", ""))
+        # Diagnostics: which gate rejected, and why (so tuning isn't blind).
+        print(f"    retries={result.get('retries')} "
+              f"verify_ok={result.get('verify_ok')} "
+              f"orthodoxy_ok={result.get('orthodoxy_ok')}")
+        if result.get("verify_feedback"):
+            print("    last verify feedback:", result["verify_feedback"])
+        if result.get("orthodoxy_report"):
+            print("    last guardrail verdict:", result["orthodoxy_report"])
         return False
     print("\n--- ANSWER ---\n" + result.get("final", "") + "\n")
     return input("  approve into library? [y/N] ").strip().lower() == "y"
@@ -72,11 +80,18 @@ def save(persona: str, obj: dict, result: dict) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--persona", choices=PERSONAS, action="append")
+    ap.add_argument("--objection", help="substring filter on the objection question")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
     personas = args.persona or PERSONAS
     objections = load_objections()
+    if args.objection:
+        needle = args.objection.lower()
+        objections = [o for o in objections if needle in o["question"].lower()]
+        if not objections:
+            print(f"no objection matches {args.objection!r}")
+            return
 
     if args.dry_run:
         for persona, obj in iter_matrix(personas, objections):

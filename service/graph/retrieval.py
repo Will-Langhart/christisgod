@@ -55,7 +55,7 @@ def _keyword_search(query: str, k: int) -> list[str]:
         if overlap:
             scored.append((overlap, stem, text))
     scored.sort(key=lambda t: t[0], reverse=True)
-    return [f"[{stem}] {text}" for _s, stem, text in scored[:k]]
+    return [f"[source: {stem}]\n{text}" for _s, stem, text in scored[:k]]
 
 
 # --- Chroma path -----------------------------------------------------------
@@ -104,7 +104,7 @@ def search(query: str, k: int = RETRIEVER_TOP_K) -> list[str]:
     res = col.query(query_texts=[query], n_results=k)
     docs = res.get("documents", [[]])[0]
     metas = res.get("metadatas", [[]])[0]
-    return [f"[{(m or {}).get('chapter', '?')}] {d}" for d, m in zip(docs, metas)]
+    return [f"[source: {(m or {}).get('chapter', '?')}]\n{d}" for d, m in zip(docs, metas)]
 
 
 def build_index(force: bool = False) -> int:

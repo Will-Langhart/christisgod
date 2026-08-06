@@ -62,6 +62,13 @@ def test_synthesizer_collects_verified_refs():
     assert out["final"] == draft
 
 
+def test_synthesizer_strips_leaked_source_tags():
+    draft = "As [source: 11-xii-the-manuscript] and [13-xiv-objections] show, John 1:1."
+    out = synthesizer({"draft": draft, "citations": []})
+    assert "source:" not in out["final"]
+    assert "11-xii" not in out["final"] and "13-xiv" not in out["final"]
+
+
 if __name__ == "__main__":
     import traceback
 
