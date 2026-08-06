@@ -39,6 +39,17 @@ def test_correct_quote_passes():
     assert r.ok, r.reason
 
 
+def test_full_kjv_verse_outside_the_book_resolves():
+    # Matthew 26:39 (Gethsemane) isn't quoted in the book, but the full-KJV store
+    # must still verify it — the apologist may cite any real verse.
+    r = verify_citation("Matthew 26:39", "let this cup pass from me")
+    assert r.ok, r.reason
+
+
+def test_verse_range_resolves():
+    assert "firstborn" in (lookup_verse("Colossians 1:15-17") or "")
+
+
 def test_quote_ignores_punctuation_and_case():
     r = verify_citation("John 1:1", "In the beginning was the WORD,")
     assert r.ok, r.reason
@@ -49,8 +60,9 @@ def test_misquote_fails():
     assert not r.ok
 
 
-def test_fabricated_reference_fails():
-    r = verify_citation("John 4:12", "Jesus is God")  # John 4:12 is not in corpus
+def test_nonexistent_verse_number_fails():
+    # John 4 exists but has no verse 99 — the full-KJV store catches bad numbers.
+    r = verify_citation("John 4:99")
     assert not r.ok
 
 

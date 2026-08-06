@@ -211,14 +211,10 @@ async function main() {
     JSON.stringify(verseJson, null, 2) + "\n",
     "utf8",
   );
-
-  await writeFile(
-    join(SHARED, "book-meta.json"),
-    JSON.stringify({ maxChapter: MAX_CHAPTER, bookAliases: BOOK_ALIASES }, null, 2) +
-      "\n",
-    "utf8",
-  );
-  console.log(`✓ wrote shared canon (verses.json, book-meta.json) → ${SHARED}`);
+  // NB: book-meta.json + the full kjv.json.gz verification store are owned by
+  // build-kjv.mjs (all 66 books). verses.json here is just the site's curated
+  // hover-card set / verifier fallback.
+  console.log(`✓ wrote shared verses.json → ${SHARED}`);
 }
 
 main().catch((e) => {

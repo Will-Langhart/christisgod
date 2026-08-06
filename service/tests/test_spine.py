@@ -34,12 +34,19 @@ def test_clean_draft_passes_gate():
     assert state["verify_ok"], state.get("verify_feedback")
 
 
-def test_fabricated_reference_is_rejected():
-    # John 4:12 is a real verse location but not in the corpus / not this claim.
-    draft = "Scripture plainly says Jesus is God (John 4:12)."
+def test_nonexistent_verse_is_rejected():
+    # John 4 has no verse 99 — the full-KJV store rejects fabricated verse numbers.
+    draft = "Scripture plainly says Jesus is God (John 4:99)."
     state = _run_gate(draft)
     assert not state["verify_ok"]
     assert state["retries"] == 1
+
+
+def test_verse_outside_the_book_now_verifies():
+    # Gethsemane (Matthew 26:39) — not quoted in the book, but a real KJV verse.
+    draft = 'Jesus prayed, "let this cup pass from me" (Matthew 26:39).'
+    state = _run_gate(draft)
+    assert state["verify_ok"], state.get("verify_feedback")
 
 
 def test_out_of_range_reference_is_rejected():

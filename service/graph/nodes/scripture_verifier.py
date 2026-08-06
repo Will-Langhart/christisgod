@@ -13,26 +13,24 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from canon import verify_citation  # noqa: E402
+from canon import verify_citations  # noqa: E402
 
 from ..state import CitationCheck, DebateState  # noqa: E402
 
 
 def scripture_verifier(state: DebateState) -> dict:
-    checks: list[CitationCheck] = []
-    for cite in state.get("citations", []):
-        raw = cite["raw"]
-        quoted = cite.get("quoted")
-        result = verify_citation(raw, quoted)
-        checks.append(
-            {
-                "raw": raw,
-                "ok": result.ok,
-                "reason": result.reason,
-                "display": result.display,
-                "quoted": quoted,
-            }
-        )
+    citations = state.get("citations", [])
+    results = verify_citations(citations)
+    checks: list[CitationCheck] = [
+        {
+            "raw": cite["raw"],
+            "ok": result.ok,
+            "reason": result.reason,
+            "display": result.display,
+            "quoted": cite.get("quoted"),
+        }
+        for cite, result in zip(citations, results)
+    ]
 
     failures = [c for c in checks if not c["ok"]]
     ok = not failures
