@@ -1,0 +1,72 @@
+{
+  "persona": "jw-unitarian",
+  "objection": "If Jesus is God, why did he pray to God?",
+  "answer": "This is a fair and important question, and the answer lies in taking the incarnation seriously rather than explaining it away. Jesus is not merely God stripped of humanity; he is true God and true man, one Person with two natures. As man, he possessed a genuine human will and human consciousness, and it was entirely proper — indeed necessary — for that humanity to pray, to depend, to submit, to fall on his face in Gethsemane. Prayer is not a denial of his deity; it is an expression of the reality that the eternal Son took to himself a complete human nature in which he lived a life of trust and obedience toward the Father.\n\nJohn 17:3 must be read in its own context. Jesus has just asked the Father to glorify him with the glory he had with the Father before the world existed — hardly the language of a creature addressing a superior being of a wholly different order, but the language of one who shares eternal glory with the Father and now asks to have it manifested in his incarnate state. The verse distinguishes the Father and the Son as persons; it does not exclude the Son from the divine identity. Tellingly, this prayer sits inside a Gospel that opens by declaring the Word was God (John 1:1) and closes with Thomas kneeling before the risen Christ confessing, \"My Lord and my God\" (John 20:28) — and Jesus accepting that confession rather than correcting it.\n\nSo the two truths must be held together, not set against each other: the Son genuinely prays as man, and the same Son is genuinely addressed in prayer as God by the apostolic Church. Stephen prays, \"Lord Jesus, receive my spirit\" (Acts 7:59). The earliest Aramaic-speaking Christians cried Maranatha — \"our Lord, come\" (1 Corinthians 16:22) — a prayer that assumes Jesus is alive, heavenly, and worthy of worship, arising in the very Jewish milieu where the Shema forbade worship of anyone but the LORD (Deuteronomy 6:4). If Jesus praying to the Father proved he isn't God, the Church praying to Jesus would prove the same of the Father — but the more coherent explanation, held from the beginning, is that one God exists in Father and Son (and Spirit) as distinct persons, and that the Son's incarnate prayers reveal the perfection of his humanity, not the absence of his deity.",
+  "citations": [
+    {
+      "raw": "John 17:3",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 17:3",
+      "quoted": null,
+      "warning": null
+    },
+    {
+      "raw": "John 1:1",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 1:1",
+      "quoted": "My Lord and my God",
+      "warning": null
+    },
+    {
+      "raw": "John 20:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 20:28",
+      "quoted": "My Lord and my God",
+      "warning": null
+    },
+    {
+      "raw": "Acts 7:59",
+      "ok": true,
+      "reason": "verified",
+      "display": "Acts 7:59",
+      "quoted": "Lord Jesus, receive my spirit",
+      "warning": null
+    },
+    {
+      "raw": "1 Corinthians 16:22",
+      "ok": true,
+      "reason": "verified",
+      "display": "1 Corinthians 16:22",
+      "quoted": "our Lord, come",
+      "warning": "quote near 1 Corinthians 16:22 is not verbatim KJV"
+    },
+    {
+      "raw": "Deuteronomy 6:4",
+      "ok": true,
+      "reason": "verified",
+      "display": "Deuteronomy 6:4",
+      "quoted": null,
+      "warning": null
+    }
+  ],
+  "citation_warnings": [
+    "quote near 1 Corinthians 16:22 is not verbatim KJV"
+  ],
+  "transcript": [
+    {
+      "role": "interlocutor",
+      "content": "# The Jehovah's Witness / Biblical Unitarian Objection\n\nLook — if Jesus is truly God, how do we explain that he *prayed* to God? In Matthew 26:39, he falls on his face and prays to the Father; in John 17, he offers the most intimate prayer recorded in Scripture, addressing God as \"you alone are the only true God\" (John 17:3, NWT). A person cannot pray to himself — prayer is the language of dependence, of a subordinate addressing a superior. If the Son and Father are one God, as Trinitarians claim, then either Jesus was praying to himself (which is absurd), or his own words testify that the Father is God in a way the Son is not. The natural, straightforward reading is that Jesus, as God's Son, brought his will into alignment with his Father's will — which makes perfect sense if he is the Messiah, but none at all if divinity itself dwells in him as it dwells in God."
+    },
+    {
+      "role": "apologist",
+      "content": "This is a fair and important question, and the answer lies in taking the incarnation seriously rather than explaining it away. Jesus is not merely God stripped of humanity; he is true God and true man, one Person with two natures. As man, he possessed a genuine human will and human consciousness, and it was entirely proper — indeed necessary — for that humanity to pray, to depend, to submit, to fall on his face in Gethsemane. Prayer is not a denial of his deity; it is an expression of the reality that the eternal Son took to himself a complete human nature in which he lived a life of trust and obedience toward the Father.\n\nJohn 17:3 must be read in its own context. Jesus has just asked the Father to glorify him with the glory he had with the Father before the world existed — hardly the language of a creature addressing a superior being of a wholly different order, but the language of one who shares eternal glory with the Father and now asks to have it manifested in his incarnate state. The verse distinguishes the Father and the Son as persons; it does not exclude the Son from the divine identity. Tellingly, this prayer sits inside a Gospel that opens by declaring the Word was God (John 1:1) and closes with Thomas kneeling before the risen Christ confessing, \"My Lord and my God\" (John 20:28) — and Jesus accepting that confession rather than correcting it.\n\nSo the two truths must be held together, not set against each other: the Son genuinely prays as man, and the same Son is genuinely addressed in prayer as God by the apostolic Church. Stephen prays, \"Lord Jesus, receive my spirit\" (Acts 7:59). The earliest Aramaic-speaking Christians cried Maranatha — \"our Lord, come\" (1 Corinthians 16:22) — a prayer that assumes Jesus is alive, heavenly, and worthy of worship, arising in the very Jewish milieu where the Shema forbade worship of anyone but the LORD (Deuteronomy 6:4). If Jesus praying to the Father proved he isn't God, the Church praying to Jesus would prove the same of the Father — but the more coherent explanation, held from the beginning, is that one God exists in Father and Son (and Spirit) as distinct persons, and that the Son's incarnate prayers reveal the perfection of his humanity, not the absence of his deity."
+    },
+    {
+      "role": "system",
+      "content": "[synth] 6 verified citation(s)"
+    }
+  ]
+}

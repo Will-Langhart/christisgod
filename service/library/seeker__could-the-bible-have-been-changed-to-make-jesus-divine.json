@@ -1,0 +1,57 @@
+{
+  "persona": "seeker",
+  "objection": "Could the Bible have been changed to make Jesus divine?",
+  "answer": "What a good and honest question — and it deserves a careful, not a defensive, answer. The short answer is: we're not relying on later editors' impressions of Jesus; we have manuscript and historical evidence reaching right back into the first generation, and it shows the \"rough spots\" and the high claims sitting side by side from the very beginning, not smoothed over at all.\n\nStart with the manuscripts themselves. The Rylands fragment (P52) of John's Gospel dates to about AD 125 — within a generation or two of composition — and the papyri P66 and P75 (c. 200) already contain \"the Word was God\" (John 1:1), \"only-begotten God\" (John 1:18), and Thomas's confession \"My Lord and my God\" (John 20:28), all more than a century before Nicaea. If scribes were quietly inserting deity into the text over time, we'd expect the earliest copies to lack these lines and later ones to add them. Instead the earliest physical evidence we possess already contains them — undiluted, not evolving.\n\nAnd notice: the text was never scrubbed of Jesus' humanity either. The very manuscripts that contain \"the Word was God\" also preserve Jesus weeping, growing weary, praying to the Father, and saying \"the Father is greater than I\" (John 14:28). If early Christians were editing to win an argument, that's a strange way to do it — they'd have had every motive to cut those lines, and didn't. That itself is evidence of honesty: they preserved what was hard to explain because it was true, and they trusted that Jesus is both fully God and fully man, so his human weakness and prayer reflect the real incarnation, not a contradiction to be hidden.\n\nHistorically, the scholarly consensus has shifted away from the old idea of a merely human Jesus gradually \"divinized.\" Larry Hurtado showed that worship of Jesus — prayer, hymns, baptism in his name — erupted among Jewish monotheists within the first few years after the resurrection, not generations later. Richard Bauckham showed the New Testament writers place Jesus within the unique identity of Israel's God from the outset. The highest Christology is also the earliest — and Nicaea in 325 didn't invent this; it defended a confession already ancient, already assumed by martyrs and bishops alike, summarized in one word, homoousios, against Arius's claim that the Son was merely the highest creature.\n\nSo you can trust what you're reading not because the Church asks you to take it on faith blindly, but because the manuscript trail and the earliest historical record both converge: \"My Lord and my God\" was the verdict of the first witnesses, not a verdict smuggled in later.",
+  "citations": [
+    {
+      "raw": "John 1:1",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 1:1",
+      "quoted": "the Word was God",
+      "warning": null
+    },
+    {
+      "raw": "John 1:18",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 1:18",
+      "quoted": "only-begotten God",
+      "warning": "quote near John 1:18 is not verbatim KJV"
+    },
+    {
+      "raw": "John 20:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 20:28",
+      "quoted": "My Lord and my God",
+      "warning": null
+    },
+    {
+      "raw": "John 14:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 14:28",
+      "quoted": "the Father is greater than I",
+      "warning": "quote near John 14:28 is not verbatim KJV"
+    }
+  ],
+  "citation_warnings": [
+    "quote near John 1:18 is not verbatim KJV",
+    "quote near John 14:28 is not verbatim KJV"
+  ],
+  "transcript": [
+    {
+      "role": "interlocutor",
+      "content": "# An Honest Question About the Text\n\nI've been reading about how the Bible came together, and I keep wondering: *how do I know the early church didn't just edit Jesus into being God?* I mean, if those first scribes really believed he was the Son of God, wouldn't they have been tempted to smooth out the rough spots — you know, the verses where Jesus seems *just* human, or where he prays like we do? I'm not saying I think they were dishonest exactly, but people do tend to see what they want to see. How can I trust that what I'm reading is really what the original writers meant, and not something someone added later to make the case stronger?"
+    },
+    {
+      "role": "apologist",
+      "content": "What a good and honest question — and it deserves a careful, not a defensive, answer. The short answer is: we're not relying on later editors' impressions of Jesus; we have manuscript and historical evidence reaching right back into the first generation, and it shows the \"rough spots\" and the high claims sitting side by side from the very beginning, not smoothed over at all.\n\nStart with the manuscripts themselves. The Rylands fragment (P52) of John's Gospel dates to about AD 125 — within a generation or two of composition — and the papyri P66 and P75 (c. 200) already contain \"the Word was God\" (John 1:1), \"only-begotten God\" (John 1:18), and Thomas's confession \"My Lord and my God\" (John 20:28), all more than a century before Nicaea. If scribes were quietly inserting deity into the text over time, we'd expect the earliest copies to lack these lines and later ones to add them. Instead the earliest physical evidence we possess already contains them — undiluted, not evolving.\n\nAnd notice: the text was never scrubbed of Jesus' humanity either. The very manuscripts that contain \"the Word was God\" also preserve Jesus weeping, growing weary, praying to the Father, and saying \"the Father is greater than I\" (John 14:28). If early Christians were editing to win an argument, that's a strange way to do it — they'd have had every motive to cut those lines, and didn't. That itself is evidence of honesty: they preserved what was hard to explain because it was true, and they trusted that Jesus is both fully God and fully man, so his human weakness and prayer reflect the real incarnation, not a contradiction to be hidden.\n\nHistorically, the scholarly consensus has shifted away from the old idea of a merely human Jesus gradually \"divinized.\" Larry Hurtado showed that worship of Jesus — prayer, hymns, baptism in his name — erupted among Jewish monotheists within the first few years after the resurrection, not generations later. Richard Bauckham showed the New Testament writers place Jesus within the unique identity of Israel's God from the outset. The highest Christology is also the earliest — and Nicaea in 325 didn't invent this; it defended a confession already ancient, already assumed by martyrs and bishops alike, summarized in one word, homoousios, against Arius's claim that the Son was merely the highest creature.\n\nSo you can trust what you're reading not because the Church asks you to take it on faith blindly, but because the manuscript trail and the earliest historical record both converge: \"My Lord and my God\" was the verdict of the first witnesses, not a verdict smuggled in later."
+    },
+    {
+      "role": "system",
+      "content": "[synth] 4 verified citation(s)"
+    }
+  ]
+}

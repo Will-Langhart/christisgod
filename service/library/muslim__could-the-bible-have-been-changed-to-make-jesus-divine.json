@@ -1,0 +1,48 @@
+{
+  "persona": "muslim",
+  "objection": "Could the Bible have been changed to make Jesus divine?",
+  "answer": "Thank you for putting the objection so honestly — this deserves a careful answer, not a dismissal.\n\nFirst, the manuscript evidence runs directly against the \"scribal corruption\" theory. P52, a fragment of John, dates to about AD 125 — within living memory of the apostles — and P66 and P75 (c. 200) already contain \"the Word was God\" (John 1:1), \"only begotten God\" (John 1:18), and Thomas's confession \"My Lord and my God\" (John 20:28), all more than a century before Nicaea. With over 5,800 Greek manuscripts, we can trace the text back further than any other ancient document; there is no textual seam where a \"plain prophet\" Jesus gets rewritten into a divine one. The high Christology is simply already there, at the earliest layer we can recover.\n\nSecond, this belief did not begin with Constantine's bishops. Larry Hurtado and Richard Bauckham have shown that worship of Jesus — prayer to him, hymns about him, baptism in his name — appears among Jewish believers within the first years after the resurrection, using the very categories (Creator, bearer of the Name, recipient of worship) by which Judaism distinguished God from all else. This is not a Greek corruption of a simple Jewish teacher; it is thoroughly Jewish devotion, and it predates Paul's letters. Nicaea, in 325, did not vote divinity into existence — Tertullian was already using the word trinitas by AD 200, and Origen was writing extended commentary assuming Christ's full deity decades before Constantine was born. Nicaea's actual question was narrower: not \"is the Son God?\" but \"is the Son of the same essence as the Father, against Arius's claim that he was the highest creature?\" The council defended an ancient confession; it did not manufacture one.\n\nAs for the tension you rightly raise — Jesus's prayers, his stated ignorance of the hour, \"the Father is greater than I\" — I don't dismiss these; they are real and must be honored, not explained away. But they describe the incarnation, not a lesser nature. The Son who is eternally God took to himself a genuine human nature, in which he prays, grows weary, and defers to the Father as Son to Father — while remaining, in that same Gospel, the one who says \"I am\" and receives Thomas's worship as \"my Lord and my God\" without correction. The earliest text holds both together; the challenge is not to erase one side, but to see why the first Jewish believers — no strangers to the peril of idolatry — concluded that both were true of the same person.",
+  "citations": [
+    {
+      "raw": "John 1:1",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 1:1",
+      "quoted": "the Word was God",
+      "warning": null
+    },
+    {
+      "raw": "John 1:18",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 1:18",
+      "quoted": "only begotten God",
+      "warning": "quote near John 1:18 is not verbatim KJV"
+    },
+    {
+      "raw": "John 20:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 20:28",
+      "quoted": "My Lord and my God",
+      "warning": null
+    }
+  ],
+  "citation_warnings": [
+    "quote near John 1:18 is not verbatim KJV"
+  ],
+  "transcript": [
+    {
+      "role": "interlocutor",
+      "content": "# Muslim Interlocutor\n\nYou must understand—we do not say this out of disrespect for your scripture, but out of concern for the truth. The earliest followers of Jesus knew him as a righteous prophet and Messiah; yet by the Council of Nicaea, three centuries later, the Church decided he was divine—a decision made by bishops under Constantine's political influence, not by Jesus's own teaching. If we examine the Gospels honestly, we find they were copied and recopied across centuries and different languages. Is it not plausible—even likely—that scribes, working under the theological conviction that Jesus *must* be God, subtly altered the text to support what the Church had already decided? The verse \"the Word was God\" in John, the titles \"Son of God,\" the \"I am\" sayings—these stand in tension with Jesus's own prayers, his ignorance of the hour, his clear statements that the Father is greater than he. How do you account for these layers of change without acknowledging that later Christians reshaped the record to fit a doctrine Jesus himself never plainly proclaimed?"
+    },
+    {
+      "role": "apologist",
+      "content": "Thank you for putting the objection so honestly — this deserves a careful answer, not a dismissal.\n\nFirst, the manuscript evidence runs directly against the \"scribal corruption\" theory. P52, a fragment of John, dates to about AD 125 — within living memory of the apostles — and P66 and P75 (c. 200) already contain \"the Word was God\" (John 1:1), \"only begotten God\" (John 1:18), and Thomas's confession \"My Lord and my God\" (John 20:28), all more than a century before Nicaea. With over 5,800 Greek manuscripts, we can trace the text back further than any other ancient document; there is no textual seam where a \"plain prophet\" Jesus gets rewritten into a divine one. The high Christology is simply already there, at the earliest layer we can recover.\n\nSecond, this belief did not begin with Constantine's bishops. Larry Hurtado and Richard Bauckham have shown that worship of Jesus — prayer to him, hymns about him, baptism in his name — appears among Jewish believers within the first years after the resurrection, using the very categories (Creator, bearer of the Name, recipient of worship) by which Judaism distinguished God from all else. This is not a Greek corruption of a simple Jewish teacher; it is thoroughly Jewish devotion, and it predates Paul's letters. Nicaea, in 325, did not vote divinity into existence — Tertullian was already using the word trinitas by AD 200, and Origen was writing extended commentary assuming Christ's full deity decades before Constantine was born. Nicaea's actual question was narrower: not \"is the Son God?\" but \"is the Son of the same essence as the Father, against Arius's claim that he was the highest creature?\" The council defended an ancient confession; it did not manufacture one.\n\nAs for the tension you rightly raise — Jesus's prayers, his stated ignorance of the hour, \"the Father is greater than I\" — I don't dismiss these; they are real and must be honored, not explained away. But they describe the incarnation, not a lesser nature. The Son who is eternally God took to himself a genuine human nature, in which he prays, grows weary, and defers to the Father as Son to Father — while remaining, in that same Gospel, the one who says \"I am\" and receives Thomas's worship as \"my Lord and my God\" without correction. The earliest text holds both together; the challenge is not to erase one side, but to see why the first Jewish believers — no strangers to the peril of idolatry — concluded that both were true of the same person."
+    },
+    {
+      "role": "system",
+      "content": "[synth] 3 verified citation(s)"
+    }
+  ]
+}

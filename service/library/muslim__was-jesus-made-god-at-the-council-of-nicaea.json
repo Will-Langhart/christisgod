@@ -1,0 +1,46 @@
+{
+  "persona": "muslim",
+  "objection": "Was Jesus made God at the Council of Nicaea?",
+  "answer": "Friend, I take your grief seriously, and I want to answer the strongest version of your worry, not a caricature of it. But the historical premise — that Nicaea manufactured Christ's divinity — doesn't hold up. The confession of Jesus as Lord and God is embedded in material older than Nicaea by nearly three centuries: Paul's letters, the primitive hymn he quotes, the practice of baptizing \"in the name of the Father, and of the Son, and of the Holy Ghost\" (Matthew 28:19) that Jesus himself commanded. Pliny, a hostile Roman governor writing around AD 112, reports Christians singing hymns to Christ \"as to a god\" — over two centuries before Constantine. Nicaea did not vote divinity into being; it faced Arius's claim that the Son was the highest of creatures and answered with one word, homoousios, to guard what Ignatius, Justin, and Irenaeus were already confessing.\n\nAs for the debates themselves — yes, they were fierce, but notice what they were about. No one at Nicaea was debating whether Jesus should be worshipped; that was already the shared inheritance of martyrs and liturgies. The debate was over how to articulate the mystery precisely enough to exclude a reduction of the Son to a creature. That the Church needed centuries to find exact language for a reality it already lived and prayed is not evidence of invention — it's evidence of care.\n\nOn John 14:28 — \"My Father is greater than I\" — this is not the Son confessing a lesser nature but the incarnate Son speaking from within his voluntary humility, sent by the Father, obedient unto the cross. The same Gospel that records this saying also has Thomas confess him as \"My Lord and my God\" (John 20:28) and Jesus receive it without correction. The Father is greater in the order of the incarnation and mission; the Son is not lesser in essence. Teaching us to pray \"Our Father\" doesn't exclude this — the Son who prays with us as man is the same one the earliest Christians, still observant monotheistic Jews shaped by the Shema, dared to worship as God without abandoning that Shema. That's not something imperial politics produced; that's something only the resurrection could explain.",
+  "citations": [
+    {
+      "raw": "Matthew 28:19",
+      "ok": true,
+      "reason": "verified",
+      "display": "Matthew 28:19",
+      "quoted": "in the name of the Father, and of the Son, and of the Holy Ghost",
+      "warning": null
+    },
+    {
+      "raw": "John 14:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 14:28",
+      "quoted": "My Father is greater than I",
+      "warning": null
+    },
+    {
+      "raw": "John 20:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 20:28",
+      "quoted": "My Lord and my God",
+      "warning": null
+    }
+  ],
+  "citation_warnings": [],
+  "transcript": [
+    {
+      "role": "interlocutor",
+      "content": "I offer this with respect for your faith and your Scripture, brother, but I must ask: How can the Council of Nicaea in 325 CE have *made* Jesus God, when the doctrine of the Trinity does not appear in the Gospels themselves? Your own early Christians — the ones closest to Jesus and his apostles — debated fiercely about his nature precisely *because* it was not plain. If Jesus had truly claimed divinity, why did the Church need imperial councils and philosophical language borrowed from Greek metaphysics to defend what should have been obvious from his own mouth? The fact that Arius and many bishops rejected this formula shows it was a *construction*, not a discovery of what Jesus taught. Did he not himself say, \"My Father is greater than I\" (John 14:28), and teach us to pray \"Our Father\"? I grieve that later generations added to his message what he never claimed for himself."
+    },
+    {
+      "role": "apologist",
+      "content": "Friend, I take your grief seriously, and I want to answer the strongest version of your worry, not a caricature of it. But the historical premise — that Nicaea manufactured Christ's divinity — doesn't hold up. The confession of Jesus as Lord and God is embedded in material older than Nicaea by nearly three centuries: Paul's letters, the primitive hymn he quotes, the practice of baptizing \"in the name of the Father, and of the Son, and of the Holy Ghost\" (Matthew 28:19) that Jesus himself commanded. Pliny, a hostile Roman governor writing around AD 112, reports Christians singing hymns to Christ \"as to a god\" — over two centuries before Constantine. Nicaea did not vote divinity into being; it faced Arius's claim that the Son was the highest of creatures and answered with one word, homoousios, to guard what Ignatius, Justin, and Irenaeus were already confessing.\n\nAs for the debates themselves — yes, they were fierce, but notice what they were about. No one at Nicaea was debating whether Jesus should be worshipped; that was already the shared inheritance of martyrs and liturgies. The debate was over how to articulate the mystery precisely enough to exclude a reduction of the Son to a creature. That the Church needed centuries to find exact language for a reality it already lived and prayed is not evidence of invention — it's evidence of care.\n\nOn John 14:28 — \"My Father is greater than I\" — this is not the Son confessing a lesser nature but the incarnate Son speaking from within his voluntary humility, sent by the Father, obedient unto the cross. The same Gospel that records this saying also has Thomas confess him as \"My Lord and my God\" (John 20:28) and Jesus receive it without correction. The Father is greater in the order of the incarnation and mission; the Son is not lesser in essence. Teaching us to pray \"Our Father\" doesn't exclude this — the Son who prays with us as man is the same one the earliest Christians, still observant monotheistic Jews shaped by the Shema, dared to worship as God without abandoning that Shema. That's not something imperial politics produced; that's something only the resurrection could explain."
+    },
+    {
+      "role": "system",
+      "content": "[synth] 3 verified citation(s)"
+    }
+  ]
+}

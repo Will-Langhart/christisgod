@@ -1,0 +1,72 @@
+{
+  "persona": "seeker",
+  "objection": "Didn’t Jesus say, ‘The Father is greater than I’—and call him the only true God?",
+  "answer": "This is exactly the right question to ask, and you're not in danger of denying anything true by wrestling with it honestly — the tension you're feeling is real, and Scripture gives us the tools to hold it rightly.\n\nStart with the plain picture: the same Gospel of John that records \"the Father is greater than I\" (John 14:28) opens by declaring the Word was God (John 1:1) and closes with Thomas confessing Jesus, \"My Lord and my God\" (John 20:28). John is not a confused author contradicting himself; he's showing us two things that are both true about the one Person, Jesus Christ, because Jesus is both fully God and fully man.\n\nWhen Jesus prays to \"the only true God\" in John 17:3, He is speaking as the incarnate Son, the one who took on our humanity and walked the path of obedience for us. That prayer distinguishes the Father and the Son as distinct persons — it doesn't erase the Son from the divine identity. The Father is Christ's Father by eternal generation, and, in His assumed humanity, the Father is also His God — while Christ remains the eternal Word according to His divine nature.\n\n\"The Father is greater than I\" works the same way. The Fathers of the Church distinguished between things said of Christ according to the economy — His voluntary self-humbling, taking the form of a servant, sent on a mission (Philippians 2:6–7) — and things said according to His eternal essence. A son sent by his father can call the sender \"greater\" in respect of the mission's order without being a lesser nature; Father and Son language itself carries an order of origin without inequality of being.\n\nSo hold both statements together, not as contradiction but as depth: \"I and my Father are one\" (John 10:30) speaks to shared divine essence; \"the Father is greater\" speaks to the Son's incarnate obedience and the eternal order between Father and Son. You're not choosing between plain language and mystery — you're letting all the plain language stand, together.",
+  "citations": [
+    {
+      "raw": "John 14:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 14:28",
+      "quoted": "the Father is greater than I",
+      "warning": "quote near John 14:28 is not verbatim KJV"
+    },
+    {
+      "raw": "John 1:1",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 1:1",
+      "quoted": "My Lord and my God",
+      "warning": null
+    },
+    {
+      "raw": "John 20:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 20:28",
+      "quoted": "My Lord and my God",
+      "warning": null
+    },
+    {
+      "raw": "John 17:3",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 17:3",
+      "quoted": "the only true God",
+      "warning": null
+    },
+    {
+      "raw": "Philippians 2:6–7",
+      "ok": true,
+      "reason": "verified",
+      "display": "Philippians 2:6–7",
+      "quoted": "greater",
+      "warning": null
+    },
+    {
+      "raw": "John 10:30",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 10:30",
+      "quoted": "I and my Father are one",
+      "warning": null
+    }
+  ],
+  "citation_warnings": [
+    "quote near John 14:28 is not verbatim KJV"
+  ],
+  "transcript": [
+    {
+      "role": "interlocutor",
+      "content": "# Honest Question from a New Believer\n\nI've been reading through John, and in chapter 14 Jesus says straight out, \"The Father is greater than I.\" And then in chapter 17, he prays to \"the only true God.\" That really sounds like Jesus is saying his Father is God, but *he* isn't—or at least not in the same way. How do I hold that together with \"the Father and I are one\" and all the places where he seems to be called God? I don't want to accidentally deny something true about Jesus, but I also don't want to ignore what feels like pretty plain language."
+    },
+    {
+      "role": "apologist",
+      "content": "This is exactly the right question to ask, and you're not in danger of denying anything true by wrestling with it honestly — the tension you're feeling is real, and Scripture gives us the tools to hold it rightly.\n\nStart with the plain picture: the same Gospel of John that records \"the Father is greater than I\" (John 14:28) opens by declaring the Word was God (John 1:1) and closes with Thomas confessing Jesus, \"My Lord and my God\" (John 20:28). John is not a confused author contradicting himself; he's showing us two things that are both true about the one Person, Jesus Christ, because Jesus is both fully God and fully man.\n\nWhen Jesus prays to \"the only true God\" in John 17:3, He is speaking as the incarnate Son, the one who took on our humanity and walked the path of obedience for us. That prayer distinguishes the Father and the Son as distinct persons — it doesn't erase the Son from the divine identity. The Father is Christ's Father by eternal generation, and, in His assumed humanity, the Father is also His God — while Christ remains the eternal Word according to His divine nature.\n\n\"The Father is greater than I\" works the same way. The Fathers of the Church distinguished between things said of Christ according to the economy — His voluntary self-humbling, taking the form of a servant, sent on a mission (Philippians 2:6–7) — and things said according to His eternal essence. A son sent by his father can call the sender \"greater\" in respect of the mission's order without being a lesser nature; Father and Son language itself carries an order of origin without inequality of being.\n\nSo hold both statements together, not as contradiction but as depth: \"I and my Father are one\" (John 10:30) speaks to shared divine essence; \"the Father is greater\" speaks to the Son's incarnate obedience and the eternal order between Father and Son. You're not choosing between plain language and mystery — you're letting all the plain language stand, together."
+    },
+    {
+      "role": "system",
+      "content": "[synth] 6 verified citation(s)"
+    }
+  ]
+}

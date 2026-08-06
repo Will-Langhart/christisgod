@@ -1,0 +1,46 @@
+{
+  "persona": "jw-unitarian",
+  "objection": "Was Jesus made God at the Council of Nicaea?",
+  "answer": "Thank you for pressing this carefully—it's the right question to ask, and I won't pretend the historical picture is simple. But the \"Nicaea invented it\" account has the timeline backwards. Homoousios is indeed a philosophical term nowhere in Scripture, but it was coined precisely to *fence* a belief already confessed for three centuries, not to create one. The confession of Jesus as Lord and God is embedded in material older than Paul's own letters—hymns and formulas the apostle inherited rather than composed. Around AD 112, the Roman governor Pliny, no friend of the church, reported to Trajan that Christians sang a hymn to Christ \"as to a god\"—that's two centuries before Constantine, from a hostile outside witness confirming what was already a recognizable marker of Christian identity. And when the risen Lord himself commanded baptism \"in the name of the Father, and of the Son, and of the Holy Ghost\" (Matthew 28:19), one singular name shared by three, that's not fourth-century bishops' invention—that's the threshold of Christian life from the beginning.\n\nAs for Jewish monotheism producing this \"suddenly\"—you're right that it's astonishing, which is exactly the point. Israel's Shema-bound monotheism made worshipping any figure besides YHWH the gravest possible sin (Deuteronomy 6:4; Exodus 20:3–5). That the earliest worshippers of Jesus were observant Jews, not Greek philosophers casually adding a god, makes their devotion to a crucified Galilean as Lord and God the more remarkable—not less credible. Nicaea didn't vote on whether Jesus was divine; that was the shared assumption of the bishops and the martyrs behind them. The question was how to protect that inherited confession against Arius's claim that the Son was merely the highest creature. Athanasius and the Nicene fathers saw themselves not as innovators but as guardians of what Ignatius, Justin, and the New Testament hymns already confessed—true God from true God, begotten, not made.",
+  "citations": [
+    {
+      "raw": "Matthew 28:19",
+      "ok": true,
+      "reason": "verified",
+      "display": "Matthew 28:19",
+      "quoted": "in the name of the Father, and of the Son, and of the Holy Ghost",
+      "warning": null
+    },
+    {
+      "raw": "Deuteronomy 6:4",
+      "ok": true,
+      "reason": "verified",
+      "display": "Deuteronomy 6:4",
+      "quoted": null,
+      "warning": null
+    },
+    {
+      "raw": "Exodus 20:3–5",
+      "ok": true,
+      "reason": "verified",
+      "display": "Exodus 20:3–5",
+      "quoted": null,
+      "warning": null
+    }
+  ],
+  "citation_warnings": [],
+  "transcript": [
+    {
+      "role": "interlocutor",
+      "content": "I appreciate the chance to raise this carefully. The historical claim isn't quite that Nicaea *made* Jesus God—we hold that the Council *invented the Trinity doctrine* at Nicaea in 325 AD, retrofitting it onto Scripture after the fact. The early Jewish disciples saw Jesus as Messiah and God's unique Son, exalted and worthy of honor, but not as God himself in person. Then Constantine convened Nicaea for political unity, bishops voted, and suddenly we have *homoousios*—\"same substance\"—a Greek philosophical term nowhere in Scripture. Doesn't it strike you as suspicious that monotheistic Judaism produced a man (Jesus) who never claimed deity, never told anyone to pray to him as God, and yet three centuries later, Greek-speaking bishops decided he *was* God the Son in a Trinity? If the doctrine were truly apostolic, why would it need a political council and philosophical language to define it?"
+    },
+    {
+      "role": "apologist",
+      "content": "Thank you for pressing this carefully—it's the right question to ask, and I won't pretend the historical picture is simple. But the \"Nicaea invented it\" account has the timeline backwards. Homoousios is indeed a philosophical term nowhere in Scripture, but it was coined precisely to *fence* a belief already confessed for three centuries, not to create one. The confession of Jesus as Lord and God is embedded in material older than Paul's own letters—hymns and formulas the apostle inherited rather than composed. Around AD 112, the Roman governor Pliny, no friend of the church, reported to Trajan that Christians sang a hymn to Christ \"as to a god\"—that's two centuries before Constantine, from a hostile outside witness confirming what was already a recognizable marker of Christian identity. And when the risen Lord himself commanded baptism \"in the name of the Father, and of the Son, and of the Holy Ghost\" (Matthew 28:19), one singular name shared by three, that's not fourth-century bishops' invention—that's the threshold of Christian life from the beginning.\n\nAs for Jewish monotheism producing this \"suddenly\"—you're right that it's astonishing, which is exactly the point. Israel's Shema-bound monotheism made worshipping any figure besides YHWH the gravest possible sin (Deuteronomy 6:4; Exodus 20:3–5). That the earliest worshippers of Jesus were observant Jews, not Greek philosophers casually adding a god, makes their devotion to a crucified Galilean as Lord and God the more remarkable—not less credible. Nicaea didn't vote on whether Jesus was divine; that was the shared assumption of the bishops and the martyrs behind them. The question was how to protect that inherited confession against Arius's claim that the Son was merely the highest creature. Athanasius and the Nicene fathers saw themselves not as innovators but as guardians of what Ignatius, Justin, and the New Testament hymns already confessed—true God from true God, begotten, not made."
+    },
+    {
+      "role": "system",
+      "content": "[synth] 3 verified citation(s)"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "persona": "seeker",
+  "objection": "Was Jesus made God at the Council of Nicaea?",
+  "answer": "That worry is completely understandable — this claim gets repeated so often it sounds like settled history, but the actual evidence points the other way. Nicaea in 325 didn't invent Christ's divinity; it defended an already-ancient confession against Arius, who taught the Son was the highest of creatures, made before time but still made. The bishops didn't vote on whether Jesus was God — that was the shared assumption of the room, the martyrs behind them, and the liturgies they'd prayed for generations. The council simply chose the precise word homoousios, \"of one essence,\" to fence that inherited faith against a new denial of it.\n\nAnd the trail runs back much further than the fourth century. The risen Lord Himself commanded baptism \"in the name of the Father, and of the Son, and of the Holy Ghost\" (Matthew 28:19) — one singular name shared by three. Paul's benediction in 2 Corinthians 13:14 assumes the same triune shape decades before any council. By AD 112, the Roman governor Pliny — no friend of the church, simply an official gathering intelligence — reported that Christians sang a hymn to Christ \"as to a god,\" confirming from outside the faith that this worship was already the recognizable center of Christian identity. Writers like Ignatius, Justin, and Irenaeus in the century after the apostles aren't inventing a new Jesus; they're defending the one already confessed in the New Testament's oldest material, material that predates even Paul's letters.\n\nSo how do you know which version is real? Trace it to its earliest layer, not its latest controversy. The astonishing thing isn't that later Christians voted Jesus into godhood — it's that Jewish monotheists, bound to the Shema's confession that \"the LORD our God is one LORD\" (Deuteronomy 6:4), began worshipping a crucified Galilean as Lord and God almost immediately after the resurrection. That's the scandal Nicaea was defending, not creating.",
+  "citations": [
+    {
+      "raw": "Matthew 28:19",
+      "ok": true,
+      "reason": "verified",
+      "display": "Matthew 28:19",
+      "quoted": "in the name of the Father, and of the Son, and of the Holy Ghost",
+      "warning": null
+    },
+    {
+      "raw": "2 Corinthians 13:14",
+      "ok": true,
+      "reason": "verified",
+      "display": "2 Corinthians 13:14",
+      "quoted": "in the name of the Father, and of the Son, and of the Holy Ghost",
+      "warning": null
+    },
+    {
+      "raw": "Deuteronomy 6:4",
+      "ok": true,
+      "reason": "verified",
+      "display": "Deuteronomy 6:4",
+      "quoted": "the LORD our God is one LORD",
+      "warning": null
+    }
+  ],
+  "citation_warnings": [],
+  "transcript": [
+    {
+      "role": "interlocutor",
+      "content": "Thank you for bringing this up — I think I hear this one a lot, and it genuinely worries me. I've read that the Council of Nicaea in 325 AD was where the church *invented* the idea that Jesus was fully God, and that before that, lots of Christians believed he was created or adopted. If that's true, doesn't it mean the Trinity isn't something Jesus' own followers believed, but something later church politics cooked up? And how do I know which version is the real one?"
+    },
+    {
+      "role": "apologist",
+      "content": "That worry is completely understandable — this claim gets repeated so often it sounds like settled history, but the actual evidence points the other way. Nicaea in 325 didn't invent Christ's divinity; it defended an already-ancient confession against Arius, who taught the Son was the highest of creatures, made before time but still made. The bishops didn't vote on whether Jesus was God — that was the shared assumption of the room, the martyrs behind them, and the liturgies they'd prayed for generations. The council simply chose the precise word homoousios, \"of one essence,\" to fence that inherited faith against a new denial of it.\n\nAnd the trail runs back much further than the fourth century. The risen Lord Himself commanded baptism \"in the name of the Father, and of the Son, and of the Holy Ghost\" (Matthew 28:19) — one singular name shared by three. Paul's benediction in 2 Corinthians 13:14 assumes the same triune shape decades before any council. By AD 112, the Roman governor Pliny — no friend of the church, simply an official gathering intelligence — reported that Christians sang a hymn to Christ \"as to a god,\" confirming from outside the faith that this worship was already the recognizable center of Christian identity. Writers like Ignatius, Justin, and Irenaeus in the century after the apostles aren't inventing a new Jesus; they're defending the one already confessed in the New Testament's oldest material, material that predates even Paul's letters.\n\nSo how do you know which version is real? Trace it to its earliest layer, not its latest controversy. The astonishing thing isn't that later Christians voted Jesus into godhood — it's that Jewish monotheists, bound to the Shema's confession that \"the LORD our God is one LORD\" (Deuteronomy 6:4), began worshipping a crucified Galilean as Lord and God almost immediately after the resurrection. That's the scandal Nicaea was defending, not creating."
+    },
+    {
+      "role": "system",
+      "content": "[synth] 3 verified citation(s)"
+    }
+  ]
+}

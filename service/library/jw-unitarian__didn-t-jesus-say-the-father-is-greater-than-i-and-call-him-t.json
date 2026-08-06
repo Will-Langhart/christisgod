@@ -1,0 +1,65 @@
+{
+  "persona": "jw-unitarian",
+  "objection": "Didn’t Jesus say, ‘The Father is greater than I’—and call him the only true God?",
+  "answer": "These texts are not embarrassments to the doctrine of Christ's deity—they're the very grammar of the Incarnation, and the historic Church has always read them together rather than picking one to override the others. \"The Father is greater than I\" (John 14:28) is spoken by the Son who took the form of a servant, Philippians 2:6-7; the Fathers distinguished statements made of Christ according to the economy of His incarnate mission from statements made according to His eternal essence. A son sent to accomplish a mission can rightly call the sender \"greater\" in respect of that mission's order without any inequality of nature—the Father-Son relation itself implies an order of origin, the Son eternally begotten, without implying inferiority of being, just as a human son shares his father's full humanity though he originates from him.\n\nOn John 17:3, the prayer distinguishes the Father and the Son personally; it does not exclude the Son from the divine identity. Notice: Jesus is praying to be glorified with the glory He had with the Father before the world existed—hardly the language of a mere creature. And this is the same Gospel that opens \"the Word was God\" and closes with Thomas confessing Him, \"My Lord and my God\" (John 20:28), a confession Jesus receives without correction.\n\nAs for John 20:17, the risen Christ speaks there as the incarnate Son and true man leading His brethren into His own filial relation with the Father—the Father is His God according to the humanity He assumed, while He remains, according to His divinity, the eternal Word. This doesn't erase His divine sonship; it reveals the grace by which His disciples now call God Father and God too. So the pattern you're pointing to is real, but it belongs to the mystery of the Incarnation—true God, true man, two natures, one person—not to a lesser divine nature or a created Son, which the whole shape of John's Gospel, from its prologue to its climactic confession, forbids us to conclude.",
+  "citations": [
+    {
+      "raw": "John 14:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 14:28",
+      "quoted": "The Father is greater than I",
+      "warning": "quote near John 14:28 is not verbatim KJV"
+    },
+    {
+      "raw": "Philippians 2:6-7",
+      "ok": true,
+      "reason": "verified",
+      "display": "Philippians 2:6-7",
+      "quoted": "The Father is greater than I",
+      "warning": "quote near Philippians 2:6-7 is not verbatim KJV"
+    },
+    {
+      "raw": "John 17:3",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 17:3",
+      "quoted": null,
+      "warning": null
+    },
+    {
+      "raw": "John 20:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 20:28",
+      "quoted": "My Lord and my God",
+      "warning": null
+    },
+    {
+      "raw": "John 20:17",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 20:17",
+      "quoted": "My Lord and my God",
+      "warning": null
+    }
+  ],
+  "citation_warnings": [
+    "quote near John 14:28 is not verbatim KJV",
+    "quote near Philippians 2:6-7 is not verbatim KJV"
+  ],
+  "transcript": [
+    {
+      "role": "interlocutor",
+      "content": "# Objection: The Father is Plainly Supreme\n\nLook—Jesus himself settles this in John 14:28. He tells his disciples, \"The Father is greater than I,\" and in John 17:3 he defines eternal life as knowing \"you, the only true God, and Jesus Christ whom you have sent.\" How do you harmonize that with calling Jesus God? He's not claiming to *be* the only true God; he's praying *to* him. And in John 20:17, after his resurrection, he says to Mary, \"I ascend to my Father and your Father, to my God and your God.\" His own God—that's the language of subordination, not equality. If Jesus is truly God in the fullest sense, why does he consistently speak of himself as dependent on, distinct from, and inferior to the Father?"
+    },
+    {
+      "role": "apologist",
+      "content": "These texts are not embarrassments to the doctrine of Christ's deity—they're the very grammar of the Incarnation, and the historic Church has always read them together rather than picking one to override the others. \"The Father is greater than I\" (John 14:28) is spoken by the Son who took the form of a servant, Philippians 2:6-7; the Fathers distinguished statements made of Christ according to the economy of His incarnate mission from statements made according to His eternal essence. A son sent to accomplish a mission can rightly call the sender \"greater\" in respect of that mission's order without any inequality of nature—the Father-Son relation itself implies an order of origin, the Son eternally begotten, without implying inferiority of being, just as a human son shares his father's full humanity though he originates from him.\n\nOn John 17:3, the prayer distinguishes the Father and the Son personally; it does not exclude the Son from the divine identity. Notice: Jesus is praying to be glorified with the glory He had with the Father before the world existed—hardly the language of a mere creature. And this is the same Gospel that opens \"the Word was God\" and closes with Thomas confessing Him, \"My Lord and my God\" (John 20:28), a confession Jesus receives without correction.\n\nAs for John 20:17, the risen Christ speaks there as the incarnate Son and true man leading His brethren into His own filial relation with the Father—the Father is His God according to the humanity He assumed, while He remains, according to His divinity, the eternal Word. This doesn't erase His divine sonship; it reveals the grace by which His disciples now call God Father and God too. So the pattern you're pointing to is real, but it belongs to the mystery of the Incarnation—true God, true man, two natures, one person—not to a lesser divine nature or a created Son, which the whole shape of John's Gospel, from its prologue to its climactic confession, forbids us to conclude."
+    },
+    {
+      "role": "system",
+      "content": "[synth] 5 verified citation(s)"
+    }
+  ]
+}
