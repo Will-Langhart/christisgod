@@ -217,7 +217,8 @@ def _chat_stream(req: ChatRequest):
     last: dict = state
     try:
         for snapshot in chat_graph().stream(
-            state, config=run_config(req.persona, user_message), stream_mode="values"
+            state, config=run_config(req.persona, user_message, kind="chat", mode=req.mode),
+            stream_mode="values",
         ):
             last = snapshot
             for key, event, note in _CHAT_STAGES:
