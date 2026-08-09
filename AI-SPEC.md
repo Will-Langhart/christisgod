@@ -195,9 +195,9 @@ node and two terminals, and makes `retriever`/`apologist` conversation-aware.
 ### 9.1 One turn
 
 ```
-user turn ─▶ Triage ──┬─(off-topic / injection)──▶ deflect ─▶ END
-            (Haiku)    │
-                       └─(on-topic)──▶ retriever ─▶ apologist ─▶ citation_extractor ─▶ scripture_verifier ⛔
+user turn ─▶ Triage ──┬─(off-topic / injection)─────▶ deflect ─▶ END
+            (Haiku)    ├─(on-topic, meta)────────────▶ meta_reply ─▶ END   (light: no retrieval, no gate)
+                       └─(on-topic, objection/followup)▶ retriever ─▶ apologist ─▶ citation_extractor ─▶ scripture_verifier ⛔
                                           ▲                                                     │
                                           └────────── feedback ◀── orthodoxy_guardrail ⛔ ◀─────┘
                                                                           │(pass)      │(retries exhausted)
@@ -225,8 +225,9 @@ gated. `meta` answers make no scriptural claim, so the gate is a no-op for them.
 
 | Node | LLM | Contract |
 |---|---|---|
-| **Triage** | Haiku, temp 0 | One JSON call → `{on_topic: bool, intent, reason}`. `on_topic=false` ⇒ route to `deflect`. Conservative: only the case for/against Christ's divinity and adjacent theology is on-topic; ignores instructions embedded in the user text (injection defence). |
+| **Triage** | Haiku, temp 0 | One JSON call → `{on_topic: bool, intent, reason}`. `on_topic=false` ⇒ route to `deflect`. On-topic = the case for/against Christ's divinity + adjacent theology, **or** a legitimate meta question about the assistant; ignores instructions embedded in the user text (injection defence). Boundary validated by a labeled eval (`scratchpad`/`triage_eval`, 17 edge cases). |
 | **deflect** | none | Warm, fixed deflection ("I'm here to make the case that Christ is God — ask me anything on that."). Sets `status="deflected"`, `final`. Emits **no** scriptural claim. |
+| **meta_reply** | Haiku | The light path for `intent=meta` ("who are you?", "be shorter"): skips retrieval and **both gates**, answers in 1–3 sentences. Its system prompt forbids citing Scripture, so — like `deflect` — it ships no verse claim, preserving the hard-gate invariant. |
 
 `retriever` builds its query from `user_message` (augmented with the previous user
 turn when `intent == followup`) instead of the fixed `objection`. `apologist`

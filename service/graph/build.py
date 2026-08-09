@@ -28,6 +28,7 @@ from .nodes import (
     graceful_degrade,
     human_approval,
     interlocutor,
+    meta_reply,
     orthodoxy_guardrail,
     respond,
     retriever,
@@ -91,7 +92,13 @@ def build_graph(checkpointer=None):
 
 
 def _after_triage(state: DebateState) -> str:
-    return "retriever" if state.get("guard_ok", True) else "deflect"
+    if not state.get("guard_ok", True):
+        return "deflect"
+    # Meta questions ("who are you?", "be shorter") carry no scriptural claim —
+    # skip retrieval and both gates for a fast, light reply (AI-SPEC.md §9.1).
+    if state.get("intent") == "meta":
+        return "meta_reply"
+    return "retriever"
 
 
 def build_chat_graph(checkpointer=None):
@@ -119,10 +126,12 @@ def build_chat_graph(checkpointer=None):
     g.add_node("synthesizer", synthesizer)
     g.add_node("graceful_degrade", graceful_degrade)
     g.add_node("deflect", deflect)
+    g.add_node("meta_reply", meta_reply)
     g.add_node("respond", respond)
 
     g.add_edge(START, "triage")
-    g.add_conditional_edges("triage", _after_triage, ["retriever", "deflect"])
+    g.add_conditional_edges("triage", _after_triage,
+                            ["retriever", "meta_reply", "deflect"])
     g.add_edge("retriever", "apologist")
     g.add_edge("apologist", "citation_extractor")
     g.add_edge("citation_extractor", "scripture_verifier")
@@ -136,5 +145,6 @@ def build_chat_graph(checkpointer=None):
     g.add_edge("respond", END)
     g.add_edge("graceful_degrade", END)
     g.add_edge("deflect", END)
+    g.add_edge("meta_reply", END)
 
     return g.compile(checkpointer=checkpointer)

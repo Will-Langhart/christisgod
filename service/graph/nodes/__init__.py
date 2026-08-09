@@ -8,6 +8,7 @@ LLM-backed: interlocutor, apologist, orthodoxy_guardrail, retriever(placeholder)
 from .apologist import apologist
 from .citation_extractor import citation_extractor
 from .interlocutor import interlocutor
+from .meta_reply import meta_reply
 from .orthodoxy_guardrail import orthodoxy_guardrail
 from .retriever import retriever
 from .scripture_verifier import scripture_verifier
@@ -28,4 +29,5 @@ __all__ = [
     "graceful_degrade",
     "triage",
     "deflect",
+    "meta_reply",
 ]

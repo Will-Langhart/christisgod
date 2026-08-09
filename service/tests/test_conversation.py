@@ -76,8 +76,18 @@ def test_after_triage_routes_offtopic_to_deflect():
     assert _after_triage({"guard_ok": False}) == "deflect"
 
 
-def test_after_triage_routes_ontopic_to_retriever():
-    assert _after_triage({"guard_ok": True}) == "retriever"
+def test_after_triage_routes_ontopic_objection_to_retriever():
+    assert _after_triage({"guard_ok": True, "intent": "objection"}) == "retriever"
+
+
+def test_after_triage_routes_meta_to_light_reply():
+    # Meta questions skip retrieval + both gates (AI-SPEC.md §9.1).
+    assert _after_triage({"guard_ok": True, "intent": "meta"}) == "meta_reply"
+
+
+def test_after_triage_offtopic_beats_meta():
+    # An off-topic message tagged meta still deflects — the guard wins.
+    assert _after_triage({"guard_ok": False, "intent": "meta"}) == "deflect"
 
 
 def test_after_triage_defaults_to_retriever():
