@@ -53,13 +53,19 @@ def configure() -> bool:
     return tracing_enabled()
 
 
-def run_config(persona: str, objection: str) -> dict:
-    """LangChain run config to pass as `graph.invoke(state, config=...)`."""
-    return {
-        "run_name": f"debate:{persona}",
-        "tags": ["debate", f"persona:{persona}"],
-        "metadata": {"persona": persona, "objection": objection},
-    }
+def run_config(persona: str, objection: str, kind: str = "debate",
+               mode: str | None = None) -> dict:
+    """LangChain run config to pass as `graph.invoke(state, config=...)`.
+
+    `kind` names the run in LangSmith ("debate" for the single-shot graph, "chat"
+    for the conversational one); `mode` (direct/debate) is added as a searchable
+    tag so a LangSmith view can filter chat traffic by mode."""
+    tags = [kind, f"persona:{persona}"]
+    metadata = {"persona": persona, "objection": objection}
+    if mode:
+        tags.append(f"mode:{mode}")
+        metadata["mode"] = mode
+    return {"run_name": f"{kind}:{persona}", "tags": tags, "metadata": metadata}
 
 
 def status() -> dict:

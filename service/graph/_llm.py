@@ -28,7 +28,7 @@ def _extract_text(content) -> str:
 
 
 def call_llm(model: str, system: str, user: str, temperature: float | None = None,
-             max_tokens: int = 4096) -> str:
+             max_tokens: int = 4096, cache_system: bool = False) -> str:
     """Single-shot completion. Returns the assistant text.
 
     `temperature` is omitted unless explicitly set — the Claude 5 models reject a
@@ -38,6 +38,11 @@ def call_llm(model: str, system: str, user: str, temperature: float | None = Non
     `max_tokens` defaults high enough that thinking tokens plus the answer/JSON
     verdict are not truncated (a truncated guardrail JSON was being parsed as a
     spurious FAIL).
+
+    `cache_system` marks the system prompt as an ephemeral prompt-cache breakpoint
+    (AI-SPEC.md §9.5). Set it on nodes whose system prompt is large and identical
+    across every turn of a conversation (apologist, orthodoxy guardrail) so turns
+    2+ read that prefix from cache instead of re-billing it.
 
     Raises a clear error if the LLM stack isn't installed yet (Phase 1 setup),
     so a missing dependency is obvious rather than a cryptic ImportError deep in
@@ -57,5 +62,18 @@ def call_llm(model: str, system: str, user: str, temperature: float | None = Non
     if temperature is not None:
         kwargs["temperature"] = temperature
     llm = ChatAnthropic(**kwargs)
-    resp = llm.invoke([SystemMessage(content=system), HumanMessage(content=user)])
+
+    # Prompt caching: send the system prompt as a content block carrying
+    # cache_control. Anthropic caches the prefix up to that breakpoint; a short
+    # prompt below the model's minimum cacheable length is simply not cached (no
+    # error), so this is always safe to request.
+    if cache_system:
+        system_msg = SystemMessage(content=[{
+            "type": "text", "text": system,
+            "cache_control": {"type": "ephemeral"},
+        }])
+    else:
+        system_msg = SystemMessage(content=system)
+
+    resp = llm.invoke([system_msg, HumanMessage(content=user)])
     return _extract_text(resp.content)

@@ -64,6 +64,7 @@ def orthodoxy_guardrail(state: DebateState) -> dict:
         _SYSTEM.format(rubric=load_taxonomy()),
         user,
         temperature=GUARDRAIL_TEMPERATURE,
+        cache_system=True,  # taxonomy is large + identical every turn (§9.5)
     )
     verdict = _parse_verdict(raw)
     ok = verdict.get("verdict") == "PASS"

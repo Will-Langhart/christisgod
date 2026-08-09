@@ -25,13 +25,38 @@ def respond(state: DebateState) -> dict:
     return {"status": "approved"}
 
 
-def graceful_degrade(state: DebateState) -> dict:
-    label = state.get("objection_label") or "the relevant chapter"
-    href = state.get("objection_href", "/")
+def deflect(state: DebateState) -> dict:
+    """Phase 3 off-topic terminal (AI-SPEC.md §9.3). Fires when Triage judges the
+    message off-topic or an injection attempt. Warm, fixed, and — critically —
+    carries NO scriptural claim, so it needs no verification."""
     message = (
-        "This objection deserves a careful answer that we won't shortcut. "
-        f"The book treats it directly — see {label} ({href})."
+        "I'm here to make the case that Jesus Christ is God — his divinity, the "
+        "Trinity, the incarnation, and the objections raised against them. Ask me "
+        "anything along those lines and I'll answer it grounded in Scripture."
     )
+    return {
+        "status": "deflected",
+        "final": message,
+        "transcript": [{"role": "system", "content": "[deflect] off-topic; no answer generated"}],
+    }
+
+
+def graceful_degrade(state: DebateState) -> dict:
+    if state.get("mode") == "debate":
+        # In debate mode the interlocutor (not the apologist) exhausted retries —
+        # almost always because it kept citing a verse it couldn't get right.
+        # Stay in the exchange rather than pointing at a chapter.
+        message = (
+            "Let me set that particular proof-text aside rather than lean on a "
+            "reference I can't state cleanly. Make your case and I'll press it."
+        )
+    else:
+        label = state.get("objection_label") or "the relevant chapter"
+        href = state.get("objection_href", "/")
+        message = (
+            "This objection deserves a careful answer that we won't shortcut. "
+            f"The book treats it directly — see {label} ({href})."
+        )
     return {
         "status": "degraded",
         "final": message,

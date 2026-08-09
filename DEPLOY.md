@@ -9,8 +9,8 @@ host requires **your** host login and secrets — the steps below are yours to r
 | Env var | Required | Notes |
 |---|---|---|
 | `ANTHROPIC_API_KEY` | **yes** | the graph 400s/errs without it |
-| `DEBATE_API_TOKEN` | strongly recommended | if set, `/debate` requires `Authorization: Bearer <token>`. Guards against non-browser abuse. |
-| `DEBATE_RATE_PER_MIN` | no (default 10) | per-IP requests/minute |
+| `DEBATE_API_TOKEN` | see note | if set, **both** `/chat` and `/debate` require `Authorization: Bearer <token>`. For a **public browser** chat, leave it **unset** (a browser token isn't secret) and rely on the CORS allow-list + rate limit. |
+| `DEBATE_RATE_PER_MIN` | no (default 10) | per-IP requests/minute, shared across `/chat` + `/debate`. Each conversational turn is one request; raise it if real users hit the limit. |
 | `CORS_ORIGINS` | no | comma-separated; defaults to christisgod.app + localhost |
 | `LANGSMITH_API_KEY` / `LANGSMITH_PROJECT` | no | tracing (project defaults to `christisgod-debate`) |
 | `DEBATE_TERMINAL` | baked to `respond` | already set in the image |
@@ -23,12 +23,22 @@ host requires **your** host login and secrets — the steps below are yours to r
 
 ```bash
 docker build -t christisgod-service .
-docker run -p 8080:8080 -e ANTHROPIC_API_KEY=sk-... -e DEBATE_API_TOKEN=dev christisgod-service
+docker run -p 8080:8080 -e ANTHROPIC_API_KEY=sk-... christisgod-service
 curl localhost:8080/health
-curl -N -X POST localhost:8080/debate -H 'authorization: Bearer dev' \
+
+# Phase 3 conversational endpoint (what the site's chat box calls):
+curl -N -X POST localhost:8080/chat \
+  -H 'content-type: application/json' \
+  -d '{"persona":"seeker","mode":"direct","messages":[{"role":"user","content":"Does John 1:1 call Jesus God?"}]}'
+
+# Phase 2 single-shot endpoint (still available):
+curl -N -X POST localhost:8080/debate \
   -H 'content-type: application/json' \
   -d '{"persona":"skeptic","objection":"Was Jesus made God at Nicaea?"}'
 ```
+
+The image is Docker-verified for Phase 3: `/health`, `/chat` (full SSE stream to
+an `approved` answer), and the CORS allow-list all pass in the container.
 
 ## Fly.io (uses fly.toml)
 
@@ -67,9 +77,11 @@ above. Railway needs a card/verified account.
 
 ## Wiring the site's live mode
 
-The live-mode box on `/dialogues` (`web/src/components/live-debate.tsx`) is built
-and **dormant until configured** — it calls the service directly from the browser
-(no Vercel proxy, so long 1–2 min streams aren't cut by function timeouts).
+The live chat box on `/dialogues` (`web/src/components/live-debate.tsx`) is built
+and **dormant until configured** — it POSTs to the service's `/chat` directly from
+the browser (no Vercel proxy, so long streams aren't cut by function timeouts). It
+offers both **Ask a question** (direct Q&A) and **Debate me** (the persona spars
+with the reader) modes.
 
 To activate:
 1. On the **Vercel (web) project**, set `NEXT_PUBLIC_DEBATE_API=https://<render-url>`

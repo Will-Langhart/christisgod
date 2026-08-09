@@ -60,6 +60,8 @@ CHROMA_COLLECTION = os.getenv("CHROMA_COLLECTION", "christisgod-chapters")
 APOLOGIST_MODEL = os.getenv("APOLOGIST_MODEL", "claude-sonnet-5")
 GUARDRAIL_MODEL = os.getenv("GUARDRAIL_MODEL", "claude-sonnet-5")
 INTERLOCUTOR_MODEL = os.getenv("INTERLOCUTOR_MODEL", "claude-haiku-4-5")
+# Triage (Phase 3 §9.3) — cheap classification; the fast model is enough.
+TRIAGE_MODEL = os.getenv("TRIAGE_MODEL", "claude-haiku-4-5")
 
 # Temperature is omitted by default — Claude 5 models reject the parameter. Set a
 # value via env only for a model that still supports it (then it's passed through).
@@ -76,6 +78,10 @@ INTERLOCUTOR_TEMPERATURE = _opt_temp("INTERLOCUTOR_TEMPERATURE")
 # Max apologist re-drafts before GracefulDegrade fires (AI-SPEC.md §4).
 MAX_RETRIES = int(os.getenv("DEBATE_MAX_RETRIES", "3"))
 RETRIEVER_TOP_K = int(os.getenv("RETRIEVER_TOP_K", "6"))
+
+# Conversational layer (Phase 3 §9.4). How many recent turns the apologist sees
+# verbatim; older turns are dropped with a note (deterministic windowing).
+WINDOW_TURNS = int(os.getenv("DEBATE_WINDOW_TURNS", "6"))
 
 # Phase 1 offline runner terminates at HumanApproval; Phase 2 live service
 # terminates at `respond`. Toggled here.

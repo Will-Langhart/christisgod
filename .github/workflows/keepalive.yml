@@ -1,0 +1,57 @@
+# Keep the free Render service warm so the first real visitor never waits on a
+# cold start. Render's free tier spins down after ~15 min idle; this pings its
+# health check every 10 minutes (comfortably under that window).
+#
+# DORMANT UNTIL CONFIGURED: it does nothing until you set the repository variable
+# KEEPALIVE_URL. Set it to the service's health URL, e.g.
+#   Settings → Secrets and variables → Actions → Variables → New repository variable
+#   Name: KEEPALIVE_URL   Value: https://christisgod-service.onrender.com/health
+#
+# Notes:
+# - This repo is public, so Actions minutes are free.
+# - GitHub cron is best-effort and can lag a few minutes; 10 min leaves margin
+#   under the 15-min sleep.
+# - GitHub disables scheduled workflows after 60 days with no repo activity.
+# - It never fails the run on a missed ping (keep-alive, not a pager) — check the
+#   Actions tab if you want to confirm the service is up.
+name: keep-alive
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {} # allow a manual run from the Actions tab
+
+# If a run is still going when the next fires, drop the newer one rather than pile up.
+concurrency:
+  group: keep-alive
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the service health check
+        env:
+          URL: ${{ vars.KEEPALIVE_URL }}
+        run: |
+          if [ -z "$URL" ]; then
+            echo "KEEPALIVE_URL is not set — nothing to ping. (Set the repository"
+            echo "variable to the service's /health URL to activate this.)"
+            exit 0
+          fi
+          echo "Pinging $URL"
+          for attempt in 1 2 3 4 5; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "$URL" || echo 000)
+            if [ "$code" = "200" ]; then
+              echo "✓ warm (HTTP 200) on attempt $attempt"
+              exit 0
+            fi
+            echo "attempt $attempt: HTTP $code — retrying (service may be waking)…"
+            sleep 20
+          done
+          echo "::warning::service did not return 200 after 5 attempts — it may be"
+          echo "::warning::down or still deploying. Not failing the keep-alive run."
+          exit 0
