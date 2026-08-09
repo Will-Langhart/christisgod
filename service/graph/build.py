@@ -98,7 +98,24 @@ def _after_triage(state: DebateState) -> str:
     # skip retrieval and both gates for a fast, light reply (AI-SPEC.md §9.1).
     if state.get("intent") == "meta":
         return "meta_reply"
+    # Debate mode: the AI plays the persona and presses the reader. No retrieval
+    # (the interlocutor is grounded in its persona brief, not the book) and — see
+    # _after_verify_chat — no orthodoxy gate, since it argues *against* orthodoxy.
+    if state.get("mode") == "debate":
+        return "interlocutor"
     return "retriever"
+
+
+def _after_verify_chat(state: DebateState) -> str:
+    """Post-scripture-gate routing for the conversational graph. In debate mode a
+    passing draft goes straight to synthesis (no orthodoxy gate) and a failing one
+    loops back to the interlocutor; direct mode keeps the full apologist path."""
+    debate = state.get("mode") == "debate"
+    if state.get("verify_ok"):
+        return "synthesizer" if debate else "orthodoxy_guardrail"
+    if state.get("retries", 0) < config.MAX_RETRIES:
+        return "interlocutor" if debate else "apologist"
+    return "graceful_degrade"
 
 
 def build_chat_graph(checkpointer=None):
@@ -119,6 +136,7 @@ def build_chat_graph(checkpointer=None):
 
     g.add_node("triage", triage)
     g.add_node("retriever", retriever)
+    g.add_node("interlocutor", interlocutor)  # debate mode
     g.add_node("apologist", apologist)
     g.add_node("citation_extractor", citation_extractor)
     g.add_node("scripture_verifier", scripture_verifier)
@@ -131,13 +149,15 @@ def build_chat_graph(checkpointer=None):
 
     g.add_edge(START, "triage")
     g.add_conditional_edges("triage", _after_triage,
-                            ["retriever", "meta_reply", "deflect"])
+                            ["retriever", "interlocutor", "meta_reply", "deflect"])
     g.add_edge("retriever", "apologist")
     g.add_edge("apologist", "citation_extractor")
+    g.add_edge("interlocutor", "citation_extractor")  # debate: gate the persona's text too
     g.add_edge("citation_extractor", "scripture_verifier")
 
-    g.add_conditional_edges("scripture_verifier", _after_verify,
-                            ["orthodoxy_guardrail", "apologist", "graceful_degrade"])
+    g.add_conditional_edges(
+        "scripture_verifier", _after_verify_chat,
+        ["orthodoxy_guardrail", "synthesizer", "apologist", "interlocutor", "graceful_degrade"])
     g.add_conditional_edges("orthodoxy_guardrail", _after_guardrail,
                             ["synthesizer", "apologist", "graceful_degrade"])
 

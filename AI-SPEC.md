@@ -272,3 +272,32 @@ SSE event stream (gate-the-answer): `start` → `thinking` → `retrieving` →
 `deflected`; exhausted retries to a `degraded` answer. The frontend appends the
 `answer`/`deflected`/`degraded` text to its client-held transcript as the next
 assistant turn.
+
+### 9.7 Debate mode (`mode="debate"`)
+
+The default is `direct` — the apologist answers the reader. `debate` flips the
+roles: **the AI plays the persona and presses the reader**, who defends the deity
+of Christ. A sparring tool for practicing the case. Same graph, one branch:
+
+```
+triage ─(on-topic, objection/followup, mode=debate)─▶ interlocutor ─▶ citation_extractor ─▶ scripture_verifier ⛔
+                                                          ▲                                          │(pass)
+                                                          └──────── feedback (fabricated ref) ◀──────┤
+                                                                                                     ▼
+                                                                                       synthesizer ─▶ respond
+```
+
+Two deliberate differences from `direct`:
+
+- **The interlocutor runs, not the apologist**, and it is conversation-aware — it
+  answers the reader's latest point in character and presses the strongest
+  remaining difficulty (the offline single-shot interlocutor is unchanged).
+- **The scripture gate still applies; the orthodoxy gate does not.** The persona
+  argues *against* Nicene orthodoxy on purpose, so judging it by the heresy
+  taxonomy would be incoherent — but it still may **not fabricate or misquote a
+  verse** (`scripture_verifier` loops it back on a bad reference). Even the
+  "skeptic" is structurally barred from inventing Scripture. On exhausted retries,
+  `graceful_degrade` emits a mode-appropriate, in-exchange message.
+
+No retrieval in debate mode: the interlocutor is grounded in its persona brief and
+its tradition's own proof-texts, not the book.

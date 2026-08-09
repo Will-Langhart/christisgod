@@ -9,7 +9,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from graph.build import _after_triage  # noqa: E402
+from graph import config  # noqa: E402
+from graph.build import _after_triage, _after_verify_chat  # noqa: E402
 from graph.history import last_user_turn, render, window  # noqa: E402
 from graph.nodes.terminal import deflect  # noqa: E402
 from graph.nodes.triage import _parse  # noqa: E402
@@ -93,6 +94,39 @@ def test_after_triage_offtopic_beats_meta():
 def test_after_triage_defaults_to_retriever():
     # Missing guard_ok (e.g. the Phase 1/2 path) must not deflect.
     assert _after_triage({}) == "retriever"
+
+
+def test_after_triage_debate_mode_goes_to_interlocutor():
+    assert _after_triage({"guard_ok": True, "intent": "objection", "mode": "debate"}) == "interlocutor"
+
+
+def test_after_triage_debate_meta_still_light_replies():
+    # A meta question during a debate is still a meta question.
+    assert _after_triage({"guard_ok": True, "intent": "meta", "mode": "debate"}) == "meta_reply"
+
+
+# --- debate vs direct: post-scripture-gate routing -------------------------
+
+def test_verify_chat_debate_pass_skips_orthodoxy_gate():
+    assert _after_verify_chat({"mode": "debate", "verify_ok": True}) == "synthesizer"
+
+
+def test_verify_chat_direct_pass_hits_orthodoxy_gate():
+    assert _after_verify_chat({"mode": "direct", "verify_ok": True}) == "orthodoxy_guardrail"
+
+
+def test_verify_chat_debate_fail_loops_to_interlocutor():
+    assert _after_verify_chat({"mode": "debate", "verify_ok": False, "retries": 0}) == "interlocutor"
+
+
+def test_verify_chat_direct_fail_loops_to_apologist():
+    assert _after_verify_chat({"mode": "direct", "verify_ok": False, "retries": 0}) == "apologist"
+
+
+def test_verify_chat_exhausted_degrades_in_both_modes():
+    n = config.MAX_RETRIES
+    assert _after_verify_chat({"mode": "debate", "verify_ok": False, "retries": n}) == "graceful_degrade"
+    assert _after_verify_chat({"mode": "direct", "verify_ok": False, "retries": n}) == "graceful_degrade"
 
 
 # --- deflect terminal ------------------------------------------------------

@@ -42,12 +42,21 @@ def deflect(state: DebateState) -> dict:
 
 
 def graceful_degrade(state: DebateState) -> dict:
-    label = state.get("objection_label") or "the relevant chapter"
-    href = state.get("objection_href", "/")
-    message = (
-        "This objection deserves a careful answer that we won't shortcut. "
-        f"The book treats it directly — see {label} ({href})."
-    )
+    if state.get("mode") == "debate":
+        # In debate mode the interlocutor (not the apologist) exhausted retries —
+        # almost always because it kept citing a verse it couldn't get right.
+        # Stay in the exchange rather than pointing at a chapter.
+        message = (
+            "Let me set that particular proof-text aside rather than lean on a "
+            "reference I can't state cleanly. Make your case and I'll press it."
+        )
+    else:
+        label = state.get("objection_label") or "the relevant chapter"
+        href = state.get("objection_href", "/")
+        message = (
+            "This objection deserves a careful answer that we won't shortcut. "
+            f"The book treats it directly — see {label} ({href})."
+        )
     return {
         "status": "degraded",
         "final": message,

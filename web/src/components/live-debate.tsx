@@ -37,7 +37,10 @@ function parseSSE(frame: string): { event: string; data: unknown } | null {
   }
 }
 
+type Mode = "direct" | "debate";
+
 export function LiveDebate() {
+  const [mode, setMode] = useState<Mode>("direct");
   const [persona, setPersona] = useState<PersonaId>("seeker");
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -75,7 +78,7 @@ export function LiveDebate() {
         },
         body: JSON.stringify({
           persona,
-          mode: "direct",
+          mode,
           messages: history.map((m) => ({ role: m.role, content: m.content })),
         }),
       });
@@ -141,28 +144,74 @@ export function LiveDebate() {
     }
   }
 
+  function switchMode(next: Mode) {
+    if (next === mode || busy) return;
+    setMode(next);
+    setMessages([]); // a direct thread and a debate thread don't mix
+    setError("");
+    setProgress("");
+  }
+
   const started = messages.length > 0 || busy;
+  const debate = mode === "debate";
 
   return (
     <section className="border-t border-rule px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-3xl">
         <header className="mx-auto max-w-2xl text-center">
           <p className="font-[family-name:var(--font-ui)] text-xs font-semibold uppercase tracking-[0.28em] text-vermillion">
-            Ask your own question
+            {debate ? "Defend the case" : "Ask your own question"}
           </p>
           <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold text-ink sm:text-4xl">
-            Put the case to the test yourself.
+            {debate ? "Take the other side on." : "Put the case to the test yourself."}
           </h2>
           <p className="mt-4 font-[family-name:var(--font-serif)] text-lg leading-relaxed text-ink-soft">
-            Ask anything about the deity of Christ and follow the thread as far as
-            you like — every answer is generated in the moment and grounded in the
-            King James text. Unlike the curated dialogues above, these responses
-            are not individually reviewed.
+            {debate ? (
+              <>
+                Make your case for the deity of Christ and the voice below will
+                press it — as a skeptic, a Muslim, or a Jehovah&rsquo;s Witness
+                would. It argues in character, but it may never fabricate or
+                misquote a verse. A sparring partner for your own answers.
+              </>
+            ) : (
+              <>
+                Ask anything about the deity of Christ and follow the thread as far
+                as you like — every answer is generated in the moment and grounded
+                in the King James text. Unlike the curated dialogues above, these
+                responses are not individually reviewed.
+              </>
+            )}
           </p>
         </header>
 
-        <div className="mt-9 rounded-2xl border border-rule bg-surface/70 p-5 sm:p-7">
-          <div role="tablist" aria-label="Choose an answering voice" className="flex flex-wrap gap-2">
+        <div className="mt-8 flex justify-center">
+          <div role="tablist" aria-label="Choose a mode" className="inline-flex rounded-full border border-rule bg-parchment/60 p-1">
+            {(["direct", "debate"] as const).map((m) => {
+              const on = m === mode;
+              return (
+                <button
+                  key={m}
+                  role="tab"
+                  aria-selected={on}
+                  onClick={() => switchMode(m)}
+                  disabled={busy}
+                  className={`rounded-full px-4 py-1.5 font-[family-name:var(--font-ui)] text-sm font-semibold transition disabled:opacity-50 ${
+                    on ? "bg-gold/15 text-gold" : "text-ink-soft hover:text-lapis"
+                  }`}
+                >
+                  {m === "direct" ? "Ask a question" : "Debate me"}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-rule bg-surface/70 p-5 sm:p-7">
+          <div
+            role="tablist"
+            aria-label={debate ? "Choose who challenges you" : "Choose an answering voice"}
+            className="flex flex-wrap gap-2"
+          >
             {dialoguePersonas.map((p) => {
               const selected = p.id === persona;
               return (
@@ -244,8 +293,12 @@ export function LiveDebate() {
               rows={2}
               placeholder={
                 messages.length
-                  ? "Ask a follow-up…"
-                  : "e.g. If Jesus is God, why did he not know the day or hour?"
+                  ? debate
+                    ? "Answer the challenge…"
+                    : "Ask a follow-up…"
+                  : debate
+                    ? "Make your case — e.g. Jesus forgave sins, which only God can do."
+                    : "e.g. If Jesus is God, why did he not know the day or hour?"
               }
               className="w-full resize-y rounded-xl border border-rule bg-parchment/60 px-4 py-3 font-[family-name:var(--font-serif)] text-lg text-ink outline-none placeholder:text-ink-faint focus:border-gold/40"
             />
