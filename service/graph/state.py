@@ -6,11 +6,18 @@ import operator
 from typing import Annotated, Literal, TypedDict
 
 Persona = Literal["jw-unitarian", "muslim", "skeptic", "seeker"]
-Status = Literal["running", "approved", "degraded", "rejected"]
+Status = Literal["running", "approved", "degraded", "rejected", "deflected"]
+Mode = Literal["direct", "debate"]
+Intent = Literal["objection", "followup", "meta"]
 
 
 class Turn(TypedDict):
     role: str  # "interlocutor" | "apologist" | "system"
+    content: str
+
+
+class ChatTurn(TypedDict):
+    role: str  # "user" | "assistant"
     content: str
 
 
@@ -29,6 +36,17 @@ class DebateState(TypedDict, total=False):
     objection: str  # the objection question, verbatim
     objection_href: str  # chapter link — used by GracefulDegrade
     objection_label: str  # human label for the chapter link
+
+    # conversational inputs (Phase 3 — AI-SPEC.md §9). Absent in Phase 1/2.
+    mode: Mode  # "direct" Q&A (default) or persona "debate"
+    history: list[ChatTurn]  # prior turns, client-supplied (windowed before use)
+    user_message: str  # the current user turn — the thing being answered
+    history_truncated: bool  # windowing dropped older turns (UI note)
+
+    # triage (Phase 3)
+    intent: Intent  # objection | followup | meta
+    guard_ok: bool  # input guard: on-topic + not an injection attempt
+    guard_reason: str  # why the guard deflected (when guard_ok is False)
 
     # transcript accumulates (reducer appends across nodes)
     transcript: Annotated[list[Turn], operator.add]

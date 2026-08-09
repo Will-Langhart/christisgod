@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from .._llm import call_llm
 from ..config import APOLOGIST_MODEL, APOLOGIST_TEMPERATURE
+from ..history import render, window
 from ..state import DebateState
 
 # DRAFT — author's review.
@@ -38,22 +39,48 @@ personal order — never a lesser divine nature or a created Son.
 Answer in 4–8 sentences, warm but precise."""
 
 _PASTORAL_NOTE = (
-    "\n\nThis objector is an honest seeker, not an adversary. Lead with reassurance "
+    "\n\nThis reader is an honest seeker, not an adversary. Lead with reassurance "
     "and a clear picture before technical distinctions; define terms plainly."
+)
+
+# Conversational (Phase 3): the apologist addresses the reader directly and may
+# use the conversation so far. Appended only when there is a live user turn.
+_CONVERSATIONAL_NOTE = (
+    "\n\nYou are in a live conversation with the reader. Address them directly. "
+    "Use the conversation so far for context and continuity, but ground every "
+    "claim in the SUPPLIED PASSAGES below — never in your own memory. If this is a "
+    "follow-up, build on what was already said rather than repeating it."
 )
 
 
 def apologist(state: DebateState) -> dict:
-    system = _SYSTEM + (_PASTORAL_NOTE if state.get("persona") == "seeker" else "")
+    conversational = bool(state.get("user_message"))
+
+    system = _SYSTEM
+    if state.get("persona") == "seeker":
+        system += _PASTORAL_NOTE
+    if conversational:
+        system += _CONVERSATIONAL_NOTE
 
     passages = "\n\n".join(state.get("retrieved", [])) or "(no passages retrieved)"
-    last_objection = next(
-        (t["content"] for t in reversed(state.get("transcript", []))
-         if t["role"] == "interlocutor"),
-        state["objection"],
-    )
 
-    parts = [f"OBJECTION:\n{last_objection}", f"\nSUPPLIED PASSAGES:\n{passages}"]
+    parts: list[str] = []
+    if conversational:
+        recent, truncated = window(state.get("history"))
+        convo = render(recent, truncated)
+        if convo:
+            parts.append(f"CONVERSATION SO FAR:\n{convo}\n")
+        parts.append(f"READER'S QUESTION:\n{state['user_message']}")
+    else:
+        # Phase 1/2 single-shot path: the objection is the last interlocutor turn.
+        last_objection = next(
+            (t["content"] for t in reversed(state.get("transcript", []))
+             if t["role"] == "interlocutor"),
+            state["objection"],
+        )
+        parts.append(f"OBJECTION:\n{last_objection}")
+    parts.append(f"\nSUPPLIED PASSAGES:\n{passages}")
+
     if state.get("verify_feedback"):
         parts.append(f"\nYour previous draft was REJECTED by the citation gate:\n"
                      f"{state['verify_feedback']}\nFix these and re-answer.")
@@ -62,6 +89,7 @@ def apologist(state: DebateState) -> dict:
                      f"{state['orthodoxy_feedback']}\nCorrect this and re-answer.")
 
     content = call_llm(
-        APOLOGIST_MODEL, system, "\n".join(parts), temperature=APOLOGIST_TEMPERATURE
+        APOLOGIST_MODEL, system, "\n".join(parts),
+        temperature=APOLOGIST_TEMPERATURE, cache_system=True,
     )
     return {"draft": content, "transcript": [{"role": "apologist", "content": content}]}

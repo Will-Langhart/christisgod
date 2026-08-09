@@ -76,16 +76,27 @@ def _rate_ok(ip: str) -> bool:
 
 
 _graph = None
+_chat_graph = None
 
 
 def graph():
-    """Build the compiled graph once, lazily (keeps startup/import cheap)."""
+    """Build the compiled debate graph once, lazily (keeps startup/import cheap)."""
     global _graph
     if _graph is None:
         from graph import build_graph
 
         _graph = build_graph()
     return _graph
+
+
+def chat_graph():
+    """Build the compiled conversational graph once, lazily (AI-SPEC.md §9)."""
+    global _chat_graph
+    if _chat_graph is None:
+        from graph import build_chat_graph
+
+        _chat_graph = build_chat_graph()
+    return _chat_graph
 
 
 class DebateRequest(BaseModel):
@@ -154,3 +165,100 @@ def debate(req: DebateRequest, request: Request, authorization: str | None = Hea
     if not req.objection.strip():
         return JSONResponse({"error": "objection must not be empty"}, status_code=400)
     return StreamingResponse(_stream(req), media_type="text/event-stream")
+
+
+# --- Phase 3: conversational /chat -------------------------------------------
+
+
+class ChatMessage(BaseModel):
+    role: str  # "user" | "assistant"
+    content: str
+
+
+class ChatRequest(BaseModel):
+    persona: str = "seeker"
+    mode: str = "direct"  # "direct" (default) or "debate"
+    messages: list[ChatMessage]
+
+
+# Which state keys, once present, signal each UI stage. Emitted once per turn, in
+# order, so the gate-the-answer stream feels alive without leaking an unverified
+# answer (AI-SPEC.md §9.6).
+_CHAT_STAGES = [
+    ("intent", "thinking", "Reading your question…"),
+    ("retrieved", "retrieving", "Searching the book…"),
+    ("draft", "drafting", "Drafting a grounded answer…"),
+    ("verify_ok", "verifying", "Checking every citation against the KJV…"),
+]
+
+
+def _chat_stream(req: ChatRequest):
+    msgs = [{"role": m.role, "content": m.content} for m in req.messages]
+    user_message = msgs[-1]["content"]
+    history = msgs[:-1]
+
+    state = {
+        "persona": req.persona,
+        "mode": req.mode,
+        "user_message": user_message,
+        "history": history,
+        # objection mirrors the live turn so the shared gate nodes' fallbacks work.
+        "objection": user_message,
+        "objection_href": "/",
+        "objection_label": "the relevant chapter",
+        "retries": 0,
+        "status": "running",
+    }
+    from graph.tracing import run_config
+
+    yield format_event("start", {"persona": req.persona, "mode": req.mode})
+
+    emitted: set[str] = set()
+    last: dict = state
+    try:
+        for snapshot in chat_graph().stream(
+            state, config=run_config(req.persona, user_message), stream_mode="values"
+        ):
+            last = snapshot
+            for key, event, note in _CHAT_STAGES:
+                if key not in emitted and snapshot.get(key) is not None:
+                    emitted.add(key)
+                    yield format_event(event, {"note": note})
+    except Exception as e:  # noqa: BLE001 — surface as an SSE error, don't 500 mid-stream
+        yield format_event("error", {"message": f"{type(e).__name__}: {e}"})
+        return
+
+    status = last.get("status")
+    answer = last.get("final", "")
+    verified = [
+        {"display": c["display"], "text": lookup_verse(c["display"])}
+        for c in last.get("citations", [])
+        if c.get("ok") and c.get("display")
+    ] if status == "approved" else []
+
+    yield format_event("answer", {"content": answer, "status": status})
+    yield format_event("done", {
+        "status": status,
+        "answer": answer,
+        "citations": verified,
+        "warnings": last.get("citation_warnings", []),
+    })
+
+
+@app.post("/chat")
+def chat(req: ChatRequest, request: Request, authorization: str | None = Header(default=None)):
+    if _API_TOKEN and authorization != f"Bearer {_API_TOKEN}":
+        return JSONResponse({"error": "unauthorized"}, status_code=401)
+    if not _rate_ok(_client_ip(request)):
+        return JSONResponse({"error": "rate limit exceeded, try again shortly"}, status_code=429)
+    err = validate_persona(req.persona)
+    if err:
+        return JSONResponse({"error": err}, status_code=400)
+    if req.mode not in ("direct", "debate"):
+        return JSONResponse({"error": "mode must be 'direct' or 'debate'"}, status_code=400)
+    if not req.messages or req.messages[-1].role != "user":
+        return JSONResponse({"error": "messages must be non-empty and end with a user turn"},
+                            status_code=400)
+    if not req.messages[-1].content.strip():
+        return JSONResponse({"error": "the latest message must not be empty"}, status_code=400)
+    return StreamingResponse(_chat_stream(req), media_type="text/event-stream")

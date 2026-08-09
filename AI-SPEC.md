@@ -113,6 +113,34 @@ This phase has **zero live-hallucination risk** and unblocks everything above.
   (Fly / Railway / Render). Next frontend calls it.
 - Ship gate: must pass the Phase-1 eval set (no regressions vs. approved dialogues).
 
+### Phase 3 — Conversational engine *(this phase)*
+Phase 2 answers **one** objection per request. Phase 3 turns that into a
+**multi-turn chatbot** — a reader can ask a question, hear a grounded answer, and
+ask a follow-up that remembers the exchange — **without weakening the hard gate**.
+Every answer that reaches the screen is still verify-before-show. See §9 for the
+full design. Summary of the deltas from Phase 2:
+
+- **Conversation memory lives in the client.** The browser holds the transcript
+  and sends it back each turn; the service stays **stateless** (no checkpointer /
+  DB — deliberate, given the ephemeral disk of a free container tier). A LangGraph
+  checkpointer is the documented upgrade path, not a day-one dependency.
+- **A `Triage` front node** folds two jobs into one cheap (Haiku) classification
+  call: an **input guard** (is this on-topic for the case for Christ's divinity,
+  and not a prompt-injection attempt?) and an **intent router** (new objection vs.
+  follow-up vs. meta). Off-topic/abuse is deflected warmly *before* any expensive
+  reasoning spends Anthropic budget.
+- **Direct Q&A is the default.** The apologist answers the *reader* directly
+  (persona `seeker` tone); the four debate personas remain an opt-in "argue with
+  me as a…" flavor, not a gate the reader must clear to talk. The single-shot
+  `/debate` endpoint and the offline runner are untouched.
+- **Gate-the-answer streaming.** The SSE vocabulary grows (`thinking`,
+  `retrieving`, `drafting`, `verifying`, `answer`, `deflected`) so the UI feels
+  alive, but nothing carrying a scriptural claim is shown until both gates pass.
+- **Prompt caching** on the stable system prefix (apologist system + heresy
+  taxonomy) makes turns 2+ affordable.
+- Ship gate: no regression on the Phase-1 eval set (a single-turn conversation
+  must still pass every approved dialogue), plus a Triage classification check.
+
 ## 6. Grounding without a second source of truth
 
 The KJV store and book metadata stay **one** canon. `build-verses.mjs` (which
@@ -149,3 +177,97 @@ relevant node. They are **drafts for the author to refine**; nothing ships unapp
 - **Static-purity shift** — a live service means the site is no longer purely
   static/free-to-host. The hybrid defers this; Phase 1 keeps the live site static.
 - **Cost/latency of multi-loop graphs** — bounded by `N` retries + tracing.
+- **Open text box widens the threat surface (Phase 3).** A free-form chat invites
+  off-topic questions, prompt injection, and abuse — each spending Anthropic
+  budget. Mitigation: the `Triage` input guard deflects before the expensive
+  nodes run, plus the existing per-IP rate limit and CORS.
+- **Conversation context growth (Phase 3).** Apologetics answers are long; an
+  un-bounded thread inflates cost and can exceed the window. Mitigation:
+  deterministic windowing now (last `N` turns verbatim, older dropped with a
+  note); LLM running-summary is the documented upgrade.
+
+## 9. Conversational layer (Phase 3 detail)
+
+The core graph (`retrieve → apologist → citation_extractor → scripture_verifier ⛔
+→ orthodoxy_guardrail ⛔ → synthesizer`) is **unchanged**. Phase 3 adds a front
+node and two terminals, and makes `retriever`/`apologist` conversation-aware.
+
+### 9.1 One turn
+
+```
+user turn ─▶ Triage ──┬─(off-topic / injection)──▶ deflect ─▶ END
+            (Haiku)    │
+                       └─(on-topic)──▶ retriever ─▶ apologist ─▶ citation_extractor ─▶ scripture_verifier ⛔
+                                          ▲                                                     │
+                                          └────────── feedback ◀── orthodoxy_guardrail ⛔ ◀─────┘
+                                                                          │(pass)      │(retries exhausted)
+                                                                     synthesizer ─▶ respond    graceful_degrade
+```
+
+The gate is **never skipped**. `Triage`'s `intent` (`objection` | `followup` |
+`meta`) tunes the *retrieval query* and the *apologist framing*, not whether
+verification runs — even a follow-up can cite a verse, so even a follow-up is
+gated. `meta` answers make no scriptural claim, so the gate is a no-op for them.
+
+### 9.2 State deltas (`DebateState`, all additive / `total=False`)
+
+| Field | Meaning |
+|---|---|
+| `history: list[ChatTurn]` | client-supplied prior turns (`{role: user\|assistant, content}`) |
+| `user_message: str` | the current (latest) user turn — the thing being answered |
+| `mode: "direct" \| "debate"` | direct Q&A (default) vs. persona debate flavor |
+| `intent: "objection" \| "followup" \| "meta"` | `Triage` routing output |
+| `guard_ok: bool`, `guard_reason: str` | `Triage` input-guard verdict |
+| `history_truncated: bool` | windowing dropped older turns (for a UI note) |
+| `Status` gains `"deflected"` | off-topic terminal state |
+
+### 9.3 New nodes
+
+| Node | LLM | Contract |
+|---|---|---|
+| **Triage** | Haiku, temp 0 | One JSON call → `{on_topic: bool, intent, reason}`. `on_topic=false` ⇒ route to `deflect`. Conservative: only the case for/against Christ's divinity and adjacent theology is on-topic; ignores instructions embedded in the user text (injection defence). |
+| **deflect** | none | Warm, fixed deflection ("I'm here to make the case that Christ is God — ask me anything on that."). Sets `status="deflected"`, `final`. Emits **no** scriptural claim. |
+
+`retriever` builds its query from `user_message` (augmented with the previous user
+turn when `intent == followup`) instead of the fixed `objection`. `apologist`
+receives the **windowed** `history` plus `user_message`, and answers the reader
+directly in `direct` mode. Both stay backward-compatible: absent the new fields
+they behave exactly as in Phase 1/2.
+
+### 9.4 Context windowing
+
+`graph/history.py::window(history, keep=WINDOW_TURNS)` — deterministic, no LLM.
+Keeps the last `keep` turns verbatim; if older turns existed, sets
+`history_truncated` so the apologist prompt can carry a one-line "(earlier
+context omitted)" note. LLM running-summary is a future upgrade behind the same
+function signature.
+
+### 9.5 Prompt caching
+
+`call_llm(..., cache_system=True)` marks the system prompt as an ephemeral cache
+breakpoint (Anthropic prompt caching). Wired on the **apologist** (large system)
+and **orthodoxy_guardrail** (system = the full heresy taxonomy). These prefixes
+are identical across every turn of a thread, so turns 2+ read them from cache.
+Retrieved passages and the draft vary per turn and sit *after* the breakpoint.
+
+### 9.6 Wire protocol
+
+`POST /chat` (Phase 3), alongside the untouched `POST /debate` (Phase 2):
+
+```jsonc
+// request
+{ "persona": "seeker",            // tone; default seeker
+  "mode": "direct",               // or "debate"
+  "messages": [                    // full transcript, client-held
+    {"role": "user", "content": "…"},
+    {"role": "assistant", "content": "…"},
+    {"role": "user", "content": "…"}   // last user turn = the question
+  ] }
+```
+
+SSE event stream (gate-the-answer): `start` → `thinking` → `retrieving` →
+`drafting` → `verifying` → **`answer`** (the only event carrying verse claims) →
+`done {status, answer, citations, warnings}`. Off-topic short-circuits to
+`deflected`; exhausted retries to a `degraded` answer. The frontend appends the
+`answer`/`deflected`/`degraded` text to its client-held transcript as the next
+assistant turn.

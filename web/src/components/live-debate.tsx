@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Loader2, Send } from "lucide-react";
 import { dialoguePersonas } from "@/lib/dialogues.generated";
 import { linkifyScripture } from "@/lib/linkify-scripture";
@@ -15,6 +15,12 @@ const TOKEN = process.env.NEXT_PUBLIC_DEBATE_TOKEN;
 
 type PersonaId = (typeof dialoguePersonas)[number]["id"];
 type Citation = { display: string; text: string | null };
+type ChatMessage = {
+  role: "user" | "assistant";
+  content: string;
+  status?: string; // "approved" | "degraded" | "deflected"
+  citations?: Citation[];
+};
 
 function parseSSE(frame: string): { event: string; data: unknown } | null {
   let event = "message";
@@ -33,33 +39,45 @@ function parseSSE(frame: string): { event: string; data: unknown } | null {
 
 export function LiveDebate() {
   const [persona, setPersona] = useState<PersonaId>("seeker");
-  const [objection, setObjection] = useState("");
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState<string>("");
-  const [answer, setAnswer] = useState<string>("");
-  const [status, setStatus] = useState<string>("");
-  const [citations, setCitations] = useState<Citation[]>([]);
   const [error, setError] = useState<string>("");
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Keep the newest turn in view as the conversation and progress notes grow.
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+  }, [messages, progress]);
 
   if (!API) return null; // dormant until configured
 
   async function ask() {
-    if (!objection.trim() || busy) return;
+    const question = input.trim();
+    if (!question || busy) return;
+
+    // Optimistically show the reader's turn and send the full transcript so the
+    // stateless service can remember the exchange (AI-SPEC.md §9 — client holds memory).
+    const history: ChatMessage[] = [...messages, { role: "user", content: question }];
+    setMessages(history);
+    setInput("");
     setBusy(true);
-    setProgress("Reading the question…");
-    setAnswer("");
-    setStatus("");
-    setCitations([]);
     setError("");
+    setProgress("Reading your question…");
 
     try {
-      const res = await fetch(`${API}/debate`, {
+      const res = await fetch(`${API}/chat`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
           ...(TOKEN ? { authorization: `Bearer ${TOKEN}` } : {}),
         },
-        body: JSON.stringify({ persona, objection }),
+        body: JSON.stringify({
+          persona,
+          mode: "direct",
+          messages: history.map((m) => ({ role: m.role, content: m.content })),
+        }),
       });
       if (!res.ok || !res.body) {
         setError(
@@ -83,16 +101,28 @@ export function LiveDebate() {
           const parsed = parseSSE(frame);
           if (!parsed) continue;
           const d = parsed.data as Record<string, unknown>;
-          if (parsed.event === "interlocutor") setProgress("Considering the objection…");
-          else if (parsed.event === "draft") setProgress("Drafting a grounded answer…");
-          else if (parsed.event === "progress") setProgress("Checking every citation against the KJV…");
-          else if (parsed.event === "done") {
-            setAnswer(String(d.answer ?? ""));
-            setStatus(String(d.status ?? ""));
-            setCitations((d.citations as Citation[]) ?? []);
-            setProgress("");
-          } else if (parsed.event === "error") {
-            setError(String(d.message ?? "Something went wrong."));
+          switch (parsed.event) {
+            case "thinking":
+            case "retrieving":
+            case "drafting":
+            case "verifying":
+              setProgress(String(d.note ?? "Working…"));
+              break;
+            case "done":
+              setMessages((prev) => [
+                ...prev,
+                {
+                  role: "assistant",
+                  content: String(d.answer ?? ""),
+                  status: String(d.status ?? ""),
+                  citations: (d.citations as Citation[]) ?? [],
+                },
+              ]);
+              setProgress("");
+              break;
+            case "error":
+              setError(String(d.message ?? "Something went wrong."));
+              break;
           }
         }
       }
@@ -104,7 +134,14 @@ export function LiveDebate() {
     }
   }
 
-  const degraded = status === "degraded";
+  function onKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      void ask();
+    }
+  }
+
+  const started = messages.length > 0 || busy;
 
   return (
     <section className="border-t border-rule px-6 py-20 sm:py-24">
@@ -117,14 +154,15 @@ export function LiveDebate() {
             Put the case to the test yourself.
           </h2>
           <p className="mt-4 font-[family-name:var(--font-serif)] text-lg leading-relaxed text-ink-soft">
-            Pose any objection and hear it answered live, grounded in the King
-            James text. These responses are generated in the moment and—unlike the
-            curated dialogues above—are not individually reviewed.
+            Ask anything about the deity of Christ and follow the thread as far as
+            you like — every answer is generated in the moment and grounded in the
+            King James text. Unlike the curated dialogues above, these responses
+            are not individually reviewed.
           </p>
         </header>
 
         <div className="mt-9 rounded-2xl border border-rule bg-surface/70 p-5 sm:p-7">
-          <div role="tablist" aria-label="Choose an interlocutor" className="flex flex-wrap gap-2">
+          <div role="tablist" aria-label="Choose an answering voice" className="flex flex-wrap gap-2">
             {dialoguePersonas.map((p) => {
               const selected = p.id === persona;
               return (
@@ -146,66 +184,84 @@ export function LiveDebate() {
             })}
           </div>
 
-          <textarea
-            value={objection}
-            onChange={(e) => setObjection(e.target.value)}
-            disabled={busy}
-            rows={3}
-            placeholder="e.g. If Jesus is God, why did he not know the day or hour?"
-            className="mt-4 w-full resize-y rounded-xl border border-rule bg-parchment/60 px-4 py-3 font-[family-name:var(--font-serif)] text-lg text-ink outline-none placeholder:text-ink-faint focus:border-gold/40"
-          />
-
-          <div className="mt-3 flex items-center justify-end">
-            <button
-              onClick={ask}
-              disabled={busy || !objection.trim()}
-              className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-5 py-2.5 font-[family-name:var(--font-ui)] text-sm font-semibold text-gold transition hover:bg-gold/15 disabled:opacity-40"
+          {started && (
+            <div
+              ref={scrollRef}
+              className="mt-6 max-h-[28rem] space-y-5 overflow-y-auto border-t border-rule pt-6"
             >
-              {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-              {busy ? "Weighing the evidence…" : "Ask"}
-            </button>
-          </div>
+              {messages.map((m, i) =>
+                m.role === "user" ? (
+                  <div key={i} className="flex justify-end">
+                    <p className="max-w-[85%] rounded-2xl rounded-br-sm border border-lapis/20 bg-lapis/5 px-4 py-2.5 font-[family-name:var(--font-serif)] text-lg text-ink">
+                      {m.content}
+                    </p>
+                  </div>
+                ) : (
+                  <div key={i} className="flex justify-start">
+                    <div className="max-w-[90%]">
+                      <div className="space-y-3">
+                        {m.content.split(/\n\s*\n/).map((para, j) => (
+                          <p
+                            key={j}
+                            className="font-[family-name:var(--font-serif)] text-lg leading-relaxed text-ink-soft"
+                          >
+                            {m.status === "approved" ? linkifyScripture(para) : para}
+                          </p>
+                        ))}
+                      </div>
+                      {m.citations && m.citations.length > 0 && (
+                        <ul className="mt-4 flex flex-wrap gap-2" aria-label="Cited passages">
+                          {m.citations.map((c) => (
+                            <li
+                              key={c.display}
+                              className="rounded-full border border-lapis/20 bg-lapis/5 px-3 py-1 font-[family-name:var(--font-ui)] text-[0.7rem] font-medium tracking-wide text-lapis"
+                            >
+                              {c.display}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </div>
+                ),
+              )}
 
-          {(progress || answer || error) && (
-            <div className="mt-6 border-t border-rule pt-6">
-              {error ? (
-                <p className="font-[family-name:var(--font-serif)] text-base text-vermillion">{error}</p>
-              ) : progress ? (
+              {progress && (
                 <p className="flex items-center gap-2 font-[family-name:var(--font-serif)] text-base italic text-ink-faint">
                   <Loader2 className="h-4 w-4 animate-spin" />
                   {progress}
                 </p>
-              ) : degraded ? (
-                <p className="font-[family-name:var(--font-serif)] text-lg leading-relaxed text-ink-soft">
-                  {answer}
-                </p>
-              ) : (
-                <>
-                  <div className="space-y-4">
-                    {answer.split(/\n\s*\n/).map((para, i) => (
-                      <p
-                        key={i}
-                        className="font-[family-name:var(--font-serif)] text-lg leading-relaxed text-ink-soft"
-                      >
-                        {linkifyScripture(para)}
-                      </p>
-                    ))}
-                  </div>
-                  {citations.length > 0 && (
-                    <ul className="mt-5 flex flex-wrap gap-2" aria-label="Cited passages">
-                      {citations.map((c) => (
-                        <li
-                          key={c.display}
-                          className="rounded-full border border-lapis/20 bg-lapis/5 px-3 py-1 font-[family-name:var(--font-ui)] text-[0.7rem] font-medium tracking-wide text-lapis"
-                        >
-                          {c.display}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </>
               )}
             </div>
+          )}
+
+          <div className="mt-5 flex items-end gap-3">
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={onKeyDown}
+              disabled={busy}
+              rows={2}
+              placeholder={
+                messages.length
+                  ? "Ask a follow-up…"
+                  : "e.g. If Jesus is God, why did he not know the day or hour?"
+              }
+              className="w-full resize-y rounded-xl border border-rule bg-parchment/60 px-4 py-3 font-[family-name:var(--font-serif)] text-lg text-ink outline-none placeholder:text-ink-faint focus:border-gold/40"
+            />
+            <button
+              onClick={ask}
+              disabled={busy || !input.trim()}
+              aria-label="Send question"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-5 py-3 font-[family-name:var(--font-ui)] text-sm font-semibold text-gold transition hover:bg-gold/15 disabled:opacity-40"
+            >
+              {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+              <span className="hidden sm:inline">{busy ? "Weighing…" : "Ask"}</span>
+            </button>
+          </div>
+
+          {error && (
+            <p className="mt-3 font-[family-name:var(--font-serif)] text-base text-vermillion">{error}</p>
           )}
         </div>
       </div>

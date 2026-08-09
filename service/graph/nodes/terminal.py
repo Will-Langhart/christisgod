@@ -25,6 +25,22 @@ def respond(state: DebateState) -> dict:
     return {"status": "approved"}
 
 
+def deflect(state: DebateState) -> dict:
+    """Phase 3 off-topic terminal (AI-SPEC.md §9.3). Fires when Triage judges the
+    message off-topic or an injection attempt. Warm, fixed, and — critically —
+    carries NO scriptural claim, so it needs no verification."""
+    message = (
+        "I'm here to make the case that Jesus Christ is God — his divinity, the "
+        "Trinity, the incarnation, and the objections raised against them. Ask me "
+        "anything along those lines and I'll answer it grounded in Scripture."
+    )
+    return {
+        "status": "deflected",
+        "final": message,
+        "transcript": [{"role": "system", "content": "[deflect] off-topic; no answer generated"}],
+    }
+
+
 def graceful_degrade(state: DebateState) -> dict:
     label = state.get("objection_label") or "the relevant chapter"
     href = state.get("objection_href", "/")
