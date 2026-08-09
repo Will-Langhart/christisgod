@@ -22,12 +22,14 @@ export default function Home() {
 
       <Hero />
 
+      <LiveDebate />
+
       <EvidenceCase />
 
       {/* Epigraphs */}
       <section
         id="epigraphs"
-        className="scroll-mt-8 border-y border-rule bg-parchment-deep/40 px-6 py-14"
+        className="scroll-mt-8 border-y border-rule px-6 py-14"
       >
         <div className="mx-auto grid max-w-3xl gap-10 sm:grid-cols-2">
           {bookMeta.epigraphs.map((e) => (
@@ -44,7 +46,7 @@ export default function Home() {
       </section>
 
       {/* Reading Paths */}
-      <section id="paths" className="section-gilt border-b border-rule px-6 py-20">
+      <section id="paths" className="border-b border-rule px-6 py-20">
         <div className="mx-auto w-full max-w-4xl">
         <h2 className="text-center font-[family-name:var(--font-display)] text-3xl font-semibold text-ink">
           Start Here
@@ -78,8 +80,6 @@ export default function Home() {
       </section>
 
       <ObjectionExplorer />
-
-      <LiveDebate />
 
       {/* Contents */}
       <section id="contents" className="mx-auto w-full max-w-4xl px-6 py-20">
@@ -116,7 +116,7 @@ export default function Home() {
         </ol>
       </section>
 
-      <footer className="section-gilt border-t border-rule px-6 py-12 text-center font-[family-name:var(--font-ui)] text-sm text-ink-faint">
+      <footer className="border-t border-rule px-6 py-12 text-center font-[family-name:var(--font-ui)] text-sm text-ink-faint">
         <div className="rule-ornament mx-auto mb-7 w-full max-w-xs">
           <span className="rule-ornament__mark">✠</span>
         </div>
