@@ -7,6 +7,7 @@ import { readingPaths } from "@/lib/reading-paths";
 import { Hero } from "@/components/hero";
 import { EvidenceCase } from "@/components/evidence-case";
 import { ObjectionExplorer } from "@/components/objection-explorer";
+import { LiveDebate } from "@/components/live-debate";
 import { homeGraph } from "@/lib/structured-data";
 
 export default function Home() {
@@ -77,6 +78,8 @@ export default function Home() {
       </section>
 
       <ObjectionExplorer />
+
+      <LiveDebate />
 
       {/* Contents */}
       <section id="contents" className="mx-auto w-full max-w-4xl px-6 py-20">
