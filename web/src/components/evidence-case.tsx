@@ -4,7 +4,7 @@ import { evidenceStrands } from "@/lib/evidence-case";
 
 export function EvidenceCase() {
   return (
-    <section id="case" className="border-b border-rule px-6 py-20 sm:py-24">
+    <section id="case" className="px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-[family-name:var(--font-ui)] text-xs font-semibold uppercase tracking-[0.28em] text-vermillion">

@@ -39,7 +39,7 @@ function parseSSE(frame: string): { event: string; data: unknown } | null {
 
 type Mode = "direct" | "debate";
 
-export function LiveDebate() {
+export function LiveDebate({ divider = true }: { divider?: boolean } = {}) {
   const [mode, setMode] = useState<Mode>("direct");
   const [persona, setPersona] = useState<PersonaId>("seeker");
   const [input, setInput] = useState("");
@@ -156,7 +156,7 @@ export function LiveDebate() {
   const debate = mode === "debate";
 
   return (
-    <section className="border-t border-rule px-6 py-20 sm:py-24">
+    <section className={`${divider ? "border-t border-rule " : ""}px-6 py-20 sm:py-24`}>
       <div className="mx-auto max-w-3xl">
         <header className="mx-auto max-w-2xl text-center">
           <p className="font-[family-name:var(--font-ui)] text-xs font-semibold uppercase tracking-[0.28em] text-vermillion">

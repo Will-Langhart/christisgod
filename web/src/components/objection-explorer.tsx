@@ -4,7 +4,7 @@ import { objections } from "@/lib/objections";
 
 export function ObjectionExplorer() {
   return (
-    <section id="questions" className="border-y border-rule px-6 py-20 sm:py-24">
+    <section id="questions" className="px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-4xl">
         <header className="mx-auto max-w-2xl text-center">
           <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-lapis/25 bg-lapis/10 text-lapis">
