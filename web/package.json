@@ -17,6 +17,8 @@
     "@radix-ui/react-hover-card": "^1.1.17",
     "@radix-ui/react-popover": "^1.1.17",
     "@radix-ui/react-tooltip": "^1.2.10",
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.2",
     "@types/mdx": "^2.0.14",
     "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",

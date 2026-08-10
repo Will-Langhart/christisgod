@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { ChapterList } from "@/components/chapter-list";
+import { AccountMenu } from "@/components/auth/account-menu";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -37,6 +38,7 @@ export function SiteHeader() {
               <span>Christ Is God</span>
             </Link>
           </div>
+          <AccountMenu />
         </div>
       </header>
 
