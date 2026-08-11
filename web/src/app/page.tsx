@@ -8,17 +8,25 @@ import { Hero } from "@/components/hero";
 import { EvidenceCase } from "@/components/evidence-case";
 import { ObjectionExplorer } from "@/components/objection-explorer";
 import { LiveDebate } from "@/components/live-debate";
+import { AccountMenu } from "@/components/auth/account-menu";
 import { homeGraph } from "@/lib/structured-data";
 
 export default function Home() {
   const jsonLd = homeGraph;
 
   return (
-    <div className="flex min-h-full flex-col">
+    <div className="relative flex min-h-full flex-col">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
+      {/* Minimal account control floating over the hero (splash pages carry no
+          full header). Consistent with the reading-view header; hidden until
+          Supabase is configured. */}
+      <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-5">
+        <AccountMenu />
+      </div>
 
       <Hero />
 
