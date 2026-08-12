@@ -1,7 +1,7 @@
 {
   "persona": "seeker",
   "objection": "Didn’t Jesus say, ‘The Father is greater than I’—and call him the only true God?",
-  "answer": "This is exactly the right question to ask, and you're not in danger of denying anything true by wrestling with it honestly — the tension you're feeling is real, and Scripture gives us the tools to hold it rightly.\n\nStart with the plain picture: the same Gospel of John that records \"the Father is greater than I\" (John 14:28) opens by declaring the Word was God (John 1:1) and closes with Thomas confessing Jesus, \"My Lord and my God\" (John 20:28). John is not a confused author contradicting himself; he's showing us two things that are both true about the one Person, Jesus Christ, because Jesus is both fully God and fully man.\n\nWhen Jesus prays to \"the only true God\" in John 17:3, He is speaking as the incarnate Son, the one who took on our humanity and walked the path of obedience for us. That prayer distinguishes the Father and the Son as distinct persons — it doesn't erase the Son from the divine identity. The Father is Christ's Father by eternal generation, and, in His assumed humanity, the Father is also His God — while Christ remains the eternal Word according to His divine nature.\n\n\"The Father is greater than I\" works the same way. The Fathers of the Church distinguished between things said of Christ according to the economy — His voluntary self-humbling, taking the form of a servant, sent on a mission (Philippians 2:6–7) — and things said according to His eternal essence. A son sent by his father can call the sender \"greater\" in respect of the mission's order without being a lesser nature; Father and Son language itself carries an order of origin without inequality of being.\n\nSo hold both statements together, not as contradiction but as depth: \"I and my Father are one\" (John 10:30) speaks to shared divine essence; \"the Father is greater\" speaks to the Son's incarnate obedience and the eternal order between Father and Son. You're not choosing between plain language and mystery — you're letting all the plain language stand, together.",
+  "answer": "You're not being stubborn at all — this is exactly the right question to ask, and the honest way to read Scripture. Let's look at both verses carefully, because the answer isn't to soften what Jesus said, but to notice *who* is speaking and *in what capacity*.\n\nWhen Jesus says \"the Father is greater than I\" (John 14:28), he's speaking as the incarnate Son who took on true humanity — Philippians 2:6–7 describes this as a real self-humbling, the Son taking the form of a servant. A son sent by his father on a mission can rightly call the one who sent him \"greater\" with respect to that mission's order, without that meaning he's a different, lesser kind of being. Think of it this way: \"Father\" and \"Son\" themselves describe a relationship of origin — the Son eternally comes from the Father — but origin isn't the same as inferiority. A human son fully shares his father's humanity even though he came from him; so too the eternal Son fully shares the Father's divine nature even though the Father is eternally \"greater\" in the order of relationship and, here, in the order of the mission Jesus was sent to accomplish.\n\nJohn 17:3 works similarly. Jesus prays to the Father as \"the only true God\" — but notice he says this in the same breath as \"Jesus Christ, whom thou hast sent.\" This distinguishes the Father and Son as persons; it doesn't exclude the Son from being included in that one true God's identity. And this is the same Gospel that opens by declaring the Word was God (John 1:1) and closes with Thomas confessing the risen Jesus as \"my Lord and my God\" (John 20:28). John isn't contradicting himself — he's showing us that the Son can address the Father as God while himself sharing fully in that same divine reality.\n\nSo here's the simplest way to hold it together: these statements describe Jesus according to his incarnate mission (theologians call this *according to the economy*), not according to his eternal nature (*according to essence*). It would actually be less honest to the whole text to isolate these verses from John 1:1, John 20:28, or Philippians 2's picture of the eternal Son humbling himself — the fuller witness shows one person, truly God and truly man, and these words fit the human, sent, obedient side of that mystery without erasing the divine side.",
   "citations": [
     {
       "raw": "John 14:28",
@@ -12,61 +12,57 @@
       "warning": "quote near John 14:28 is not verbatim KJV"
     },
     {
-      "raw": "John 1:1",
+      "raw": "Philippians 2:6–7",
       "ok": true,
       "reason": "verified",
-      "display": "John 1:1",
-      "quoted": "My Lord and my God",
-      "warning": null
-    },
-    {
-      "raw": "John 20:28",
-      "ok": true,
-      "reason": "verified",
-      "display": "John 20:28",
-      "quoted": "My Lord and my God",
-      "warning": null
+      "display": "Philippians 2:6–7",
+      "quoted": "the Father is greater than I",
+      "warning": "quote near Philippians 2:6–7 is not verbatim KJV"
     },
     {
       "raw": "John 17:3",
       "ok": true,
       "reason": "verified",
       "display": "John 17:3",
-      "quoted": "the only true God",
-      "warning": null
+      "quoted": "in the order of relationship and, here, in the order of the mission Jesus was sent to accomplish.\n\nJohn 17:3 works similarly. Jesus prays to the Father as",
+      "warning": "quote near John 17:3 is not verbatim KJV"
     },
     {
-      "raw": "Philippians 2:6–7",
+      "raw": "John 1:1",
       "ok": true,
       "reason": "verified",
-      "display": "Philippians 2:6–7",
-      "quoted": "greater",
-      "warning": null
+      "display": "John 1:1",
+      "quoted": "This distinguishes the Father and Son as persons; it doesn't exclude the Son from being included in that one true God's identity. And this is the same Gospel that opens by declaring the Word was God (John 1:1) and closes with Thomas confessing the risen Jesus as",
+      "warning": "quote near John 1:1 is not verbatim KJV"
     },
     {
-      "raw": "John 10:30",
+      "raw": "John 20:28",
       "ok": true,
       "reason": "verified",
-      "display": "John 10:30",
-      "quoted": "I and my Father are one",
-      "warning": null
+      "display": "John 20:28",
+      "quoted": "This distinguishes the Father and Son as persons; it doesn't exclude the Son from being included in that one true God's identity. And this is the same Gospel that opens by declaring the Word was God (John 1:1) and closes with Thomas confessing the risen Jesus as",
+      "warning": "quote near John 20:28 is not verbatim KJV"
     }
   ],
   "citation_warnings": [
-    "quote near John 14:28 is not verbatim KJV"
+    "quote near John 14:28 is not verbatim KJV",
+    "quote near Philippians 2:6–7 is not verbatim KJV",
+    "quote near John 17:3 is not verbatim KJV",
+    "quote near John 1:1 is not verbatim KJV",
+    "quote near John 20:28 is not verbatim KJV"
   ],
   "transcript": [
     {
       "role": "interlocutor",
-      "content": "# Honest Question from a New Believer\n\nI've been reading through John, and in chapter 14 Jesus says straight out, \"The Father is greater than I.\" And then in chapter 17, he prays to \"the only true God.\" That really sounds like Jesus is saying his Father is God, but *he* isn't—or at least not in the same way. How do I hold that together with \"the Father and I are one\" and all the places where he seems to be called God? I don't want to accidentally deny something true about Jesus, but I also don't want to ignore what feels like pretty plain language."
+      "content": "You know, I *want* to understand this, and I'm trying not to be stubborn about it, but when I read John 14:28—\"The Father is greater than me\"—and then John 17:3 where Jesus calls the Father \"the only true God,\" it honestly sounds like Jesus is saying he's *not* God, or at least not equal to him. I'm not trying to be difficult; I just don't want to twist the Bible to fit a doctrine. If Jesus himself said the Father is greater, how do I hold onto \"Jesus is God\" without feeling like I'm ignoring what he actually said? And wouldn't it be simpler—more honest with the text—if Jesus is something *less* than God, just really special and important?"
     },
     {
       "role": "apologist",
-      "content": "This is exactly the right question to ask, and you're not in danger of denying anything true by wrestling with it honestly — the tension you're feeling is real, and Scripture gives us the tools to hold it rightly.\n\nStart with the plain picture: the same Gospel of John that records \"the Father is greater than I\" (John 14:28) opens by declaring the Word was God (John 1:1) and closes with Thomas confessing Jesus, \"My Lord and my God\" (John 20:28). John is not a confused author contradicting himself; he's showing us two things that are both true about the one Person, Jesus Christ, because Jesus is both fully God and fully man.\n\nWhen Jesus prays to \"the only true God\" in John 17:3, He is speaking as the incarnate Son, the one who took on our humanity and walked the path of obedience for us. That prayer distinguishes the Father and the Son as distinct persons — it doesn't erase the Son from the divine identity. The Father is Christ's Father by eternal generation, and, in His assumed humanity, the Father is also His God — while Christ remains the eternal Word according to His divine nature.\n\n\"The Father is greater than I\" works the same way. The Fathers of the Church distinguished between things said of Christ according to the economy — His voluntary self-humbling, taking the form of a servant, sent on a mission (Philippians 2:6–7) — and things said according to His eternal essence. A son sent by his father can call the sender \"greater\" in respect of the mission's order without being a lesser nature; Father and Son language itself carries an order of origin without inequality of being.\n\nSo hold both statements together, not as contradiction but as depth: \"I and my Father are one\" (John 10:30) speaks to shared divine essence; \"the Father is greater\" speaks to the Son's incarnate obedience and the eternal order between Father and Son. You're not choosing between plain language and mystery — you're letting all the plain language stand, together."
+      "content": "You're not being stubborn at all — this is exactly the right question to ask, and the honest way to read Scripture. Let's look at both verses carefully, because the answer isn't to soften what Jesus said, but to notice *who* is speaking and *in what capacity*.\n\nWhen Jesus says \"the Father is greater than I\" (John 14:28), he's speaking as the incarnate Son who took on true humanity — Philippians 2:6–7 describes this as a real self-humbling, the Son taking the form of a servant. A son sent by his father on a mission can rightly call the one who sent him \"greater\" with respect to that mission's order, without that meaning he's a different, lesser kind of being. Think of it this way: \"Father\" and \"Son\" themselves describe a relationship of origin — the Son eternally comes from the Father — but origin isn't the same as inferiority. A human son fully shares his father's humanity even though he came from him; so too the eternal Son fully shares the Father's divine nature even though the Father is eternally \"greater\" in the order of relationship and, here, in the order of the mission Jesus was sent to accomplish.\n\nJohn 17:3 works similarly. Jesus prays to the Father as \"the only true God\" — but notice he says this in the same breath as \"Jesus Christ, whom thou hast sent.\" This distinguishes the Father and Son as persons; it doesn't exclude the Son from being included in that one true God's identity. And this is the same Gospel that opens by declaring the Word was God (John 1:1) and closes with Thomas confessing the risen Jesus as \"my Lord and my God\" (John 20:28). John isn't contradicting himself — he's showing us that the Son can address the Father as God while himself sharing fully in that same divine reality.\n\nSo here's the simplest way to hold it together: these statements describe Jesus according to his incarnate mission (theologians call this *according to the economy*), not according to his eternal nature (*according to essence*). It would actually be less honest to the whole text to isolate these verses from John 1:1, John 20:28, or Philippians 2's picture of the eternal Son humbling himself — the fuller witness shows one person, truly God and truly man, and these words fit the human, sent, obedient side of that mystery without erasing the divine side."
     },
     {
       "role": "system",
-      "content": "[synth] 6 verified citation(s)"
+      "content": "[synth] 5 verified citation(s)"
     }
   ]
 }

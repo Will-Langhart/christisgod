@@ -1,49 +1,64 @@
 {
   "persona": "skeptic",
   "objection": "Didn’t Jesus say, ‘The Father is greater than I’—and call him the only true God?",
-  "answer": "You're right that dating and authorship matter, and I won't wave that away. But the \"low-to-high trajectory\" thesis runs against the evidence you've already granted: Philippians 2:6–7, widely regarded as an early hymn Paul is quoting rather than composing, already confesses Christ existing in the form of God and taking the form of a servant — that is the highest Christology, attested earlier than Mark's Gospel itself, not a late Hellenistic accretion drifting from Palestine. The direction of travel isn't obviously low-to-high.\n\nNor is John's Gospel plausibly a corrective pulling an \"over-realized\" deity claim back toward mere exaltation, since the same Gospel that records \"the Father is greater than I\" (John 14:28) opens by calling the Word God and ends with Thomas's confession, \"My Lord and my God\" (John 20:28). What John is doing is distinguishing statements made of Christ according to His incarnate economy from statements made according to His eternal being — the Son sent on mission can rightly call the Father \"greater\" without implying a lesser nature, just as He can call the Father \"my God\" according to His assumed humanity while remaining the eternal Word according to His divinity. And the equality-claim isn't floating free of narrative memory either: John 5 preserves a hostile, historically-textured controversy in which the Jews sought to kill Jesus specifically because calling God his own Father was understood as making himself equal with God — that's remembered conflict, not gradual invention.\n\nI'll concede Mark is more reticent than John in style; the Gospels differ in emphasis. But reticent isn't absent, and the whole shape of the witness forces a verdict rather than a comfortable middle where Jesus is a teacher slowly mythologized into a god.",
+  "answer": "Both texts describe real facts, but not the fact the objection needs. John 14:28 speaks within the economy of the incarnation: the Son, having taken the form of a servant, is on mission from the Father, and a sent son can rightly call the sender \"greater\" in respect of that order without being of a lesser nature. The Father-Son relation itself involves an order of origin — the Son eternally begotten of the Father — without implying inequality of essence, just as a human son shares his father's full humanity despite originating from him. John 17:3 likewise distinguishes the Father and Son personally, but distinguishing persons is not excluding one from the divine identity; Jesus has just asked to be glorified with the glory he had with the Father before the world existed, hardly the request of a mere exalted creature.\n\nAnd this is exactly why we can't read these two verses in isolation from the Gospel that contains them: the same John who records \"the Father is greater than I\" opens by calling the Word God (John 1:1, and on the earliest manuscripts, \"only-begotten God\" in 1:18) and closes with Thomas worshiping the risen Jesus as \"my Lord and my God\" — a confession Jesus accepts and blesses rather than corrects. If John were charting a gradual elevation of a mere rabbi, this is a strange way to write a book: framing the whole narrative with the highest possible confessions of Christ's deity while including, in between, sayings that reflect his voluntary humbling as true man. The more coherent reading — the one the Fathers used against real subordinationists — is that statements like John 14:28 speak κατ᾽ οἰκονομίαν (according to the incarnate mission), while statements like John 1:1, John 1:18, and John 20:28 speak κατ᾽ οὐσίαν (according to his eternal nature). The pattern isn't evolution toward deity; it's one Gospel holding together, without contradiction, the true God who became true man and thereby could, as man, call his Father greater.",
   "citations": [
-    {
-      "raw": "Philippians 2:6–7",
-      "ok": true,
-      "reason": "verified",
-      "display": "Philippians 2:6–7",
-      "quoted": "low-to-high trajectory",
-      "warning": "quote near Philippians 2:6–7 is not verbatim KJV"
-    },
     {
       "raw": "John 14:28",
       "ok": true,
       "reason": "verified",
       "display": "John 14:28",
+      "quoted": null,
+      "warning": null
+    },
+    {
+      "raw": "John 17:3",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 17:3",
+      "quoted": null,
+      "warning": null
+    },
+    {
+      "raw": "John 1:1",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 1:1",
       "quoted": "the Father is greater than I",
-      "warning": "quote near John 14:28 is not verbatim KJV"
+      "warning": "quote near John 1:1 is not verbatim KJV"
+    },
+    {
+      "raw": "John 1:18",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 1:18",
+      "quoted": null,
+      "warning": null
     },
     {
       "raw": "John 20:28",
       "ok": true,
       "reason": "verified",
       "display": "John 20:28",
-      "quoted": "My Lord and my God",
+      "quoted": null,
       "warning": null
     }
   ],
   "citation_warnings": [
-    "quote near Philippians 2:6–7 is not verbatim KJV",
-    "quote near John 14:28 is not verbatim KJV"
+    "quote near John 1:1 is not verbatim KJV"
   ],
   "transcript": [
     {
       "role": "interlocutor",
-      "content": "Good point to press me. In John 14:28, Jesus does say \"the Father is greater than I,\" and in John 17:3 he calls the Father \"the only true God.\" But here's where I'd push back: those verses come from the *latest Gospel*, written 60–70 years after Easter by an author who never met Jesus, working in a Greek-speaking community far from Palestine. By then, high Christology was already established in Paul and the hymns you'll cite—so John may be *correcting* an over-realized deity claim, trying to preserve monotheism while still exalting Jesus. The real problem is that the earliest Jesus—Mark's Jesus—barely claims anything explicit about his own nature at all. He proclaims the Kingdom; he doesn't proclaim himself. The trajectory is legendary development: a Jewish teacher gradually *deified* as the decades passed and communities moved further from Aramaic-speaking Palestine into Greek cities where divine-men language came naturally. You're asking me to read John's late theological formulations back into the mind of a first-century rabbi—and that's exactly the move that worries historians."
+      "content": "You're right that *John 14:28* says exactly that: \"The Father is greater than I.\" And in John 17:3 Jesus prays, \"Now this is eternal life: that they know you, the only true God, and Jesus Christ, whom you have sent.\" If Jesus really believed he was fully God—coequal with the Father—why would he say the Father is *greater*, and why distinguish himself from \"the only true God\"? The most natural reading is that here we have a subordinationist view: Jesus is exalted, honored, sent by God, but not God himself in the same way. That's precisely what *you'd* expect if an early Jewish movement gradually elevated a rabbi over decades, rather than what *you'd* expect if the incarnate God himself taught it from the start."
     },
     {
       "role": "apologist",
-      "content": "You're right that dating and authorship matter, and I won't wave that away. But the \"low-to-high trajectory\" thesis runs against the evidence you've already granted: Philippians 2:6–7, widely regarded as an early hymn Paul is quoting rather than composing, already confesses Christ existing in the form of God and taking the form of a servant — that is the highest Christology, attested earlier than Mark's Gospel itself, not a late Hellenistic accretion drifting from Palestine. The direction of travel isn't obviously low-to-high.\n\nNor is John's Gospel plausibly a corrective pulling an \"over-realized\" deity claim back toward mere exaltation, since the same Gospel that records \"the Father is greater than I\" (John 14:28) opens by calling the Word God and ends with Thomas's confession, \"My Lord and my God\" (John 20:28). What John is doing is distinguishing statements made of Christ according to His incarnate economy from statements made according to His eternal being — the Son sent on mission can rightly call the Father \"greater\" without implying a lesser nature, just as He can call the Father \"my God\" according to His assumed humanity while remaining the eternal Word according to His divinity. And the equality-claim isn't floating free of narrative memory either: John 5 preserves a hostile, historically-textured controversy in which the Jews sought to kill Jesus specifically because calling God his own Father was understood as making himself equal with God — that's remembered conflict, not gradual invention.\n\nI'll concede Mark is more reticent than John in style; the Gospels differ in emphasis. But reticent isn't absent, and the whole shape of the witness forces a verdict rather than a comfortable middle where Jesus is a teacher slowly mythologized into a god."
+      "content": "Both texts describe real facts, but not the fact the objection needs. John 14:28 speaks within the economy of the incarnation: the Son, having taken the form of a servant, is on mission from the Father, and a sent son can rightly call the sender \"greater\" in respect of that order without being of a lesser nature. The Father-Son relation itself involves an order of origin — the Son eternally begotten of the Father — without implying inequality of essence, just as a human son shares his father's full humanity despite originating from him. John 17:3 likewise distinguishes the Father and Son personally, but distinguishing persons is not excluding one from the divine identity; Jesus has just asked to be glorified with the glory he had with the Father before the world existed, hardly the request of a mere exalted creature.\n\nAnd this is exactly why we can't read these two verses in isolation from the Gospel that contains them: the same John who records \"the Father is greater than I\" opens by calling the Word God (John 1:1, and on the earliest manuscripts, \"only-begotten God\" in 1:18) and closes with Thomas worshiping the risen Jesus as \"my Lord and my God\" — a confession Jesus accepts and blesses rather than corrects. If John were charting a gradual elevation of a mere rabbi, this is a strange way to write a book: framing the whole narrative with the highest possible confessions of Christ's deity while including, in between, sayings that reflect his voluntary humbling as true man. The more coherent reading — the one the Fathers used against real subordinationists — is that statements like John 14:28 speak κατ᾽ οἰκονομίαν (according to the incarnate mission), while statements like John 1:1, John 1:18, and John 20:28 speak κατ᾽ οὐσίαν (according to his eternal nature). The pattern isn't evolution toward deity; it's one Gospel holding together, without contradiction, the true God who became true man and thereby could, as man, call his Father greater."
     },
     {
       "role": "system",
-      "content": "[synth] 3 verified citation(s)"
+      "content": "[synth] 5 verified citation(s)"
     }
   ]
 }

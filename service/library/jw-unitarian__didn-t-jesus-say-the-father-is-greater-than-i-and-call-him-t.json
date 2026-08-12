@@ -1,38 +1,38 @@
 {
   "persona": "jw-unitarian",
   "objection": "Didn’t Jesus say, ‘The Father is greater than I’—and call him the only true God?",
-  "answer": "These texts are not embarrassments to the doctrine of Christ's deity—they're the very grammar of the Incarnation, and the historic Church has always read them together rather than picking one to override the others. \"The Father is greater than I\" (John 14:28) is spoken by the Son who took the form of a servant, Philippians 2:6-7; the Fathers distinguished statements made of Christ according to the economy of His incarnate mission from statements made according to His eternal essence. A son sent to accomplish a mission can rightly call the sender \"greater\" in respect of that mission's order without any inequality of nature—the Father-Son relation itself implies an order of origin, the Son eternally begotten, without implying inferiority of being, just as a human son shares his father's full humanity though he originates from him.\n\nOn John 17:3, the prayer distinguishes the Father and the Son personally; it does not exclude the Son from the divine identity. Notice: Jesus is praying to be glorified with the glory He had with the Father before the world existed—hardly the language of a mere creature. And this is the same Gospel that opens \"the Word was God\" and closes with Thomas confessing Him, \"My Lord and my God\" (John 20:28), a confession Jesus receives without correction.\n\nAs for John 20:17, the risen Christ speaks there as the incarnate Son and true man leading His brethren into His own filial relation with the Father—the Father is His God according to the humanity He assumed, while He remains, according to His divinity, the eternal Word. This doesn't erase His divine sonship; it reveals the grace by which His disciples now call God Father and God too. So the pattern you're pointing to is real, but it belongs to the mystery of the Incarnation—true God, true man, two natures, one person—not to a lesser divine nature or a created Son, which the whole shape of John's Gospel, from its prologue to its climactic confession, forbids us to conclude.",
+  "answer": "Both texts you cite are real, and I won't soften them — but read in their full Gospel context, they describe the incarnate order of Persons, not a difference of nature.\n\nJohn 14:28 comes from Jesus in the form of a servant, on His way to the cross, describing His mission from the Father who sent Him. The Fathers rightly distinguished statements Christ makes according to the economy of the incarnation from statements about His eternal essence. A son sent on a task can call the sender \"greater\" in respect of that mission's order without being of lesser nature — just as the Son's eternal relation to the Father as \"begotten\" implies an order of origin, not an inequality of being. That's why the same Gospel that records \"the Father is greater than I\" also opens by declaring the Word was God (John 1:1) and closes with Thomas confessing the risen Christ as \"my Lord and my God\" (John 20:28) — John is not contradicting himself.\n\nJohn 17:3 is spoken in that same incarnate voice, in a prayer where Jesus has just asked the Father to glorify Him with the glory He had with the Father before the world existed — hardly the language of a mere creature. The verse distinguishes the Father and Son as persons; it doesn't exclude the Son from the divine identity any more than \"my God and your God\" in John 20:17 erases His divine sonship. There Christ is our God according to His eternal Word even while the Father is His God according to the humanity He assumed for our sake.\n\nSo the \"one true God\" language honors exactly what Trinitarian faith confesses: one God, known through the Father who sends and the Son who is sent — the Son not competing with the Father's deity but sharing it, as the Jews themselves understood when they charged Him with making Himself equal with God for calling God His own Father (John 5:17-18).",
   "citations": [
     {
       "raw": "John 14:28",
       "ok": true,
       "reason": "verified",
       "display": "John 14:28",
-      "quoted": "The Father is greater than I",
-      "warning": "quote near John 14:28 is not verbatim KJV"
-    },
-    {
-      "raw": "Philippians 2:6-7",
-      "ok": true,
-      "reason": "verified",
-      "display": "Philippians 2:6-7",
-      "quoted": "The Father is greater than I",
-      "warning": "quote near Philippians 2:6-7 is not verbatim KJV"
-    },
-    {
-      "raw": "John 17:3",
-      "ok": true,
-      "reason": "verified",
-      "display": "John 17:3",
       "quoted": null,
       "warning": null
+    },
+    {
+      "raw": "John 1:1",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 1:1",
+      "quoted": "the Father is greater than I",
+      "warning": "quote near John 1:1 is not verbatim KJV"
     },
     {
       "raw": "John 20:28",
       "ok": true,
       "reason": "verified",
       "display": "John 20:28",
-      "quoted": "My Lord and my God",
+      "quoted": "my Lord and my God",
+      "warning": null
+    },
+    {
+      "raw": "John 17:3",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 17:3",
+      "quoted": "my Lord and my God",
       "warning": null
     },
     {
@@ -40,26 +40,33 @@
       "ok": true,
       "reason": "verified",
       "display": "John 20:17",
-      "quoted": "My Lord and my God",
+      "quoted": "my God and your God",
+      "warning": null
+    },
+    {
+      "raw": "John 5:17-18",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 5:17-18",
+      "quoted": null,
       "warning": null
     }
   ],
   "citation_warnings": [
-    "quote near John 14:28 is not verbatim KJV",
-    "quote near Philippians 2:6-7 is not verbatim KJV"
+    "quote near John 1:1 is not verbatim KJV"
   ],
   "transcript": [
     {
       "role": "interlocutor",
-      "content": "# Objection: The Father is Plainly Supreme\n\nLook—Jesus himself settles this in John 14:28. He tells his disciples, \"The Father is greater than I,\" and in John 17:3 he defines eternal life as knowing \"you, the only true God, and Jesus Christ whom you have sent.\" How do you harmonize that with calling Jesus God? He's not claiming to *be* the only true God; he's praying *to* him. And in John 20:17, after his resurrection, he says to Mary, \"I ascend to my Father and your Father, to my God and your God.\" His own God—that's the language of subordination, not equality. If Jesus is truly God in the fullest sense, why does he consistently speak of himself as dependent on, distinct from, and inferior to the Father?"
+      "content": "# The Witness Speaks\n\nLook at John 14:28 plainly: *\"The Father is greater than I.\"* Jesus says this himself—not a later theologian's inference, but his own words. And then in John 17:3, standing before his disciples at the end of his ministry, he defines eternal life as knowing \"you, the only true God, and Jesus Christ whom you have sent.\" If Jesus *is* God, how can he pray to the only true God and distinguish himself from that one God? The language is crystal clear: there is *one* God—the Father—and Jesus Christ is his Son. This isn't hostile to Jesus; it honors him as God's greatest creation and our Savior. But it respects what Scripture actually says about who the one true God is."
     },
     {
       "role": "apologist",
-      "content": "These texts are not embarrassments to the doctrine of Christ's deity—they're the very grammar of the Incarnation, and the historic Church has always read them together rather than picking one to override the others. \"The Father is greater than I\" (John 14:28) is spoken by the Son who took the form of a servant, Philippians 2:6-7; the Fathers distinguished statements made of Christ according to the economy of His incarnate mission from statements made according to His eternal essence. A son sent to accomplish a mission can rightly call the sender \"greater\" in respect of that mission's order without any inequality of nature—the Father-Son relation itself implies an order of origin, the Son eternally begotten, without implying inferiority of being, just as a human son shares his father's full humanity though he originates from him.\n\nOn John 17:3, the prayer distinguishes the Father and the Son personally; it does not exclude the Son from the divine identity. Notice: Jesus is praying to be glorified with the glory He had with the Father before the world existed—hardly the language of a mere creature. And this is the same Gospel that opens \"the Word was God\" and closes with Thomas confessing Him, \"My Lord and my God\" (John 20:28), a confession Jesus receives without correction.\n\nAs for John 20:17, the risen Christ speaks there as the incarnate Son and true man leading His brethren into His own filial relation with the Father—the Father is His God according to the humanity He assumed, while He remains, according to His divinity, the eternal Word. This doesn't erase His divine sonship; it reveals the grace by which His disciples now call God Father and God too. So the pattern you're pointing to is real, but it belongs to the mystery of the Incarnation—true God, true man, two natures, one person—not to a lesser divine nature or a created Son, which the whole shape of John's Gospel, from its prologue to its climactic confession, forbids us to conclude."
+      "content": "Both texts you cite are real, and I won't soften them — but read in their full Gospel context, they describe the incarnate order of Persons, not a difference of nature.\n\nJohn 14:28 comes from Jesus in the form of a servant, on His way to the cross, describing His mission from the Father who sent Him. The Fathers rightly distinguished statements Christ makes according to the economy of the incarnation from statements about His eternal essence. A son sent on a task can call the sender \"greater\" in respect of that mission's order without being of lesser nature — just as the Son's eternal relation to the Father as \"begotten\" implies an order of origin, not an inequality of being. That's why the same Gospel that records \"the Father is greater than I\" also opens by declaring the Word was God (John 1:1) and closes with Thomas confessing the risen Christ as \"my Lord and my God\" (John 20:28) — John is not contradicting himself.\n\nJohn 17:3 is spoken in that same incarnate voice, in a prayer where Jesus has just asked the Father to glorify Him with the glory He had with the Father before the world existed — hardly the language of a mere creature. The verse distinguishes the Father and Son as persons; it doesn't exclude the Son from the divine identity any more than \"my God and your God\" in John 20:17 erases His divine sonship. There Christ is our God according to His eternal Word even while the Father is His God according to the humanity He assumed for our sake.\n\nSo the \"one true God\" language honors exactly what Trinitarian faith confesses: one God, known through the Father who sends and the Son who is sent — the Son not competing with the Father's deity but sharing it, as the Jews themselves understood when they charged Him with making Himself equal with God for calling God His own Father (John 5:17-18)."
     },
     {
       "role": "system",
-      "content": "[synth] 5 verified citation(s)"
+      "content": "[synth] 6 verified citation(s)"
     }
   ]
 }
