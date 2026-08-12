@@ -1,38 +1,81 @@
 {
   "persona": "jw-unitarian",
   "objection": "Could the Bible have been changed to make Jesus divine?",
-  "answer": "The objection deserves a careful answer, because it raises a real question—textual transmission—and then answers it wrongly by inverting the evidence. Let's look at what the manuscripts actually show, not what the New World Translation asserts.\n\nFirst, on P52 (c. AD 125) and P66/P75 (c. 200), we already possess John's Gospel with \"the Word was God\" (1:1), \"only-begotten God\" (1:18), and Thomas' \"My Lord and my God\" (20:28) — more than a century before Nicaea, and within a generation or two of the apostles themselves. There is no manuscript tradition, however early, that lacks these readings and shows them being progressively inserted. The \"a god\" rendering isn't a manuscript variant at all; it's a translation choice by one denomination's committee, not something found in any Greek text. If scribes were smoothing the text toward higher Christology, we'd expect to find the raw, lower material in the earliest witnesses and the exalted material appearing later — but that's precisely backward from what P52 and the papyri show us.\n\nSecond, you're right that John 14:28 and 1 Corinthians 8:6 remain in the text, sitting alongside \"the Word was God\" — and this is not evidence against corruption but evidence against a simple binitarian-to-Trinitarian evolutionary model altogether, because both kinds of texts are early and both were preserved by the same believing communities without felt contradiction. That's the real historical datum: the earliest Christians held together Jesus' full humanity, his obedience to and sending by the Father, and his identity as God, without needing to erase one side to protect the other. Orthodoxy doesn't ask you to ignore \"the Father is greater than I\" — it explains it: as Son incarnate, Jesus speaks from within the personal order and the limits of his assumed humanity, not as a lesser divine nature.\n\nThird, the scholarly consensus you invoke against an \"evolutionary model\" actually supports the opposite of your conclusion. Hurtado and Bauckham showed that worship of Jesus — prayer, hymns, invocation of his name — erupted among Jewish monotheists within the earliest years, before any Gentile \"corruption\" could have occurred. The highest Christology is also the earliest Christology, and it is Jewish to its bones, not a later Greek overlay.\n\nFinally, on Mark's apparent restraint: this is an argument from silence, not from variants, and Mark still records Jesus forgiving sins as only God can (2:5-10), stilling the sea, and receiving the confession that he is the Christ, the Son of God (1:1). Silence in one Gospel's emphasis is not evidence of a text under construction; it's evidence of an author's chosen focus. The manuscript record itself gives no foothold for the corruption theory — it gives us, remarkably early, the very texts on which the case for Christ's deity rests.",
+  "answer": "The objection deserves a real answer rather than a dismissal, so let me take its two claims separately.\n\nFirst, the textual point. If \"God-language\" for Jesus were a second-century insertion, we'd expect it to show up late in the manuscript stream and be absent from the earliest copies. The opposite is true: P52 (c. AD 125) already carries John's Gospel, and P66/P75 (c. 200) already contain \"the Word was God\" (John 1:1), \"only-begotten God\" (John 1:18), and Thomas's \"My Lord and my God\" (John 20:28) — all more than a century before Nicaea, with no evidence of an earlier, lower-Christology version being edited upward. Where real textual variants exist, like 1 Timothy 3:16 or Acts 20:28, the deity of Christ survives on either reading; scribal uncertainty never runs the direction the objection needs.\n\nSecond, the chronology. It's true Paul doesn't write \"Jesus is theos\" as a bare equation — but Paul is not our earliest layer; he quotes material older than himself. Philippians 2:6-11 is widely judged a pre-Pauline hymn, already applying to Jesus the words YHWH speaks of himself in Isaiah 45:23, within a few years of the crucifixion, among Jewish believers who reserved that language jealously for God alone. That is not late Greco-Roman deification-mythology drifting into a Jewish movement; it's Jewish monotheists including Jesus in the identity of the one God from the very start — worshiping him, praying to him, invoking his name in baptism, essentially at the beginning. John's Gospel doesn't introduce a new belief; it writes down, in fuller theological language, a confession Paul's letters presuppose and quote as already ancient.\n\nSo the doctrine didn't shape the text over decades of editing — the text we possess, at its earliest recoverable layer, already assumes the doctrine. That's a real difficulty for any theory of gradual invention, and it's worth naming plainly: the \"late high Christology\" model is not what the manuscripts or the pre-Pauline hymns actually show.",
   "citations": [
     {
-      "raw": "John 14:28",
+      "raw": "John 1:1",
       "ok": true,
       "reason": "verified",
-      "display": "John 14:28",
+      "display": "John 1:1",
       "quoted": "the Word was God",
       "warning": null
     },
     {
-      "raw": "1 Corinthians 8:6",
+      "raw": "John 1:18",
       "ok": true,
       "reason": "verified",
-      "display": "1 Corinthians 8:6",
-      "quoted": "the Word was God",
+      "display": "John 1:18",
+      "quoted": "only-begotten God",
+      "warning": "quote near John 1:18 is not verbatim KJV"
+    },
+    {
+      "raw": "John 20:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 20:28",
+      "quoted": "My Lord and my God",
+      "warning": null
+    },
+    {
+      "raw": "1 Timothy 3:16",
+      "ok": true,
+      "reason": "verified",
+      "display": "1 Timothy 3:16",
+      "quoted": null,
+      "warning": null
+    },
+    {
+      "raw": "Acts 20:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "Acts 20:28",
+      "quoted": null,
+      "warning": null
+    },
+    {
+      "raw": "Philippians 2:6-11",
+      "ok": true,
+      "reason": "verified",
+      "display": "Philippians 2:6-11",
+      "quoted": "Jesus is theos",
+      "warning": "quote near Philippians 2:6-11 is not verbatim KJV"
+    },
+    {
+      "raw": "Isaiah 45:23",
+      "ok": true,
+      "reason": "verified",
+      "display": "Isaiah 45:23",
+      "quoted": null,
       "warning": null
     }
   ],
-  "citation_warnings": [],
+  "citation_warnings": [
+    "quote near John 1:18 is not verbatim KJV",
+    "quote near Philippians 2:6-11 is not verbatim KJV"
+  ],
   "transcript": [
     {
       "role": "interlocutor",
-      "content": "# Objection: Textual Corruption in Service of Trinitarian Doctrine\n\nLook—the earliest, most reliable manuscripts we possess are *already* Trinitarian. But I'd press you harder: How do we know the text *itself* wasn't shaped by later Trinitarian bias? The Watchtower's New World Translation renders John 1:1 as \"the Word was *a god*\"—and our scholars argue this fits the earliest Christology. But consider: if scribes in the 2nd and 3rd centuries were already copying texts to emphasize Jesus's divinity, how confident can *any* of us be about what the original apostles actually taught? The variants we do see—did they flow toward *higher* Christology, not lower? And what about the silences—texts like Mark, where Jesus seems most human, least explicitly divine? Wouldn't truly corrupted texts push *everything* toward \"Jesus is God\"? The fact that we still find passages like John 14:28 (\"the Father is greater than I\") and 1 Corinthians 8:6 (\"one God, the Father\") sitting uneasily *alongside* higher passages—doesn't that suggest the text was *not* systematically altered, but rather that the Trinity was read *into* genuinely ambiguous evidence?"
+      "content": "# Objection: The Divine Jesus Is a Later Addition to Scripture\n\nHere's my concern: the passages that most clearly say Jesus *is* God — like John 1:1 or Thomas calling him \"my God\" in John 20:28 — appear mainly in the latest Gospel, written perhaps 90–100 AD when Greco-Roman ideas of divine men were circulating. The earlier epistles of Paul never once say \"Jesus is God\"; he consistently reserves \"God\" (*theos*) for the Father alone, calling Jesus \"Lord\" (*kyrios*). How confident can we be that later scribes and editors didn't insert or rewrite passages to elevate Jesus after the church had already decided, in the second century, that he must be divine? Couldn't the doctrine have shaped the text, rather than the text establishing the doctrine?"
     },
     {
       "role": "apologist",
-      "content": "The objection deserves a careful answer, because it raises a real question—textual transmission—and then answers it wrongly by inverting the evidence. Let's look at what the manuscripts actually show, not what the New World Translation asserts.\n\nFirst, on P52 (c. AD 125) and P66/P75 (c. 200), we already possess John's Gospel with \"the Word was God\" (1:1), \"only-begotten God\" (1:18), and Thomas' \"My Lord and my God\" (20:28) — more than a century before Nicaea, and within a generation or two of the apostles themselves. There is no manuscript tradition, however early, that lacks these readings and shows them being progressively inserted. The \"a god\" rendering isn't a manuscript variant at all; it's a translation choice by one denomination's committee, not something found in any Greek text. If scribes were smoothing the text toward higher Christology, we'd expect to find the raw, lower material in the earliest witnesses and the exalted material appearing later — but that's precisely backward from what P52 and the papyri show us.\n\nSecond, you're right that John 14:28 and 1 Corinthians 8:6 remain in the text, sitting alongside \"the Word was God\" — and this is not evidence against corruption but evidence against a simple binitarian-to-Trinitarian evolutionary model altogether, because both kinds of texts are early and both were preserved by the same believing communities without felt contradiction. That's the real historical datum: the earliest Christians held together Jesus' full humanity, his obedience to and sending by the Father, and his identity as God, without needing to erase one side to protect the other. Orthodoxy doesn't ask you to ignore \"the Father is greater than I\" — it explains it: as Son incarnate, Jesus speaks from within the personal order and the limits of his assumed humanity, not as a lesser divine nature.\n\nThird, the scholarly consensus you invoke against an \"evolutionary model\" actually supports the opposite of your conclusion. Hurtado and Bauckham showed that worship of Jesus — prayer, hymns, invocation of his name — erupted among Jewish monotheists within the earliest years, before any Gentile \"corruption\" could have occurred. The highest Christology is also the earliest Christology, and it is Jewish to its bones, not a later Greek overlay.\n\nFinally, on Mark's apparent restraint: this is an argument from silence, not from variants, and Mark still records Jesus forgiving sins as only God can (2:5-10), stilling the sea, and receiving the confession that he is the Christ, the Son of God (1:1). Silence in one Gospel's emphasis is not evidence of a text under construction; it's evidence of an author's chosen focus. The manuscript record itself gives no foothold for the corruption theory — it gives us, remarkably early, the very texts on which the case for Christ's deity rests."
+      "content": "The objection deserves a real answer rather than a dismissal, so let me take its two claims separately.\n\nFirst, the textual point. If \"God-language\" for Jesus were a second-century insertion, we'd expect it to show up late in the manuscript stream and be absent from the earliest copies. The opposite is true: P52 (c. AD 125) already carries John's Gospel, and P66/P75 (c. 200) already contain \"the Word was God\" (John 1:1), \"only-begotten God\" (John 1:18), and Thomas's \"My Lord and my God\" (John 20:28) — all more than a century before Nicaea, with no evidence of an earlier, lower-Christology version being edited upward. Where real textual variants exist, like 1 Timothy 3:16 or Acts 20:28, the deity of Christ survives on either reading; scribal uncertainty never runs the direction the objection needs.\n\nSecond, the chronology. It's true Paul doesn't write \"Jesus is theos\" as a bare equation — but Paul is not our earliest layer; he quotes material older than himself. Philippians 2:6-11 is widely judged a pre-Pauline hymn, already applying to Jesus the words YHWH speaks of himself in Isaiah 45:23, within a few years of the crucifixion, among Jewish believers who reserved that language jealously for God alone. That is not late Greco-Roman deification-mythology drifting into a Jewish movement; it's Jewish monotheists including Jesus in the identity of the one God from the very start — worshiping him, praying to him, invoking his name in baptism, essentially at the beginning. John's Gospel doesn't introduce a new belief; it writes down, in fuller theological language, a confession Paul's letters presuppose and quote as already ancient.\n\nSo the doctrine didn't shape the text over decades of editing — the text we possess, at its earliest recoverable layer, already assumes the doctrine. That's a real difficulty for any theory of gradual invention, and it's worth naming plainly: the \"late high Christology\" model is not what the manuscripts or the pre-Pauline hymns actually show."
     },
     {
       "role": "system",
-      "content": "[synth] 2 verified citation(s)"
+      "content": "[synth] 7 verified citation(s)"
     }
   ]
 }

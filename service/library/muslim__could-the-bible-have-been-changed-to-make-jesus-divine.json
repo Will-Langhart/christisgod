@@ -1,7 +1,7 @@
 {
   "persona": "muslim",
   "objection": "Could the Bible have been changed to make Jesus divine?",
-  "answer": "Thank you for putting the objection so honestly — this deserves a careful answer, not a dismissal.\n\nFirst, the manuscript evidence runs directly against the \"scribal corruption\" theory. P52, a fragment of John, dates to about AD 125 — within living memory of the apostles — and P66 and P75 (c. 200) already contain \"the Word was God\" (John 1:1), \"only begotten God\" (John 1:18), and Thomas's confession \"My Lord and my God\" (John 20:28), all more than a century before Nicaea. With over 5,800 Greek manuscripts, we can trace the text back further than any other ancient document; there is no textual seam where a \"plain prophet\" Jesus gets rewritten into a divine one. The high Christology is simply already there, at the earliest layer we can recover.\n\nSecond, this belief did not begin with Constantine's bishops. Larry Hurtado and Richard Bauckham have shown that worship of Jesus — prayer to him, hymns about him, baptism in his name — appears among Jewish believers within the first years after the resurrection, using the very categories (Creator, bearer of the Name, recipient of worship) by which Judaism distinguished God from all else. This is not a Greek corruption of a simple Jewish teacher; it is thoroughly Jewish devotion, and it predates Paul's letters. Nicaea, in 325, did not vote divinity into existence — Tertullian was already using the word trinitas by AD 200, and Origen was writing extended commentary assuming Christ's full deity decades before Constantine was born. Nicaea's actual question was narrower: not \"is the Son God?\" but \"is the Son of the same essence as the Father, against Arius's claim that he was the highest creature?\" The council defended an ancient confession; it did not manufacture one.\n\nAs for the tension you rightly raise — Jesus's prayers, his stated ignorance of the hour, \"the Father is greater than I\" — I don't dismiss these; they are real and must be honored, not explained away. But they describe the incarnation, not a lesser nature. The Son who is eternally God took to himself a genuine human nature, in which he prays, grows weary, and defers to the Father as Son to Father — while remaining, in that same Gospel, the one who says \"I am\" and receives Thomas's worship as \"my Lord and my God\" without correction. The earliest text holds both together; the challenge is not to erase one side, but to see why the first Jewish believers — no strangers to the peril of idolatry — concluded that both were true of the same person.",
+  "answer": "Wa alaykum as-salam, and thank you for pressing this honestly — it deserves a careful answer, not a slogan.\n\nFirst, the \"Nicaea invented it\" picture doesn't survive contact with the evidence. Nicaea (325) did not create the confession of Jesus as Lord and God; it defended a confession already old. Scholars like Bauckham and Hurtado have shown that worship of Jesus — prayer to him, hymns about him, invocation of his name — erupted among Jewish believers within the first years of the movement, using precisely the categories (Creator, bearer of the divine Name, recipient of worship) by which Judaism distinguished God from everything else. That is not a gradual pagan corruption of a \"simple prophet\"; it is the earliest layer.\n\nSecond, on John specifically: the \"insertion by later hands\" theory requires manuscript evidence, and the manuscripts say otherwise. P52 (John fragment) dates to about AD 125 — within a generation of composition. P66 and P75 (c. 200) already contain \"the Word was God\" (John 1:1), \"only-begotten God\" (John 1:18), and Thomas' \"My Lord and my God\" (John 20:28) — a full century before Constantine was even born. If bishops in the 300s had wanted to insert this language, they would have needed to alter manuscripts already scattered across Egypt and beyond a hundred years earlier — an impossibility, and one for which not a shred of textual evidence exists.\n\nThird, I should be fair: a handful of \"God\" texts do carry real textual variants — 1 Timothy 3:16 and Acts 20:28 among them — and honesty requires naming them rather than hiding them. But even there, the alternate readings still leave the deity of the one described intact; and John 1:18, far from being weakened by the earliest manuscripts, is strengthened by them.\n\nFinally, this isn't resting on John alone — Romans 9:5, Thomas' confession, and other strands throughout the New Testament converge from independent early sources, forming what the early Fathers called a rope of many strands. You may still dispute the theological conclusion, and that's a real conversation worth having. But the claim that it was a late scribal invention is a historical claim, and the manuscripts themselves — not later councils — are the evidence that settles it.",
   "citations": [
     {
       "raw": "John 1:1",
@@ -16,7 +16,7 @@
       "ok": true,
       "reason": "verified",
       "display": "John 1:18",
-      "quoted": "only begotten God",
+      "quoted": "only-begotten God",
       "warning": "quote near John 1:18 is not verbatim KJV"
     },
     {
@@ -26,6 +26,30 @@
       "display": "John 20:28",
       "quoted": "My Lord and my God",
       "warning": null
+    },
+    {
+      "raw": "1 Timothy 3:16",
+      "ok": true,
+      "reason": "verified",
+      "display": "1 Timothy 3:16",
+      "quoted": null,
+      "warning": null
+    },
+    {
+      "raw": "Acts 20:28",
+      "ok": true,
+      "reason": "verified",
+      "display": "Acts 20:28",
+      "quoted": null,
+      "warning": null
+    },
+    {
+      "raw": "Romans 9:5",
+      "ok": true,
+      "reason": "verified",
+      "display": "Romans 9:5",
+      "quoted": null,
+      "warning": null
     }
   ],
   "citation_warnings": [
@@ -34,15 +58,15 @@
   "transcript": [
     {
       "role": "interlocutor",
-      "content": "# Muslim Interlocutor\n\nYou must understand—we do not say this out of disrespect for your scripture, but out of concern for the truth. The earliest followers of Jesus knew him as a righteous prophet and Messiah; yet by the Council of Nicaea, three centuries later, the Church decided he was divine—a decision made by bishops under Constantine's political influence, not by Jesus's own teaching. If we examine the Gospels honestly, we find they were copied and recopied across centuries and different languages. Is it not plausible—even likely—that scribes, working under the theological conviction that Jesus *must* be God, subtly altered the text to support what the Church had already decided? The verse \"the Word was God\" in John, the titles \"Son of God,\" the \"I am\" sayings—these stand in tension with Jesus's own prayers, his ignorance of the hour, his clear statements that the Father is greater than he. How do you account for these layers of change without acknowledging that later Christians reshaped the record to fit a doctrine Jesus himself never plainly proclaimed?"
+      "content": "# Muslim Interlocutor\n\nAs-salamu alaykum. This is the question that troubles many of us most deeply. You know that the Qur'an itself testifies — \"Some of the People of the Book say, 'Believe in what has been revealed to those who believe in the morning and reject it at the end, that they may return'\" (4:137) — meaning the text was altered for their own desires. Over three centuries, from the Council of Nicaea onward, powerful bishops and emperors shaped what Christians would believe; Constantine himself pressured the councils. How can you be certain that the divine claims about Jesus — which appear mostly in John's Gospel, written last, decades after the events — were not inserted by later scribes and theologians who wanted to elevate him beyond what he truly was? If the earliest disciples knew him only as a righteous prophet and Messiah, is it not more likely that *later hands* added the \"Word made flesh\" language to transform him into God?"
     },
     {
       "role": "apologist",
-      "content": "Thank you for putting the objection so honestly — this deserves a careful answer, not a dismissal.\n\nFirst, the manuscript evidence runs directly against the \"scribal corruption\" theory. P52, a fragment of John, dates to about AD 125 — within living memory of the apostles — and P66 and P75 (c. 200) already contain \"the Word was God\" (John 1:1), \"only begotten God\" (John 1:18), and Thomas's confession \"My Lord and my God\" (John 20:28), all more than a century before Nicaea. With over 5,800 Greek manuscripts, we can trace the text back further than any other ancient document; there is no textual seam where a \"plain prophet\" Jesus gets rewritten into a divine one. The high Christology is simply already there, at the earliest layer we can recover.\n\nSecond, this belief did not begin with Constantine's bishops. Larry Hurtado and Richard Bauckham have shown that worship of Jesus — prayer to him, hymns about him, baptism in his name — appears among Jewish believers within the first years after the resurrection, using the very categories (Creator, bearer of the Name, recipient of worship) by which Judaism distinguished God from all else. This is not a Greek corruption of a simple Jewish teacher; it is thoroughly Jewish devotion, and it predates Paul's letters. Nicaea, in 325, did not vote divinity into existence — Tertullian was already using the word trinitas by AD 200, and Origen was writing extended commentary assuming Christ's full deity decades before Constantine was born. Nicaea's actual question was narrower: not \"is the Son God?\" but \"is the Son of the same essence as the Father, against Arius's claim that he was the highest creature?\" The council defended an ancient confession; it did not manufacture one.\n\nAs for the tension you rightly raise — Jesus's prayers, his stated ignorance of the hour, \"the Father is greater than I\" — I don't dismiss these; they are real and must be honored, not explained away. But they describe the incarnation, not a lesser nature. The Son who is eternally God took to himself a genuine human nature, in which he prays, grows weary, and defers to the Father as Son to Father — while remaining, in that same Gospel, the one who says \"I am\" and receives Thomas's worship as \"my Lord and my God\" without correction. The earliest text holds both together; the challenge is not to erase one side, but to see why the first Jewish believers — no strangers to the peril of idolatry — concluded that both were true of the same person."
+      "content": "Wa alaykum as-salam, and thank you for pressing this honestly — it deserves a careful answer, not a slogan.\n\nFirst, the \"Nicaea invented it\" picture doesn't survive contact with the evidence. Nicaea (325) did not create the confession of Jesus as Lord and God; it defended a confession already old. Scholars like Bauckham and Hurtado have shown that worship of Jesus — prayer to him, hymns about him, invocation of his name — erupted among Jewish believers within the first years of the movement, using precisely the categories (Creator, bearer of the divine Name, recipient of worship) by which Judaism distinguished God from everything else. That is not a gradual pagan corruption of a \"simple prophet\"; it is the earliest layer.\n\nSecond, on John specifically: the \"insertion by later hands\" theory requires manuscript evidence, and the manuscripts say otherwise. P52 (John fragment) dates to about AD 125 — within a generation of composition. P66 and P75 (c. 200) already contain \"the Word was God\" (John 1:1), \"only-begotten God\" (John 1:18), and Thomas' \"My Lord and my God\" (John 20:28) — a full century before Constantine was even born. If bishops in the 300s had wanted to insert this language, they would have needed to alter manuscripts already scattered across Egypt and beyond a hundred years earlier — an impossibility, and one for which not a shred of textual evidence exists.\n\nThird, I should be fair: a handful of \"God\" texts do carry real textual variants — 1 Timothy 3:16 and Acts 20:28 among them — and honesty requires naming them rather than hiding them. But even there, the alternate readings still leave the deity of the one described intact; and John 1:18, far from being weakened by the earliest manuscripts, is strengthened by them.\n\nFinally, this isn't resting on John alone — Romans 9:5, Thomas' confession, and other strands throughout the New Testament converge from independent early sources, forming what the early Fathers called a rope of many strands. You may still dispute the theological conclusion, and that's a real conversation worth having. But the claim that it was a late scribal invention is a historical claim, and the manuscripts themselves — not later councils — are the evidence that settles it."
     },
     {
       "role": "system",
-      "content": "[synth] 3 verified citation(s)"
+      "content": "[synth] 6 verified citation(s)"
     }
   ]
 }

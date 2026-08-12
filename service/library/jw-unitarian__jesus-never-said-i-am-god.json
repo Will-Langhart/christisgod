@@ -1,14 +1,22 @@
 {
   "persona": "jw-unitarian",
   "objection": "Jesus never said, ‘I am God.’",
-  "answer": "You're right that \"I am God\" never appears verbatim on Jesus's lips, and I won't pretend otherwise — that's a real feature of the text, not a weakness to explain away. But the pattern of distinction you're pointing to is exactly what Trinitarian theology expects, not what it needs to explain away. Jesus is a distinct person from the Father — that's precisely why he prays to him, calls him \"Father,\" and in John 17:3 speaks of him in the third person while addressing him. Distinction of persons is not division of essence. Notice, in that same John 17:3 context, Jesus has just asked the Father to glorify him with the glory he had with the Father before the world existed — hardly the language of a mere creature. And the very Gospel containing that prayer opens by declaring the Word was God and closes with Thomas's unrebuked confession, \"My Lord and my God\" (John 20:28).\n\nAs for John 10:33 — the Jews weren't confused; they accused him of blasphemy for making himself God, and Jesus's reply appeals to Scripture to defend, not deny, the claim to a unique unity with the Father that provoked the charge in the first place. If Jesus were merely a distinct, lesser being, accepting worship — as he does from Thomas without correction — would itself be idolatry, forbidden absolutely by the Shema he was raised on: \"Hear, O Israel: The LORD our God is one LORD\" (Deuteronomy 6:4). The consistent New Testament pattern is not Jesus saying \"I am the Father\" — that would be modalism, not Trinitarian faith — but Jesus receiving what belongs to YHWH alone: the divine Name, divine titles, and divine worship, all while remaining, in his own person, the one who prays, obeys, and is sent. That is not a contradiction to square; it is the very shape of the Incarnation.",
+  "answer": "The objection assumes that unless Jesus utters the exact sentence \"I am God,\" no claim to deity has been made. But that standard would rule out most ancient claims to identity, which were made through names, actions, and categories rather than propositional slogans — and Scripture itself shows Jesus making the claim in exactly that idiom. When He says \"before Abraham was, I AM\" (John 8:58), He deliberately takes up the divine Name of Exodus 3:14 in a way His hearers understood immediately — they reached for stones, not clarification. That is not silence; it is the most dangerous kind of speech a first-century Jew could utter.\n\nAs for the \"burden of proof\" — it doesn't rest on inference from silence, but on positive testimony that Jesus received. Thomas says to the risen Christ, \"My Lord and my God\" (John 20:28), and Jesus does not correct him but blesses those who will believe the same. John closes his epistle calling Jesus \"the true God\" (1 John 5:20), the very title Jeremiah 10:10 reserves for YHWH against idols. Philippians 2:10 applies to Jesus what Isaiah 45:23 says only the LORD receives — universal worship. These are not honorific flourishes loosely draped on a man; they are Old Testament identifiers of God deliberately laid on Jesus.\n\nNow, the texts you cite are real and must be honored, not explained away: Jesus does call the Father \"my God\" and say \"the Father is greater than I.\" But this is not in tension with the above once you see the pattern the material lays out — Scripture consistently shows the Son in personal relation to the Father (praying, submitting, being sent) while also bearing the divine Name and receiving worship. The natural reading is not \"mere man exalted\" but \"true God who has also become true man,\" now speaking and praying as man to His Father while never disowning the confession \"my Lord and my God.\" The claim isn't absent from the words of Jesus; it's just spoken in the mode of divine self-disclosure — the Name, not a slogan — which is exactly the mode Israel's own Scriptures used to identify God to begin with.",
   "citations": [
     {
-      "raw": "John 17:3",
+      "raw": "John 8:58",
       "ok": true,
       "reason": "verified",
-      "display": "John 17:3",
-      "quoted": "Father,",
+      "display": "John 8:58",
+      "quoted": "before Abraham was, I AM",
+      "warning": null
+    },
+    {
+      "raw": "Exodus 3:14",
+      "ok": true,
+      "reason": "verified",
+      "display": "Exodus 3:14",
+      "quoted": "before Abraham was, I AM",
       "warning": null
     },
     {
@@ -20,19 +28,35 @@
       "warning": null
     },
     {
-      "raw": "John 10:33",
+      "raw": "1 John 5:20",
       "ok": true,
       "reason": "verified",
-      "display": "John 10:33",
-      "quoted": "My Lord and my God",
+      "display": "1 John 5:20",
+      "quoted": "the true God",
       "warning": null
     },
     {
-      "raw": "Deuteronomy 6:4",
+      "raw": "Jeremiah 10:10",
       "ok": true,
       "reason": "verified",
-      "display": "Deuteronomy 6:4",
-      "quoted": "Hear, O Israel: The LORD our God is one LORD",
+      "display": "Jeremiah 10:10",
+      "quoted": "the true God",
+      "warning": null
+    },
+    {
+      "raw": "Philippians 2:10",
+      "ok": true,
+      "reason": "verified",
+      "display": "Philippians 2:10",
+      "quoted": "the true God",
+      "warning": null
+    },
+    {
+      "raw": "Isaiah 45:23",
+      "ok": true,
+      "reason": "verified",
+      "display": "Isaiah 45:23",
+      "quoted": "the true God",
       "warning": null
     }
   ],
@@ -40,15 +64,15 @@
   "transcript": [
     {
       "role": "interlocutor",
-      "content": "You're right to notice that—and it matters. Jesus said many things about his authority, his unity with the Father, his pre-existence—but the direct statement \"I am God\" never appears on his lips in any Gospel. In fact, when the Jews accused him of *claiming* to be God (John 10:33), his response was to appeal to Scripture and call himself \"Son of God\"—a distinct title. If Jesus truly believed he *was* God the Father, wouldn't that be the clearest, most direct thing for him to say? Instead, he consistently directs worship and prayer *toward* the Father, teaches us to pray \"Our Father,\" and says in John 17:3 that eternal life means knowing \"you, the only true God, and Jesus Christ, whom you have sent.\" How do you square the Trinity with that pattern of deliberate distinction?"
+      "content": "You're right to notice that — and it's the heart of the matter, isn't it? Jesus never *once* uses the phrase \"I am God\" or claims to be God in so many words. Instead, he consistently directs worship and prayer *to* the Father, calls the Father \"my God\" (John 20:17), and says plainly \"the Father is greater than I\" (John 14:28). If Jesus truly were God — God the Son, equal in every way — wouldn't he have said so explicitly, especially when directly challenged about his identity? The burden seems to fall on those who claim the Trinity: you're asking us to build a complex doctrine on texts that *never actually state it*. How do you justify that leap from what Scripture says to what it doesn't?"
     },
     {
       "role": "apologist",
-      "content": "You're right that \"I am God\" never appears verbatim on Jesus's lips, and I won't pretend otherwise — that's a real feature of the text, not a weakness to explain away. But the pattern of distinction you're pointing to is exactly what Trinitarian theology expects, not what it needs to explain away. Jesus is a distinct person from the Father — that's precisely why he prays to him, calls him \"Father,\" and in John 17:3 speaks of him in the third person while addressing him. Distinction of persons is not division of essence. Notice, in that same John 17:3 context, Jesus has just asked the Father to glorify him with the glory he had with the Father before the world existed — hardly the language of a mere creature. And the very Gospel containing that prayer opens by declaring the Word was God and closes with Thomas's unrebuked confession, \"My Lord and my God\" (John 20:28).\n\nAs for John 10:33 — the Jews weren't confused; they accused him of blasphemy for making himself God, and Jesus's reply appeals to Scripture to defend, not deny, the claim to a unique unity with the Father that provoked the charge in the first place. If Jesus were merely a distinct, lesser being, accepting worship — as he does from Thomas without correction — would itself be idolatry, forbidden absolutely by the Shema he was raised on: \"Hear, O Israel: The LORD our God is one LORD\" (Deuteronomy 6:4). The consistent New Testament pattern is not Jesus saying \"I am the Father\" — that would be modalism, not Trinitarian faith — but Jesus receiving what belongs to YHWH alone: the divine Name, divine titles, and divine worship, all while remaining, in his own person, the one who prays, obeys, and is sent. That is not a contradiction to square; it is the very shape of the Incarnation."
+      "content": "The objection assumes that unless Jesus utters the exact sentence \"I am God,\" no claim to deity has been made. But that standard would rule out most ancient claims to identity, which were made through names, actions, and categories rather than propositional slogans — and Scripture itself shows Jesus making the claim in exactly that idiom. When He says \"before Abraham was, I AM\" (John 8:58), He deliberately takes up the divine Name of Exodus 3:14 in a way His hearers understood immediately — they reached for stones, not clarification. That is not silence; it is the most dangerous kind of speech a first-century Jew could utter.\n\nAs for the \"burden of proof\" — it doesn't rest on inference from silence, but on positive testimony that Jesus received. Thomas says to the risen Christ, \"My Lord and my God\" (John 20:28), and Jesus does not correct him but blesses those who will believe the same. John closes his epistle calling Jesus \"the true God\" (1 John 5:20), the very title Jeremiah 10:10 reserves for YHWH against idols. Philippians 2:10 applies to Jesus what Isaiah 45:23 says only the LORD receives — universal worship. These are not honorific flourishes loosely draped on a man; they are Old Testament identifiers of God deliberately laid on Jesus.\n\nNow, the texts you cite are real and must be honored, not explained away: Jesus does call the Father \"my God\" and say \"the Father is greater than I.\" But this is not in tension with the above once you see the pattern the material lays out — Scripture consistently shows the Son in personal relation to the Father (praying, submitting, being sent) while also bearing the divine Name and receiving worship. The natural reading is not \"mere man exalted\" but \"true God who has also become true man,\" now speaking and praying as man to His Father while never disowning the confession \"my Lord and my God.\" The claim isn't absent from the words of Jesus; it's just spoken in the mode of divine self-disclosure — the Name, not a slogan — which is exactly the mode Israel's own Scriptures used to identify God to begin with."
     },
     {
       "role": "system",
-      "content": "[synth] 4 verified citation(s)"
+      "content": "[synth] 7 verified citation(s)"
     }
   ]
 }

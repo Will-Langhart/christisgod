@@ -78,6 +78,16 @@ INTERLOCUTOR_TEMPERATURE = _opt_temp("INTERLOCUTOR_TEMPERATURE")
 # Max apologist re-drafts before GracefulDegrade fires (AI-SPEC.md §4).
 MAX_RETRIES = int(os.getenv("DEBATE_MAX_RETRIES", "3"))
 RETRIEVER_TOP_K = int(os.getenv("RETRIEVER_TOP_K", "6"))
+# Over-retrieval + MMR rerank (retrieval-quality upgrade). Fetch this many
+# candidates by embedding similarity, then MMR narrows to RETRIEVER_TOP_K,
+# trading pure relevance for non-redundancy at lambda (1.0 = relevance only).
+RETRIEVER_FETCH_K = int(os.getenv("RETRIEVER_FETCH_K", "20"))
+RETRIEVER_MMR_LAMBDA = float(os.getenv("RETRIEVER_MMR_LAMBDA", "0.6"))
+# HyDE query expansion (retriever node): draft a short hypothetical *orthodox
+# answer* with the cheap model and retrieve on it, so adversarially-phrased
+# objections land near the book's affirmative prose. Degrades to the raw query
+# on any failure. Disable with RETRIEVER_HYDE=0.
+RETRIEVER_HYDE = os.getenv("RETRIEVER_HYDE", "1") != "0"
 
 # Conversational layer (Phase 3 §9.4). How many recent turns the apologist sees
 # verbatim; older turns are dropped with a note (deterministic windowing).

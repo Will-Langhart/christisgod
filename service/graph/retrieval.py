@@ -13,24 +13,60 @@ Rebuild the index after editing chapter content:
 
 from __future__ import annotations
 
+import math
 import re
 
-from .config import CHROMA_COLLECTION, CHROMA_DIR, CONTENT_DIR, RETRIEVER_TOP_K
+from .config import (
+    CHROMA_COLLECTION,
+    CHROMA_DIR,
+    CONTENT_DIR,
+    RETRIEVER_FETCH_K,
+    RETRIEVER_MMR_LAMBDA,
+    RETRIEVER_TOP_K,
+)
 
 # --- chunking (shared by both paths) --------------------------------------
 
-_SKIP_PREFIXES = ("import", "export", "<", "#", "{")
+# Non-prose lines we never want as a chunk. Headings ("#") are handled
+# separately below — tracked as section context, not skipped blindly.
+_SKIP_PREFIXES = ("import", "export", "<", "{")
+_ROMAN_RE = re.compile(r"^[ivxlcdm]+$")
+
+
+def _chapter_title(stem: str) -> str:
+    """Human title from a filename stem, e.g. ``03-iv-jesus-is-god`` → "Jesus Is
+    God". Drops the leading order number and roman-numeral tokens."""
+    parts = stem.split("-")
+    while parts and (parts[0].isdigit() or _ROMAN_RE.match(parts[0])):
+        parts.pop(0)
+    return " ".join(w.capitalize() for w in parts) or stem
 
 
 def chunks() -> list[tuple[str, str, str]]:
-    """Return (chunk_id, text, chapter_stem) for every prose paragraph."""
+    """Return (chunk_id, text, chapter_stem) for every prose paragraph.
+
+    Each chunk's text is prefixed with a plain-language context line — the
+    chapter title and the nearest ``##`` section heading — so both the embedding
+    and the keyword scorer see where the paragraph sits in the argument, and so
+    the Apologist reading the passage knows its section. The prefix deliberately
+    avoids a leading ``#`` so the paragraph still reads as prose.
+    """
     out: list[tuple[str, str, str]] = []
     for path in sorted(CONTENT_DIR.glob("*.mdx")):
         stem = path.stem
+        title = _chapter_title(stem)
+        section: str | None = None
         for i, para in enumerate(path.read_text("utf-8").split("\n\n")):
             para = para.strip()
-            if len(para) > 120 and not para.startswith(_SKIP_PREFIXES):
-                out.append((f"{stem}#{i}", para, stem))
+            if not para:
+                continue
+            if para.startswith("#"):  # a heading — remember it, don't emit it
+                section = para.lstrip("#").strip()
+                continue
+            if para.startswith(_SKIP_PREFIXES) or len(para) <= 120:
+                continue
+            ctx = f"{title} — {section}" if section else title
+            out.append((f"{stem}#{i}", f"Chapter: {ctx}\n{para}", stem))
     return out
 
 
@@ -90,21 +126,85 @@ def _get_collection(force: bool = False):
     return col
 
 
-def search(query: str, k: int = RETRIEVER_TOP_K) -> list[str]:
-    """Top-k chapter passages for a query, as ``"[chapter] text"`` strings.
+# --- MMR rerank (deterministic, no extra model call) -----------------------
 
-    Uses Chroma if available; otherwise the keyword fallback. Never raises on a
-    missing embedding stack — it degrades.
+def _cosine(a: list[float], b: list[float]) -> float:
+    dot = sum(x * y for x, y in zip(a, b))
+    na = math.sqrt(sum(x * x for x in a))
+    nb = math.sqrt(sum(y * y for y in b))
+    return dot / (na * nb) if na and nb else 0.0
+
+
+def _mmr(distances: list[float], vectors: list[list[float]], k: int,
+         lambda_: float = RETRIEVER_MMR_LAMBDA) -> list[int]:
+    """Maximal Marginal Relevance selection over an over-retrieved candidate set.
+
+    Balances relevance (from Chroma's distances — smaller is closer, so we invert
+    and min-max normalise to [0,1]) against redundancy (max cosine similarity to
+    an already-picked passage). Returns the chosen indices, in pick order. Pure
+    Python, deterministic, no embedding-model call. Degrades to plain top-k if the
+    candidate vectors are unusable.
+    """
+    n = len(vectors)
+    k = min(k, n)
+    if k <= 0:
+        return []
+    lo, hi = min(distances), max(distances)
+    span = (hi - lo) or 1.0
+    relevance = [(hi - d) / span for d in distances]  # 1.0 = nearest, 0.0 = farthest
+
+    selected: list[int] = []
+    candidates = list(range(n))
+    while candidates and len(selected) < k:
+        best_i, best_score = candidates[0], None
+        for i in candidates:
+            redundancy = max(
+                ((_cosine(vectors[i], vectors[j]) + 1.0) / 2.0 for j in selected),
+                default=0.0,
+            )
+            score = lambda_ * relevance[i] - (1.0 - lambda_) * redundancy
+            if best_score is None or score > best_score:
+                best_score, best_i = score, i
+        selected.append(best_i)
+        candidates.remove(best_i)
+    return selected
+
+
+def search(query: str, k: int = RETRIEVER_TOP_K, fetch_k: int | None = None) -> list[str]:
+    """Top-k chapter passages for a query, as ``"[source: chapter] text"`` strings.
+
+    Over-retrieves ``fetch_k`` candidates by embedding similarity, then reranks to
+    ``k`` with MMR so the passages are relevant *and* non-redundant. Uses Chroma if
+    available; otherwise the keyword fallback. Never raises on a missing embedding
+    stack — it degrades, and if MMR cannot run it falls back to plain top-k order.
     """
     try:
         col = _get_collection()
     except ImportError:
         return _keyword_search(query, k)
 
-    res = col.query(query_texts=[query], n_results=k)
+    fetch_k = fetch_k or max(RETRIEVER_FETCH_K, k)
+    res = col.query(
+        query_texts=[query],
+        n_results=fetch_k,
+        include=["documents", "metadatas", "embeddings", "distances"],
+    )
     docs = res.get("documents", [[]])[0]
     metas = res.get("metadatas", [[]])[0]
-    return [f"[source: {(m or {}).get('chapter', '?')}]\n{d}" for d, m in zip(docs, metas)]
+    dists = res.get("distances", [[]])[0]
+    embs = res.get("embeddings", [[]])[0]
+
+    order = list(range(len(docs)))
+    if embs is not None and len(embs) == len(docs) and dists:
+        vectors = [list(v) for v in embs]
+        order = _mmr(list(dists), vectors, k)
+    else:  # embeddings unavailable — keep Chroma's own top-k ordering
+        order = order[:k]
+
+    return [
+        f"[source: {(metas[i] or {}).get('chapter', '?')}]\n{docs[i]}"
+        for i in order
+    ]
 
 
 def build_index(force: bool = False) -> int:

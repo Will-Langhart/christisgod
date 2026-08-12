@@ -25,7 +25,9 @@ COPY web/src/content/ web/src/content/
 
 # Pre-build the Chroma index at image-build time so the embedding model is baked
 # in and the first request isn't a cold download. Needs network during build.
-RUN cd service && python -m graph.retrieval --build
+# --force makes the rebuild unconditional, so a stale index can never be baked in
+# (e.g. if service/.chroma were ever removed from .dockerignore).
+RUN cd service && python -m graph.retrieval --build --force
 
 ENV PORT=8080 \
     DEBATE_TERMINAL=respond \

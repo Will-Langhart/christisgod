@@ -1,30 +1,54 @@
 {
   "persona": "jw-unitarian",
   "objection": "If Jesus is God, why did he pray to God?",
-  "answer": "This is a fair and important question, and the answer lies in taking the incarnation seriously rather than explaining it away. Jesus is not merely God stripped of humanity; he is true God and true man, one Person with two natures. As man, he possessed a genuine human will and human consciousness, and it was entirely proper — indeed necessary — for that humanity to pray, to depend, to submit, to fall on his face in Gethsemane. Prayer is not a denial of his deity; it is an expression of the reality that the eternal Son took to himself a complete human nature in which he lived a life of trust and obedience toward the Father.\n\nJohn 17:3 must be read in its own context. Jesus has just asked the Father to glorify him with the glory he had with the Father before the world existed — hardly the language of a creature addressing a superior being of a wholly different order, but the language of one who shares eternal glory with the Father and now asks to have it manifested in his incarnate state. The verse distinguishes the Father and the Son as persons; it does not exclude the Son from the divine identity. Tellingly, this prayer sits inside a Gospel that opens by declaring the Word was God (John 1:1) and closes with Thomas kneeling before the risen Christ confessing, \"My Lord and my God\" (John 20:28) — and Jesus accepting that confession rather than correcting it.\n\nSo the two truths must be held together, not set against each other: the Son genuinely prays as man, and the same Son is genuinely addressed in prayer as God by the apostolic Church. Stephen prays, \"Lord Jesus, receive my spirit\" (Acts 7:59). The earliest Aramaic-speaking Christians cried Maranatha — \"our Lord, come\" (1 Corinthians 16:22) — a prayer that assumes Jesus is alive, heavenly, and worthy of worship, arising in the very Jewish milieu where the Shema forbade worship of anyone but the LORD (Deuteronomy 6:4). If Jesus praying to the Father proved he isn't God, the Church praying to Jesus would prove the same of the Father — but the more coherent explanation, held from the beginning, is that one God exists in Father and Son (and Spirit) as distinct persons, and that the Son's incarnate prayers reveal the perfection of his humanity, not the absence of his deity.",
+  "answer": "Notice what the objection has to prove: not that Father and Son are personally distinct—everyone agrees on that—but that this personal distinction excludes Jesus from being fully God. John 17:3 shows the first; it doesn't show the second. The same Gospel that records Jesus praying \"Father... the only true God\" opens by declaring the Word was God (John 1:1) and closes with Thomas addressing the risen Jesus as \"my Lord and my God\" (John 20:28), a confession Jesus accepts rather than corrects. John did not think these statements contradicted each other; neither should we.\n\nAs for the prayers and \"My God and your God\" (John 20:17): these are exactly what we'd expect given the Incarnation. The Son, in taking true humanity, took a human nature that prays, depends, obeys, and calls the Father \"My God\" — because as man, He does have a God. That's not a problem for His deity; it's the necessary shape of real incarnation. If the Word truly became flesh (John 1:14), then the eternal Son now lives a genuine human life addressed toward the Father, without that human life exhausting who He is. Hebrews 1:8 shows the reverse side of this same relationship: the Father Himself addresses the Son as \"O God,\" in direct vocative address — so within the very Godhead there is a Father who is addressed as God and a Son who is addressed as God, in distinct persons.\n\nFinally, watch what the early Christians actually did with the \"one whom the Father sent\": they prayed to Him. Stephen commends his spirit to \"Lord Jesus\" (Acts 7:59); the Church invoked Maranatha, \"Our Lord, come\" (1 Corinthians 16:22); believers everywhere are described as those who call upon the name of the Lord Jesus (1 Corinthians 1:2). If Jesus were merely an exalted agent, this would be exactly the idolatry Isaiah 45 forbids — worship rendered to any but YHWH alone. Instead, Philippians 2:9–11 has Paul deliberately apply Isaiah's language of universal worship to Jesus, and calls this the Father's glory, not a rival to it. So the \"sent\" language and the prayer to the Father express real, eternal personal order within the one God; they don't demote the Son from the divine identity into which He was, is, and remains fully received.",
   "citations": [
     {
       "raw": "John 17:3",
       "ok": true,
       "reason": "verified",
       "display": "John 17:3",
-      "quoted": null,
-      "warning": null
+      "quoted": "Father... the only true God",
+      "warning": "quote near John 17:3 is not verbatim KJV"
     },
     {
       "raw": "John 1:1",
       "ok": true,
       "reason": "verified",
       "display": "John 1:1",
-      "quoted": "My Lord and my God",
-      "warning": null
+      "quoted": "Father... the only true God",
+      "warning": "quote near John 1:1 is not verbatim KJV"
     },
     {
       "raw": "John 20:28",
       "ok": true,
       "reason": "verified",
       "display": "John 20:28",
-      "quoted": "My Lord and my God",
+      "quoted": "my Lord and my God",
+      "warning": null
+    },
+    {
+      "raw": "John 20:17",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 20:17",
+      "quoted": "My God and your God",
+      "warning": null
+    },
+    {
+      "raw": "John 1:14",
+      "ok": true,
+      "reason": "verified",
+      "display": "John 1:14",
+      "quoted": null,
+      "warning": null
+    },
+    {
+      "raw": "Hebrews 1:8",
+      "ok": true,
+      "reason": "verified",
+      "display": "Hebrews 1:8",
+      "quoted": "O God,",
       "warning": null
     },
     {
@@ -32,7 +56,7 @@
       "ok": true,
       "reason": "verified",
       "display": "Acts 7:59",
-      "quoted": "Lord Jesus, receive my spirit",
+      "quoted": "Lord Jesus",
       "warning": null
     },
     {
@@ -40,33 +64,44 @@
       "ok": true,
       "reason": "verified",
       "display": "1 Corinthians 16:22",
-      "quoted": "our Lord, come",
+      "quoted": "Our Lord, come",
       "warning": "quote near 1 Corinthians 16:22 is not verbatim KJV"
     },
     {
-      "raw": "Deuteronomy 6:4",
+      "raw": "1 Corinthians 1:2",
       "ok": true,
       "reason": "verified",
-      "display": "Deuteronomy 6:4",
+      "display": "1 Corinthians 1:2",
+      "quoted": "Our Lord, come",
+      "warning": "quote near 1 Corinthians 1:2 is not verbatim KJV"
+    },
+    {
+      "raw": "Philippians 2:9–11",
+      "ok": true,
+      "reason": "verified",
+      "display": "Philippians 2:9–11",
       "quoted": null,
       "warning": null
     }
   ],
   "citation_warnings": [
-    "quote near 1 Corinthians 16:22 is not verbatim KJV"
+    "quote near John 17:3 is not verbatim KJV",
+    "quote near John 1:1 is not verbatim KJV",
+    "quote near 1 Corinthians 16:22 is not verbatim KJV",
+    "quote near 1 Corinthians 1:2 is not verbatim KJV"
   ],
   "transcript": [
     {
       "role": "interlocutor",
-      "content": "# The Jehovah's Witness / Biblical Unitarian Objection\n\nLook — if Jesus is truly God, how do we explain that he *prayed* to God? In Matthew 26:39, he falls on his face and prays to the Father; in John 17, he offers the most intimate prayer recorded in Scripture, addressing God as \"you alone are the only true God\" (John 17:3, NWT). A person cannot pray to himself — prayer is the language of dependence, of a subordinate addressing a superior. If the Son and Father are one God, as Trinitarians claim, then either Jesus was praying to himself (which is absurd), or his own words testify that the Father is God in a way the Son is not. The natural, straightforward reading is that Jesus, as God's Son, brought his will into alignment with his Father's will — which makes perfect sense if he is the Messiah, but none at all if divinity itself dwells in him as it dwells in God."
+      "content": "# Objection: Jesus's Prayer to God\n\nLook, this is the hardest saying for your position. In John 17:3, Jesus himself says: \"This is eternal life, that they know you, the only true God, and Jesus Christ whom you have sent.\" He's distinguishing himself from the only true God—he's the one *sent*, not the sender. And he does this throughout the Gospels: he prays to the Father, asks the Father for things, says \"My God and your God\" in John 20:17. If Jesus were truly God in the fullest sense, wouldn't he be praying to himself? That makes no rational sense. The straightforward reading is that Jesus is God's unique Son, his agent and messenger—deeply exalted, yes—but not God himself. How do you explain Jesus addressing God as \"you\" and himself as distinct from that \"only true God\"?"
     },
     {
       "role": "apologist",
-      "content": "This is a fair and important question, and the answer lies in taking the incarnation seriously rather than explaining it away. Jesus is not merely God stripped of humanity; he is true God and true man, one Person with two natures. As man, he possessed a genuine human will and human consciousness, and it was entirely proper — indeed necessary — for that humanity to pray, to depend, to submit, to fall on his face in Gethsemane. Prayer is not a denial of his deity; it is an expression of the reality that the eternal Son took to himself a complete human nature in which he lived a life of trust and obedience toward the Father.\n\nJohn 17:3 must be read in its own context. Jesus has just asked the Father to glorify him with the glory he had with the Father before the world existed — hardly the language of a creature addressing a superior being of a wholly different order, but the language of one who shares eternal glory with the Father and now asks to have it manifested in his incarnate state. The verse distinguishes the Father and the Son as persons; it does not exclude the Son from the divine identity. Tellingly, this prayer sits inside a Gospel that opens by declaring the Word was God (John 1:1) and closes with Thomas kneeling before the risen Christ confessing, \"My Lord and my God\" (John 20:28) — and Jesus accepting that confession rather than correcting it.\n\nSo the two truths must be held together, not set against each other: the Son genuinely prays as man, and the same Son is genuinely addressed in prayer as God by the apostolic Church. Stephen prays, \"Lord Jesus, receive my spirit\" (Acts 7:59). The earliest Aramaic-speaking Christians cried Maranatha — \"our Lord, come\" (1 Corinthians 16:22) — a prayer that assumes Jesus is alive, heavenly, and worthy of worship, arising in the very Jewish milieu where the Shema forbade worship of anyone but the LORD (Deuteronomy 6:4). If Jesus praying to the Father proved he isn't God, the Church praying to Jesus would prove the same of the Father — but the more coherent explanation, held from the beginning, is that one God exists in Father and Son (and Spirit) as distinct persons, and that the Son's incarnate prayers reveal the perfection of his humanity, not the absence of his deity."
+      "content": "Notice what the objection has to prove: not that Father and Son are personally distinct—everyone agrees on that—but that this personal distinction excludes Jesus from being fully God. John 17:3 shows the first; it doesn't show the second. The same Gospel that records Jesus praying \"Father... the only true God\" opens by declaring the Word was God (John 1:1) and closes with Thomas addressing the risen Jesus as \"my Lord and my God\" (John 20:28), a confession Jesus accepts rather than corrects. John did not think these statements contradicted each other; neither should we.\n\nAs for the prayers and \"My God and your God\" (John 20:17): these are exactly what we'd expect given the Incarnation. The Son, in taking true humanity, took a human nature that prays, depends, obeys, and calls the Father \"My God\" — because as man, He does have a God. That's not a problem for His deity; it's the necessary shape of real incarnation. If the Word truly became flesh (John 1:14), then the eternal Son now lives a genuine human life addressed toward the Father, without that human life exhausting who He is. Hebrews 1:8 shows the reverse side of this same relationship: the Father Himself addresses the Son as \"O God,\" in direct vocative address — so within the very Godhead there is a Father who is addressed as God and a Son who is addressed as God, in distinct persons.\n\nFinally, watch what the early Christians actually did with the \"one whom the Father sent\": they prayed to Him. Stephen commends his spirit to \"Lord Jesus\" (Acts 7:59); the Church invoked Maranatha, \"Our Lord, come\" (1 Corinthians 16:22); believers everywhere are described as those who call upon the name of the Lord Jesus (1 Corinthians 1:2). If Jesus were merely an exalted agent, this would be exactly the idolatry Isaiah 45 forbids — worship rendered to any but YHWH alone. Instead, Philippians 2:9–11 has Paul deliberately apply Isaiah's language of universal worship to Jesus, and calls this the Father's glory, not a rival to it. So the \"sent\" language and the prayer to the Father express real, eternal personal order within the one God; they don't demote the Son from the divine identity into which He was, is, and remains fully received."
     },
     {
       "role": "system",
-      "content": "[synth] 6 verified citation(s)"
+      "content": "[synth] 10 verified citation(s)"
     }
   ]
 }

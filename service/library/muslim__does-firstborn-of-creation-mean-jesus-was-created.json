@@ -1,14 +1,14 @@
 {
   "persona": "muslim",
   "objection": "Does ‘firstborn of creation’ mean Jesus was created?",
-  "answer": "Peace to you as well, and thank you for asking so directly — this is precisely the right question to press, and I want to answer it on its own terms.\n\nThe Greek word Paul uses, prototokos, is fundamentally a title of rank and inheritance, not a marker of when someone came into existence. Scripture itself shows this: in Psalm 89:27 God says of David, \"I will make him my firstborn, higher than the kings of the earth\" — yet David was neither God's literal son nor the first king of Israel. \"Firstborn\" there means supreme heir, preeminent one, not first-in-a-sequence.\n\nBut even setting the lexical point aside, look at what Paul himself does in the very next verse. Colossians 1:16 says \"for by him were all things created, that are in heaven, and that are in earth, visible and invisible... all things were created by him, and for him.\" If the Son were himself one of the created things, Paul's sentence collapses into nonsense — the \"firstborn of all creation\" would be creating himself, and being included in the \"all things\" he creates. That is incoherent. Paul is not placing Christ first in the created order; he is placing him outside it, on the Creator's side of the Creator-creature line, with everything else — every throne, dominion, principality, power, visible and invisible — owing its existence to him.\n\nThis is confirmed by John 1:3: \"All things were made by him; and without him was not any thing made that was made.\" Not \"almost all things,\" not \"all things except himself\" — all things, without remainder. If Christ made everything that was made, he was not himself made. So Colossians 1:15 doesn't contradict his eternity; rightly read in its own context, it establishes it. He is firstborn in the sense of supreme heir and sovereign head over creation, precisely because he is its uncreated source.",
+  "answer": "Peace to you as well, and thank you for pressing this honestly—it deserves a careful answer, not a dismissal.\n\nThe key is that *prototokos* (\"firstborn\") in biblical usage is a title of rank and inheritance, not a claim about coming into existence. Psalm 89:27 calls David God's \"firstborn,\" yet David was neither God's first nor only son in any literal biological sense—the word marks him as heir, preeminent, the one holding the place of highest honor. This usage was well established in Paul's own Jewish frame of reference before he ever wrote to the Colossians.\n\nBut we don't need to rest on comparative usage alone, because Paul immediately defines his own term. The very next verse, Colossians 1:16, says all things were created \"by him\" and \"for him\"—and then Colossians 1:17 adds that he is \"before all things.\" If \"firstborn of all creation\" meant \"the first created thing,\" Paul would be saying the Creator of all things created himself, which is incoherent. Instead, Paul places Christ on the Creator side of the ledger, receiving the same rank Genesis gives only to God: the one through whom, and for whom, \"all things\" exist.\n\nThis coheres with the wider witness of Scripture cited here: John 1:3 insists \"without him was not any thing made that was made\"—an absolute claim that excludes him from the category of \"made things\" altogether. Hebrews 1, quoting Psalm 45:6, has the Father himself address the Son directly as \"God\" whose \"throne...is for ever and ever\"—hardly language for a creature with a beginning.\n\nSo the \"escape,\" as you put it, isn't a dodge of the text but attention to what Paul himself says the title means. \"Firstborn\" answers the question \"who has supremacy and inheritance over all creation?\"—and Paul's answer is: the One who made it all, and therefore stands outside the category of things that began.",
   "citations": [
     {
       "raw": "Psalm 89:27",
       "ok": true,
       "reason": "verified",
       "display": "Psalm 89:27",
-      "quoted": "I will make him my firstborn, higher than the kings of the earth",
+      "quoted": "firstborn,",
       "warning": null
     },
     {
@@ -16,42 +16,49 @@
       "ok": true,
       "reason": "verified",
       "display": "Colossians 1:16",
-      "quoted": "for by him were all things created, that are in heaven, and that are in earth, visible and invisible... all things were created by him, and for him.",
-      "warning": "quote near Colossians 1:16 is not verbatim KJV"
+      "quoted": "by him",
+      "warning": null
+    },
+    {
+      "raw": "Colossians 1:17",
+      "ok": true,
+      "reason": "verified",
+      "display": "Colossians 1:17",
+      "quoted": "for him",
+      "warning": null
     },
     {
       "raw": "John 1:3",
       "ok": true,
       "reason": "verified",
       "display": "John 1:3",
-      "quoted": "All things were made by him; and without him was not any thing made that was made.",
+      "quoted": "without him was not any thing made that was made",
       "warning": null
     },
     {
-      "raw": "Colossians 1:15",
+      "raw": "Psalm 45:6",
       "ok": true,
       "reason": "verified",
-      "display": "Colossians 1:15",
-      "quoted": "all things except himself",
-      "warning": "quote near Colossians 1:15 is not verbatim KJV"
+      "display": "Psalm 45:6",
+      "quoted": "made things",
+      "warning": "quote near Psalm 45:6 is not verbatim KJV"
     }
   ],
   "citation_warnings": [
-    "quote near Colossians 1:16 is not verbatim KJV",
-    "quote near Colossians 1:15 is not verbatim KJV"
+    "quote near Psalm 45:6 is not verbatim KJV"
   ],
   "transcript": [
     {
       "role": "interlocutor",
-      "content": "# Muslim Interlocutor\n\nPeace be upon you. I wish to ask about your interpretation of Colossians 1:15, where Paul calls Jesus \"the firstborn of all creation.\" In our understanding, *firstborn* clearly means Jesus was created—he is the first among created things, just as the Qur'an teaches that everything besides Allah is created. How do you explain this language if Jesus is truly God? If he is divine and eternal, why would Paul use the word that most naturally means he came into being, ranked first among creatures? Does this not contradict your claim that he has no beginning?"
+      "content": "Peace be upon you. I wish to press what seems to me a plain reading of your own Scripture: Paul writes that the Son is \"the firstborn of all creation\" (Colossians 1:15). In Arabic we say *awwal*, the first—and \"firstborn\" surely means He came into being before all else, does it not? If He were truly eternal and divine, why would Paul call Him *firstborn*? A firstborn implies a birth, a beginning. The Qur'an is clear: \"He to whom there is no like\" (Surah 42:11)—God alone has no beginning. So either Jesus had a beginning and is therefore created, not divine, or your own apostle's words are misleading. How do you escape this?"
     },
     {
       "role": "apologist",
-      "content": "Peace to you as well, and thank you for asking so directly — this is precisely the right question to press, and I want to answer it on its own terms.\n\nThe Greek word Paul uses, prototokos, is fundamentally a title of rank and inheritance, not a marker of when someone came into existence. Scripture itself shows this: in Psalm 89:27 God says of David, \"I will make him my firstborn, higher than the kings of the earth\" — yet David was neither God's literal son nor the first king of Israel. \"Firstborn\" there means supreme heir, preeminent one, not first-in-a-sequence.\n\nBut even setting the lexical point aside, look at what Paul himself does in the very next verse. Colossians 1:16 says \"for by him were all things created, that are in heaven, and that are in earth, visible and invisible... all things were created by him, and for him.\" If the Son were himself one of the created things, Paul's sentence collapses into nonsense — the \"firstborn of all creation\" would be creating himself, and being included in the \"all things\" he creates. That is incoherent. Paul is not placing Christ first in the created order; he is placing him outside it, on the Creator's side of the Creator-creature line, with everything else — every throne, dominion, principality, power, visible and invisible — owing its existence to him.\n\nThis is confirmed by John 1:3: \"All things were made by him; and without him was not any thing made that was made.\" Not \"almost all things,\" not \"all things except himself\" — all things, without remainder. If Christ made everything that was made, he was not himself made. So Colossians 1:15 doesn't contradict his eternity; rightly read in its own context, it establishes it. He is firstborn in the sense of supreme heir and sovereign head over creation, precisely because he is its uncreated source."
+      "content": "Peace to you as well, and thank you for pressing this honestly—it deserves a careful answer, not a dismissal.\n\nThe key is that *prototokos* (\"firstborn\") in biblical usage is a title of rank and inheritance, not a claim about coming into existence. Psalm 89:27 calls David God's \"firstborn,\" yet David was neither God's first nor only son in any literal biological sense—the word marks him as heir, preeminent, the one holding the place of highest honor. This usage was well established in Paul's own Jewish frame of reference before he ever wrote to the Colossians.\n\nBut we don't need to rest on comparative usage alone, because Paul immediately defines his own term. The very next verse, Colossians 1:16, says all things were created \"by him\" and \"for him\"—and then Colossians 1:17 adds that he is \"before all things.\" If \"firstborn of all creation\" meant \"the first created thing,\" Paul would be saying the Creator of all things created himself, which is incoherent. Instead, Paul places Christ on the Creator side of the ledger, receiving the same rank Genesis gives only to God: the one through whom, and for whom, \"all things\" exist.\n\nThis coheres with the wider witness of Scripture cited here: John 1:3 insists \"without him was not any thing made that was made\"—an absolute claim that excludes him from the category of \"made things\" altogether. Hebrews 1, quoting Psalm 45:6, has the Father himself address the Son directly as \"God\" whose \"throne...is for ever and ever\"—hardly language for a creature with a beginning.\n\nSo the \"escape,\" as you put it, isn't a dodge of the text but attention to what Paul himself says the title means. \"Firstborn\" answers the question \"who has supremacy and inheritance over all creation?\"—and Paul's answer is: the One who made it all, and therefore stands outside the category of things that began."
     },
     {
       "role": "system",
-      "content": "[synth] 4 verified citation(s)"
+      "content": "[synth] 5 verified citation(s)"
     }
   ]
 }
